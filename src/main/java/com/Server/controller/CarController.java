@@ -66,9 +66,9 @@ public class CarController {
     @ResponseBody
     @GetMapping(value = "/get-car-localization")
     public ResponseEntity<?> showCarLocalization(@RequestParam String city) {
-        if(localizationServiceImpl.existsByCity(city)) {
-            return new ResponseEntity<>(carServiceImpl.findByLocalizationCity(city),HttpStatus.OK);
-        }else{
+        if (localizationServiceImpl.existsByCity(city)) {
+            return new ResponseEntity<>(carServiceImpl.findByLocalizationCity(city), HttpStatus.OK);
+        } else {
             try {
                 throw new ExceptionRequest("Wrong city");
             } catch (ExceptionRequest exceptionRequest) {
@@ -81,7 +81,7 @@ public class CarController {
     @PostMapping("/delete-car")
     public ResponseEntity<?> deleteCar(@RequestParam int id) {
         if (carServiceImpl.existsByIdcar(id)) {
-             carServiceImpl.deleteByIdcar(id);
+            carServiceImpl.deleteByIdcar(id);
             return new ResponseEntity(HttpStatus.OK);
         } else {
             try {
@@ -115,16 +115,18 @@ public class CarController {
         List<Car> carsEmpty = carServiceImpl.findByLocalizationCity(questionCarRequest.getCity());
         for (Car car : cars) {
             if (reservationServiceImpl.existsByCar_Idcar(car.getIdcar())) {
-                List<Reservation> reservation=reservationServiceImpl.findByCar_Idcar(car.getIdcar());
-                    for(Reservation reser:reservation) {
-                        if (reser.getDataFrom().compareTo(questionCarRequest.getDateTo()) * questionCarRequest.getDateTo().compareTo(reser.getDataTo()) >= 0) {
-                            carsEmpty.remove(car);
-                        }if (reser.getDataFrom().compareTo(questionCarRequest.getDateFrom()) * questionCarRequest.getDateFrom().compareTo(reser.getDataTo()) >= 0) {
-                            carsEmpty.remove(car);
-                        }if(reser.getDataFrom().after(questionCarRequest.getDateFrom()) && reser.getDataTo().before(questionCarRequest.getDateTo())){
-                            carsEmpty.remove(car);
-                        }
+                List<Reservation> reservation = reservationServiceImpl.findByCar_Idcar(car.getIdcar());
+                for (Reservation reser : reservation) {
+                    if (reser.getDataFrom().compareTo(questionCarRequest.getDateTo()) * questionCarRequest.getDateTo().compareTo(reser.getDataTo()) >= 0) {
+                        carsEmpty.remove(car);
                     }
+                    if (reser.getDataFrom().compareTo(questionCarRequest.getDateFrom()) * questionCarRequest.getDateFrom().compareTo(reser.getDataTo()) >= 0) {
+                        carsEmpty.remove(car);
+                    }
+                    if (reser.getDataFrom().after(questionCarRequest.getDateFrom()) && reser.getDataTo().before(questionCarRequest.getDateTo())) {
+                        carsEmpty.remove(car);
+                    }
+                }
             }
         }
         return new ResponseEntity(carsEmpty, HttpStatus.OK);
