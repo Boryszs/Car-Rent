@@ -33,10 +33,9 @@ public class LocalizationController {
     @GetMapping(value = "/show-id")
     public ResponseEntity<?> showLocalizationId(@RequestParam int id) {
 
-        if(localizationServiceImpl.existsById(id)) {
+        if (localizationServiceImpl.existsById(id)) {
             return new ResponseEntity<>(localizationServiceImpl.findById(id).get(), HttpStatus.OK);
-        }else
-        {
+        } else {
             try {
                 throw new ExceptionRequest("Bad id localization");
             } catch (ExceptionRequest exceptionRequest) {
@@ -50,9 +49,9 @@ public class LocalizationController {
     @ResponseBody
     @GetMapping(value = "/show-city")
     public ResponseEntity<?> showLocalizationCity(@RequestParam String city) {
-        if(localizationServiceImpl.existsByCity(city)) {
-            return new ResponseEntity<>(localizationServiceImpl.findByCity(city).get(),HttpStatus.OK);
-        }else{
+        if (localizationServiceImpl.existsByCity(city)) {
+            return new ResponseEntity<>(localizationServiceImpl.findByCity(city).get(), HttpStatus.OK);
+        } else {
             try {
                 throw new ExceptionRequest("Bad city localization");
             } catch (ExceptionRequest exceptionRequest) {

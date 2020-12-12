@@ -56,4 +56,9 @@ public class UserServiceImpl implements UserService {
     public User findByReservations_Idrent(Long id) {
         return userRepository.findByReservations_Idrent(id);
     }
+
+    @Override
+    public Boolean existsById(long id) {
+        return userRepository.existsById(id);
+    }
 }

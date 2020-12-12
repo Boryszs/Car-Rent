@@ -21,4 +21,6 @@ public interface UserService {
     List<User> findAll();
 
     User findByReservations_Idrent(Long id);
+
+    Boolean existsById(long id);
 }

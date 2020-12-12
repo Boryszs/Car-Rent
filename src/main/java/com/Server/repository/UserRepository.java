@@ -21,7 +21,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByReservations_Idrent(Long id);
 
-    Optional<User> findById(Long email);
+    Boolean existsById(long id);
+
+    Optional<User> findById(Long id);
 
 
 }
