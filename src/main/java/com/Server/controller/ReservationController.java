@@ -106,9 +106,9 @@ public class ReservationController {
     }
 
 
-    //Dodawanie rezerwacji
-    @PostMapping(value = "/add")
-    public ResponseEntity<?> addReservation(@Valid @RequestBody AddReservationRequest addReservationRequest) {
+    //Dodawanie rezerwacji i sprawdzanie dostepnosci
+    @PostMapping(value = "/add-car")
+    public ResponseEntity<?> addReservationCar(@Valid @RequestBody AddReservationRequest addReservationRequest) {
 
         if (carServiceImpl.existsByIdcar(addReservationRequest.getId_car())) {
             if (reservationServiceImpl.existsByCar_Idcar(addReservationRequest.getId_car())) {
@@ -130,6 +130,34 @@ public class ReservationController {
                     return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
                 }
             }
+
+            User user = userServiceImpl.findById(addReservationRequest.getId_user()).get();
+            Car car = carServiceImpl.findByIdcar(addReservationRequest.getId_car()).get();
+            LocalDate dateBefore = LocalDate.parse(addReservationRequest.getDatefrom().toString());
+            LocalDate dateAfter = LocalDate.parse(addReservationRequest.getDateto().toString());
+            long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, dateAfter);
+            Reservation reservations = new Reservation(carServiceImpl.findByIdcar(addReservationRequest.getId_car()).get(), user, Date.valueOf(addReservationRequest.getDatefrom()), Date.valueOf(addReservationRequest.getDateto()), localizationServiceImpl.findByCity(addReservationRequest.getLocalization_start()).get(), localizationServiceImpl.findByCity(addReservationRequest.getLocalization_end()).get(), (noOfDaysBetween * car.getMoney()));
+            car.setLocalization(localizationServiceImpl.findByCity(addReservationRequest.getLocalization_end()).get());
+            carServiceImpl.save(car);
+            reservationServiceImpl.save(reservations);
+            user.setReservations(reservations);
+            userServiceImpl.save(user);
+            sendMail.sendMail(user.getUsername(), "Thank you for order car:" + car.getMark() + " " + car.getModel() + " for " + noOfDaysBetween + " days in localization " + car.getLocalization().getCity() + " for prices: " + (noOfDaysBetween * car.getMoney()));
+            return new ResponseEntity(new CarReservationResponse(reservations.getCar().getMark(), reservations.getCar().getModel(), reservations.getLocalizationStart().getCity(), reservations.getLocalizationEnd().getCity(), reservations.getDataTo(), reservations.getDataFrom(), reservations.getPrice()), HttpStatus.OK);
+        } else {
+            try {
+                throw new ExceptionRequest("Wrong car!!!");
+            } catch (ExceptionRequest exceptionRequest) {
+                return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            }
+        }
+    }
+
+    //Dodawanie rezerwacji bez sprawdzania dostepnosci
+    @PostMapping(value = "/add")
+    public ResponseEntity<?> addReservation(@Valid @RequestBody AddReservationRequest addReservationRequest) {
+
+        if (carServiceImpl.existsByIdcar(addReservationRequest.getId_car())) {
 
             User user = userServiceImpl.findById(addReservationRequest.getId_user()).get();
             Car car = carServiceImpl.findByIdcar(addReservationRequest.getId_car()).get();
