@@ -61,15 +61,13 @@ public class ReservationController {
         }
     }
 
-    //Zwracanie rezerwacji aktualnych rezerwacji usera po jego id
+    //Zwracanie rezerwacji rezerwacji usera po id user
     @ResponseBody
     @GetMapping(value = "/get")
     public ResponseEntity<?> getReservationUser(@RequestParam Long id) {
         if (userServiceImpl.existsById(id)) {
             User user = userServiceImpl.findById(id).get();
             List<Reservation> reservations = user.getReservations();
-
-
             return new ResponseEntity(reservations, HttpStatus.OK);
         } else {
             try {
