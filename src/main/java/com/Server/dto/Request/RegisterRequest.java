@@ -1,10 +1,11 @@
 package com.Server.dto.Request;
 
+
+import java.util.Set;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
 public class RegisterRequest {
     @Size(min = 3)

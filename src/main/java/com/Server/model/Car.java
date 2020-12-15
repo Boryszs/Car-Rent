@@ -33,6 +33,10 @@ public class Car {
     @Column(name = "money")
     private float money;
 
+    @NotNull
+    @Column(name = "image")
+    private String image;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_localization", referencedColumnName = "id_localization")
     private Localization localization;
@@ -40,7 +44,7 @@ public class Car {
     public Car() {
     }
 
-    public Car(String mark, String model, String type, int yearProduction, String color, int engineCapacity, float money, Localization localization) {
+    public Car(String mark, String model, String type, int yearProduction, String color, int engineCapacity, float money, Localization localization, String image) {
         this.idcar = idcar;
         this.mark = mark;
         this.model = model;
@@ -50,6 +54,7 @@ public class Car {
         this.engineCapacity = engineCapacity;
         this.money = money;
         this.localization = localization;
+        this.image = image;
     }
 
 
@@ -124,4 +129,8 @@ public class Car {
     public void setModel(String model) {
         this.model = model;
     }
+
+    public String getImage() { return image; }
+
+    public void setImage(String image) { this.image = image; }
 }

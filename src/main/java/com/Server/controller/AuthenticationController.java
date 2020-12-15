@@ -79,13 +79,13 @@ public class AuthenticationController {
     //Rejestracja.
     @ResponseBody
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
 
         if (userServiceImpl.existsByUsername(registerRequest.getUsername())) {
 
             return new ResponseEntity(new MessageResponse("User is exist"), HttpStatus.BAD_REQUEST);
         } else {
-            sendMail.sendMail(registerRequest.getUsername(), "Thank you for register account.");
+            //sendMail.sendMail(registerRequest.getUsername(), "Thank you for register account.");
             List<Role> roles = new LinkedList<>();
             if (registerRequest.getRole().isEmpty()) {
                 roles.add(roleServiceImpl.findByName(Roles.ROLE_USER).get());

@@ -48,7 +48,7 @@ public class CarController {
                 return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
             }
         }
-        Car car = new Car(addCarRequest.getMark(), addCarRequest.getModel(), addCarRequest.getType(), addCarRequest.getYearProduction(), addCarRequest.getColor(), addCarRequest.getEngine(), addCarRequest.getMoney(), localization);
+        Car car = new Car(addCarRequest.getMark(), addCarRequest.getModel(), addCarRequest.getType(), addCarRequest.getYearProduction(), addCarRequest.getColor(), addCarRequest.getEngine(), addCarRequest.getMoney(), localization, addCarRequest.getImage());
         carServiceImpl.save(car);
         return new ResponseEntity<>(car, HttpStatus.OK);
     }
