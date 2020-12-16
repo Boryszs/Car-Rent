@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.sql.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @RequestMapping(value = "/reservation")
@@ -84,44 +85,41 @@ public class ReservationController {
     public ResponseEntity<?> addReservation(@Valid @RequestBody AddReservationRequest addReservationRequest) {
 
         if (carServiceImpl.existsByIdcar(addReservationRequest.getId_car())) {
-            if (reservationServiceImpl.existsByCar_Idcar(addReservationRequest.getId_car())) {
-                Car car = carServiceImpl.findByIdcar(addReservationRequest.getId_car()).get();
-                List<Reservation> reser = reservationServiceImpl.findByCar_Idcar(car.getIdcar());
-                try {
-                    for (Reservation reservation : reser) {
-                        if (reservation.getDataFrom().compareTo(Date.valueOf(addReservationRequest.getDateto())) * Date.valueOf(addReservationRequest.getDateto()).compareTo(reservation.getDataTo()) >= 0) {
-                            throw new ExceptionRequest("Car Order!!!");
-                        }
-                        if (reservation.getDataFrom().compareTo(Date.valueOf(addReservationRequest.getDatefrom())) * Date.valueOf(addReservationRequest.getDatefrom()).compareTo(reservation.getDataTo()) >= 0) {
-                            throw new ExceptionRequest("Car Order!!!");
-                        }if(reservation.getDataFrom().after(Date.valueOf(addReservationRequest.getDatefrom())) && reservation.getDataTo().before(Date.valueOf(addReservationRequest.getDateto()))){
-                            throw new ExceptionRequest("Car Order!!!");
-                        }
-                    }
-                } catch (ExceptionRequest exceptionRequest) {
-                    return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
-                }
-            }
 
-                User user = userServiceImpl.findById(addReservationRequest.getId_user()).get();
-                Car car = carServiceImpl.findByIdcar(addReservationRequest.getId_car()).get();
-                LocalDate dateBefore = LocalDate.parse(addReservationRequest.getDatefrom().toString());
-                LocalDate dateAfter = LocalDate.parse(addReservationRequest.getDateto().toString());
-                long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, dateAfter);
-                Reservation reservations = new Reservation(carServiceImpl.findByIdcar(addReservationRequest.getId_car()).get(), user, Date.valueOf(addReservationRequest.getDatefrom()), Date.valueOf(addReservationRequest.getDateto()), localizationServiceImpl.findByCity(addReservationRequest.getLocalization_start()).get(), localizationServiceImpl.findByCity(addReservationRequest.getLocalization_end()).get(), (noOfDaysBetween * car.getMoney()));
-                car.setLocalization(localizationServiceImpl.findByCity(addReservationRequest.getLocalization_end()).get());
-                carServiceImpl.save(car);
-                reservationServiceImpl.save(reservations);
-                user.setReservations(reservations);
-                userServiceImpl.save(user);
-                sendMail.sendMail(user.getUsername(), "Thank you for order car:" + car.getMark() + " " + car.getModel() + " for " + noOfDaysBetween + " days in localization " + car.getLocalization().getCity() + " for prices: " + (noOfDaysBetween * car.getMoney()));
-                return new ResponseEntity(new CarReservationResponse(reservations.getCar().getMark(), reservations.getCar().getModel(), reservations.getLocalizationStart().getCity(), reservations.getLocalizationEnd().getCity(), reservations.getDataTo(), reservations.getDataFrom(), reservations.getPrice()), HttpStatus.OK);
-            } else {
-                try {
-                    throw new ExceptionRequest("Wrong car!!!");
-                } catch (ExceptionRequest exceptionRequest) {
-                    return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
-                }
+            User user = userServiceImpl.findById(addReservationRequest.getId_user()).get();
+            Car car = carServiceImpl.findByIdcar(addReservationRequest.getId_car()).get();
+            LocalDate dateBefore = LocalDate.parse(addReservationRequest.getDatefrom().toString());
+            LocalDate dateAfter = LocalDate.parse(addReservationRequest.getDateto().toString());
+            long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, dateAfter);
+            Reservation reservations = new Reservation(carServiceImpl.findByIdcar(addReservationRequest.getId_car()).get(), user, Date.valueOf(addReservationRequest.getDatefrom()), Date.valueOf(addReservationRequest.getDateto()), localizationServiceImpl.findByCity(addReservationRequest.getLocalization_start()).get(), localizationServiceImpl.findByCity(addReservationRequest.getLocalization_end()).get(), (noOfDaysBetween * car.getMoney()));
+            car.setLocalization(localizationServiceImpl.findByCity(addReservationRequest.getLocalization_end()).get());
+            carServiceImpl.save(car);
+            reservationServiceImpl.save(reservations);
+            user.setReservations(reservations);
+            userServiceImpl.save(user);
+            sendMail.sendMail(user.getUsername(), "Thank you for order car:" + car.getMark() + " " + car.getModel() + " for " + noOfDaysBetween + " days in localization " + car.getLocalization().getCity() + " for prices: " + (noOfDaysBetween * car.getMoney()));
+            return new ResponseEntity(new CarReservationResponse(reservations.getCar().getMark(), reservations.getCar().getModel(), reservations.getLocalizationStart().getCity(), reservations.getLocalizationEnd().getCity(), reservations.getDataTo(), reservations.getDataFrom(), reservations.getPrice()), HttpStatus.OK);
+        } else {
+            try {
+                throw new ExceptionRequest("Wrong car!!!");
+            } catch (ExceptionRequest exceptionRequest) {
+                return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
             }
         }
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/get-all-user")
+    public ResponseEntity<?> getReservationById(@RequestParam Long id) {
+            User user = userServiceImpl.findById(id).get();
+            List<Reservation> reservations = user.getReservations();
+            List<Reservation> reservationCurrent = new LinkedList<>();
+            java.util.Date date = new java.util.Date();
+            for (Reservation reservation : reservations) {
+                if (reservation.getDataFrom().compareTo(date) * date.compareTo(reservation.getDataTo()) >= 0) {
+                    reservationCurrent.add(reservation);
+                }
+            }
+            return new ResponseEntity(reservationCurrent, HttpStatus.OK);
+    }
 }
