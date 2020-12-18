@@ -1,5 +1,8 @@
 package com.Server.service;
 
+import com.Server.dto.Request.AddReservationRequest;
+import com.Server.dto.Response.CarReservationResponse;
+import com.Server.exception.ExceptionRequest;
 import com.Server.model.Reservation;
 
 import java.util.List;
@@ -12,9 +15,11 @@ public interface ReservationService {
 
     int deleteByIdrent(Long id);
 
+    List<Reservation> getCurrentReservation(Long id) throws ExceptionRequest;
+
     boolean existsByCar_Idcar(int id);
 
-    Reservation save(Reservation reservation);
+    CarReservationResponse save(AddReservationRequest addReservationRequest) throws ExceptionRequest;
 
     List<Reservation> findAll();
 

@@ -1,33 +1,21 @@
 package com.Server.dto.Request;
 
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
+
 
 public class QuestionCarRequest {
 
     @NotBlank
     private String city;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Type(type = "date")
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateFrom;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Type(type = "date")
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateTo;
+    @NotBlank
+    private String dateFrom;
+    @NotBlank
+    private String dateTo;
 
     public QuestionCarRequest() {
     }
 
-    public QuestionCarRequest(String city, Date dateFrom, Date dateTo) {
+    public QuestionCarRequest(String city, String dateFrom, String dateTo) {
         this.city = city;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
@@ -37,11 +25,11 @@ public class QuestionCarRequest {
         return city;
     }
 
-    public Date getDateFrom() {
+    public String getDateFrom() {
         return dateFrom;
     }
 
-    public Date getDateTo() {
+    public String getDateTo() {
         return dateTo;
     }
 
@@ -49,11 +37,11 @@ public class QuestionCarRequest {
         this.city = city;
     }
 
-    public void setDateFrom(Date dateFrom) {
+    public void setDateFrom(String dateFrom) {
         this.dateFrom = dateFrom;
     }
 
-    public void setDateTo(Date dateTo) {
+    public void setDateTo(String dateTo) {
         this.dateTo = dateTo;
     }
 }

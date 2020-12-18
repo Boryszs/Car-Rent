@@ -19,9 +19,7 @@ public class AddReservationRequest {
     @NotNull
     @Min(1)
     private int id_car;
-
     private String dateto;
-
     private String datefrom;
     @NotBlank
     private String localization_end;

@@ -7,7 +7,13 @@ import com.Server.exception.ExceptionRequest;
 import com.Server.model.Car;
 import com.Server.model.Reservation;
 import com.Server.model.User;
+import com.Server.service.CarService;
+import com.Server.service.LocalizationService;
+import com.Server.service.ReservationService;
+import com.Server.service.UserService;
 import com.Server.service.impl.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,18 +31,24 @@ import java.util.List;
 @CrossOrigin
 public class ReservationController {
 
-    @Autowired
-    ReservationServiceImpl reservationServiceImpl;
-    @Autowired
-    UserServiceImpl userServiceImpl;
-    @Autowired
-    CarServiceImpl carServiceImpl;
-    @Autowired
-    LocalizationServiceImpl localizationServiceImpl;
-    @Autowired
-    SendMail sendMail;
+    private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
+    private ReservationService reservationServiceImpl;
+    private UserService userServiceImpl;
+    private CarService carServiceImpl;
+    private LocalizationService localizationServiceImpl;
+    private SendMail sendMail;
 
-    //Zwracanie rezerwacji
+    @Autowired
+    public ReservationController(ReservationService reservationServiceImpl, UserService userServiceImpl, CarService carServiceImpl, LocalizationService localizationServiceImpl, SendMail sendMail) {
+        this.reservationServiceImpl = reservationServiceImpl;
+        this.userServiceImpl = userServiceImpl;
+        this.carServiceImpl = carServiceImpl;
+        this.localizationServiceImpl = localizationServiceImpl;
+        this.sendMail = sendMail;
+    }
+
+
+    //Zwracanie rezerwacji wszystkich
     @ResponseBody
     @GetMapping(value = "/show")
     public List<Reservation> getReservations() {
@@ -44,6 +56,7 @@ public class ReservationController {
     }
 
 
+    //TODO FIX DELETE
     @PostMapping(value = "/delete")
     public ResponseEntity<?> deleteReservation(@RequestParam Long id) {
         if (reservationServiceImpl.existsByIdrent(id)) {
@@ -53,7 +66,7 @@ public class ReservationController {
                     user.getReservations().remove(i);
                 }
             }
-            userServiceImpl.save(user);
+            //userServiceImpl.save(user);
             reservationServiceImpl.deleteByIdrent(id);
             return new ResponseEntity(user, HttpStatus.OK);
 
@@ -63,63 +76,39 @@ public class ReservationController {
     }
 
 
-    //Zwracanie rezerwacji po id
+    //Zwracanie rezerwacji po id rezerwacji
     @ResponseBody
     @GetMapping(value = "/get")
     public ResponseEntity<?> getReservation(@RequestParam Long id) {
-        if (reservationServiceImpl.existsByIdrent(id)) {
-            User user = userServiceImpl.findById(id).get();
-            List<Reservation> reservations = user.getReservations();
-            return new ResponseEntity(reservations, HttpStatus.OK);
-        } else {
-            try {
-                throw new ExceptionRequest("Reservation not exist!!!");
-            } catch (ExceptionRequest exceptionRequest) {
-                return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
-            }
+        try {
+            return new ResponseEntity(userServiceImpl.getReservationUser(id), HttpStatus.OK);
+        } catch (ExceptionRequest exceptionRequest) {
+            logger.error("------ Reservation Id Not Exist To Get ------");
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
         }
     }
 
     //Dodawanie rezerwacji
+    @ResponseBody
     @PostMapping(value = "/add")
-    public ResponseEntity<?> addReservation(@Valid @RequestBody AddReservationRequest addReservationRequest) {
-
-        if (carServiceImpl.existsByIdcar(addReservationRequest.getId_car())) {
-
-            User user = userServiceImpl.findById(addReservationRequest.getId_user()).get();
-            Car car = carServiceImpl.findByIdcar(addReservationRequest.getId_car()).get();
-            LocalDate dateBefore = LocalDate.parse(addReservationRequest.getDatefrom().toString());
-            LocalDate dateAfter = LocalDate.parse(addReservationRequest.getDateto().toString());
-            long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, dateAfter);
-            Reservation reservations = new Reservation(carServiceImpl.findByIdcar(addReservationRequest.getId_car()).get(), user, Date.valueOf(addReservationRequest.getDatefrom()), Date.valueOf(addReservationRequest.getDateto()), localizationServiceImpl.findByCity(addReservationRequest.getLocalization_start()).get(), localizationServiceImpl.findByCity(addReservationRequest.getLocalization_end()).get(), (noOfDaysBetween * car.getMoney()));
-            car.setLocalization(localizationServiceImpl.findByCity(addReservationRequest.getLocalization_end()).get());
-            carServiceImpl.save(car);
-            reservationServiceImpl.save(reservations);
-            user.setReservations(reservations);
-            userServiceImpl.save(user);
-            sendMail.sendMail(user.getUsername(), "Thank you for order car:" + car.getMark() + " " + car.getModel() + " for " + noOfDaysBetween + " days in localization " + car.getLocalization().getCity() + " for prices: " + (noOfDaysBetween * car.getMoney()));
-            return new ResponseEntity(new CarReservationResponse(reservations.getCar().getMark(), reservations.getCar().getModel(), reservations.getLocalizationStart().getCity(), reservations.getLocalizationEnd().getCity(), reservations.getDataTo(), reservations.getDataFrom(), reservations.getPrice()), HttpStatus.OK);
-        } else {
-            try {
-                throw new ExceptionRequest("Wrong car!!!");
-            } catch (ExceptionRequest exceptionRequest) {
-                return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
-            }
+    public ResponseEntity<?> addReservation(@Valid @RequestBody AddReservationRequest addReservationRequest){
+        try {
+            return new ResponseEntity(reservationServiceImpl.save(addReservationRequest), HttpStatus.OK);
+        } catch (ExceptionRequest exceptionRequest) {
+            logger.error("------ Reservation Add Error ------");
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
         }
     }
 
+    //Zwraca aktualne rezerwacje usera po id usera
     @ResponseBody
     @GetMapping(value = "/get-all-user")
-    public ResponseEntity<?> getReservationById(@RequestParam Long id) {
-            User user = userServiceImpl.findById(id).get();
-            List<Reservation> reservations = user.getReservations();
-            List<Reservation> reservationCurrent = new LinkedList<>();
-            java.util.Date date = new java.util.Date();
-            for (Reservation reservation : reservations) {
-                if (reservation.getDataFrom().compareTo(date) * date.compareTo(reservation.getDataTo()) >= 0) {
-                    reservationCurrent.add(reservation);
-                }
-            }
-            return new ResponseEntity(reservationCurrent, HttpStatus.OK);
+    public ResponseEntity<?> getReservationById(@RequestParam Long id){
+        try {
+            return new ResponseEntity(reservationServiceImpl.getCurrentReservation(id), HttpStatus.OK);
+        } catch (ExceptionRequest exceptionRequest) {
+            logger.error("------ User Not Exist ------");
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+        }
     }
 }

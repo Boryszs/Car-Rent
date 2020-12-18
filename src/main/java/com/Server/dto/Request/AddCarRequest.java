@@ -26,7 +26,6 @@ public class AddCarRequest {
     @NotNull
     @Min(40)
     private float money;
-
     @NotBlank
     private String image;
 

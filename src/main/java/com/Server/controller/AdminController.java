@@ -16,4 +16,11 @@ public class AdminController {
     public String getString() {
         return "hello";
     }
+
+    //About company
+    @GetMapping(value = "/about", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getAbout() {
+        return "about company";
+    }
+
 }
