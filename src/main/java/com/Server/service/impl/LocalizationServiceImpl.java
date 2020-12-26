@@ -15,7 +15,7 @@ import java.util.Optional;
 @Transactional
 public class LocalizationServiceImpl implements LocalizationService {
 
-    LocalizationRepository localizationRepository;
+    private LocalizationRepository localizationRepository;
 
     @Autowired
     public LocalizationServiceImpl(LocalizationRepository localizationRepository) {

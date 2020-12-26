@@ -14,8 +14,16 @@ import java.util.Optional;
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {
+
+    private RoleRepository roleRepository;
+
     @Autowired
-    RoleRepository roleRepository;
+    public RoleServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
+
+
+
 
     @Override
     public Optional<Role> findByName(Roles name) {

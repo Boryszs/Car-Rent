@@ -14,8 +14,13 @@ import javax.transaction.Transactional;
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    private UserServiceImpl userServiceImpl;
+
     @Autowired
-    UserServiceImpl userServiceImpl;
+    public UserDetailsServiceImpl(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
+    }
+
 
     @Override
     @Transactional
