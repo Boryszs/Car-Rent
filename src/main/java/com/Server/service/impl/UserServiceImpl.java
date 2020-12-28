@@ -1,5 +1,6 @@
 package com.Server.service.impl;
 
+import com.Server.dto.Request.EditUser;
 import com.Server.dto.Request.RegisterRequest;
 import com.Server.exception.ExceptionRequest;
 import com.Server.model.Reservation;
@@ -63,8 +64,50 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUser(Long id) throws ExceptionRequest {
+        if(!userRepository.existsById(id)){
+            throw new ExceptionRequest("User not Exist");
+        }else{
+        User user = userRepository.findById(id).get();
+        user.getReservations().forEach(reservation -> reservationRepository.delete(reservation));
+        user.getReservations().removeAll(user.getReservations());
+        userRepository.save(user);
+        userRepository.deleteById(id);
+        }
+    }
+
+    @Override
     public User update(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public User update(EditUser editUser) throws ExceptionRequest {
+        System.out.println(editUser.getId());
+        if(!userRepository.existsById(editUser.getId())){
+            throw new ExceptionRequest("User not Exist");
+        }else {
+            if(userRepository.existsByUsername(editUser.getUsername())){
+                throw new ExceptionRequest("User of Username is Exist");
+            }
+                User user = userRepository.findById(editUser.getId()).get();
+                user.setUsername(editUser.getUsername());
+                user.setEmail(editUser.getEmail());
+                user.setPassword(encoder.encode(editUser.getPassword()));
+                List<Role> roles = new LinkedList<>();
+                if (editUser.getRole().isEmpty()) {
+                    roles.add(roleRepository.findByName(Roles.ROLE_USER).get());
+                }
+                for (String rol : editUser.getRole()) {
+                    if (rol.equals("user")) {
+                        roles.add(roleRepository.findByName(Roles.ROLE_USER).get());
+                    } else if (rol.equals("admin")) {
+                        roles.add(roleRepository.findByName(Roles.ROLE_ADMIN).get());
+                    }
+                }
+                user.setRoles(roles);
+                return userRepository.save(user);
+        }
     }
 
     @Override

@@ -13,8 +13,6 @@ import com.Server.repository.ReservationRepository;
 import com.Server.repository.UserRepository;
 import com.Server.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -56,7 +54,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public int deleteByIdrent(Long id){
+    public int deleteByIdrent(Long id) {
         return reservationRepository.deleteByIdrent(id);
     }
 
@@ -68,9 +66,9 @@ public class ReservationServiceImpl implements ReservationService {
             User user = userRepository.findById(id).get();
             List<Reservation> reservations = user.getReservations();
             List<Reservation> reservationCurrent = new LinkedList<>();
-            LocalDate date =LocalDate.now();
+            LocalDate date = LocalDate.now();
             for (Reservation reservation : reservations) {
-                if (reservation.getDataFrom().compareTo(Date.valueOf(date)) * Date.valueOf(date).compareTo(reservation.getDataTo()) >= 0 ) {
+                if (reservation.getDataFrom().compareTo(Date.valueOf(date)) * Date.valueOf(date).compareTo(reservation.getDataTo()) >= 0) {
                     reservationCurrent.add(reservation);
                 }
             }
@@ -88,7 +86,7 @@ public class ReservationServiceImpl implements ReservationService {
                 }
             }
             userRepository.save(user);
-            return  reservationRepository.deleteByIdrent(id);
+            return reservationRepository.deleteByIdrent(id);
         } else {
             throw new ExceptionRequest("Reservation not exist !!!");
         }

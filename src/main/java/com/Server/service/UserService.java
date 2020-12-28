@@ -1,5 +1,6 @@
 package com.Server.service;
 
+import com.Server.dto.Request.EditUser;
 import com.Server.dto.Request.RegisterRequest;
 import com.Server.exception.ExceptionRequest;
 import com.Server.model.Reservation;
@@ -15,7 +16,11 @@ public interface UserService {
 
     List<Reservation> getReservationUser(Long id) throws ExceptionRequest;
 
+    void deleteUser(Long id) throws ExceptionRequest;
+
     User update(User user);
+
+    User update(EditUser editUser) throws ExceptionRequest;
 
     Boolean existsByEmail(String email);
 
