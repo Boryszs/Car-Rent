@@ -7,11 +7,15 @@ import com.Server.exception.ExceptionRequest;
 import com.Server.model.Car;
 import com.Server.model.Localization;
 import com.Server.model.Reservation;
+import com.Server.model.User;
 import com.Server.repository.CarRepository;
 import com.Server.repository.LocalizationRepository;
 import com.Server.repository.ReservationRepository;
+import com.Server.repository.UserRepository;
 import com.Server.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,13 +30,14 @@ public class CarServiceImpl implements CarService {
     private CarRepository carRepository;
     private ReservationRepository reservationRepository;
     private LocalizationRepository localizationRepository;
-
+    private UserRepository  userRepository;
 
     @Autowired
-    public CarServiceImpl(CarRepository carRepository, ReservationRepository reservationRepository, LocalizationRepository localizationRepository) {
+    public CarServiceImpl(CarRepository carRepository, ReservationRepository reservationRepository, LocalizationRepository localizationRepository, UserRepository userRepository) {
         this.carRepository = carRepository;
         this.reservationRepository = reservationRepository;
         this.localizationRepository = localizationRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -103,6 +108,24 @@ public class CarServiceImpl implements CarService {
                 }
             }
             return carsEmpty;
+        }
+    }
+
+    @Override
+    public void deleteCar(int id) throws ExceptionRequest {
+        if (!carRepository.existsByIdcar(id)) {
+            throw new ExceptionRequest("Wrong car");
+        } else {
+            List<Reservation> reservations = reservationRepository.findAll();
+            for(int i = 0;i < reservations.size(); i++){
+                if(reservations.get(i).getCar().getIdcar() == id){
+                    User user = userRepository.findByReservations_Idrent(reservations.get(i).getIdrent());
+                    user.getReservations().remove(reservations.get(i));
+                    userRepository.save(user);
+                    reservationRepository.deleteByIdrent(reservations.get(i).getIdrent());
+                }
+            }
+            carRepository.deleteByIdcar(id);
         }
     }
 

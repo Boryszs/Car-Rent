@@ -2,6 +2,7 @@ package com.Server.service.impl;
 
 import com.Server.dto.Request.AddReservationRequest;
 import com.Server.dto.Response.CarReservationResponse;
+import com.Server.dto.Response.MessageResponse;
 import com.Server.exception.ExceptionRequest;
 import com.Server.model.Car;
 import com.Server.model.Reservation;
@@ -12,6 +13,8 @@ import com.Server.repository.ReservationRepository;
 import com.Server.repository.UserRepository;
 import com.Server.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -53,7 +56,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public int deleteByIdrent(Long id) {
+    public int deleteByIdrent(Long id){
         return reservationRepository.deleteByIdrent(id);
     }
 
@@ -73,6 +76,22 @@ public class ReservationServiceImpl implements ReservationService {
                 }
             }
             return reservationCurrent;
+        }
+    }
+
+    @Override
+    public Integer deleteReservation(Long id) throws ExceptionRequest {
+        if (reservationRepository.existsByIdrent(id)) {
+            User user = userRepository.findByReservations_Idrent(id);
+            for (int i = 0; i < user.getReservations().size(); i++) {
+                if (user.getReservations().get(i).getIdrent() == id) {
+                    user.getReservations().remove(i);
+                }
+            }
+            userRepository.save(user);
+            return  reservationRepository.deleteByIdrent(id);
+        } else {
+            throw new ExceptionRequest("Reservation not exist !!!");
         }
     }
 

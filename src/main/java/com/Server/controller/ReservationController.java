@@ -50,22 +50,13 @@ public class ReservationController {
     }
 
 
-    //TODO FIX DELETE
     @PostMapping(value = "/delete")
-    public ResponseEntity<?> deleteReservation(@RequestParam Long id) {
-        if (reservationServiceImpl.existsByIdrent(id)) {
-            User user = userServiceImpl.findByReservations_Idrent(id);
-            for (int i = 0; i < user.getReservations().size(); i++) {
-                if (user.getReservations().get(i).getIdrent() == id) {
-                    user.getReservations().remove(i);
-                }
-            }
-            //userServiceImpl.save(user);
-            reservationServiceImpl.deleteByIdrent(id);
-            return new ResponseEntity(user, HttpStatus.OK);
-
-        } else {
-            return new ResponseEntity(new MessageResponse("Brak takiego zamowienia"), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> deleteReservation(@RequestParam Long id){
+        try {
+            return new ResponseEntity(reservationServiceImpl.deleteReservation(id), HttpStatus.OK);
+        } catch (ExceptionRequest exceptionRequest) {
+            logger.error("------ Reservation Id Not Exist To Delete ------");
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
         }
     }
 

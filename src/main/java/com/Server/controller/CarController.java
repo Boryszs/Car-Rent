@@ -6,6 +6,9 @@ import com.Server.dto.Request.QuestionCarRequest;
 import com.Server.dto.Response.MessageResponse;
 import com.Server.exception.ExceptionRequest;
 import com.Server.model.Car;
+import com.Server.model.Reservation;
+import com.Server.model.User;
+import com.Server.repository.UserRepository;
 import com.Server.service.CarService;
 import com.Server.service.LocalizationService;
 import com.Server.service.ReservationService;
@@ -70,19 +73,15 @@ public class CarController {
     }
 
 
-    //TODO FIX DELETE
     //Usuwa samochody
     @PostMapping("/delete-car")
     public ResponseEntity<?> deleteCar(@RequestParam int id) {
-        if (carServiceImpl.existsByIdcar(id)) {
-            carServiceImpl.deleteByIdcar(id);
+        try {
+            carServiceImpl.deleteCar(id);
             return new ResponseEntity(HttpStatus.OK);
-        } else {
-            try {
-                throw new ExceptionRequest("Wrong car");
-            } catch (ExceptionRequest e) {
-                return new ResponseEntity<>(e.getErr(), HttpStatus.BAD_REQUEST);
-            }
+        } catch (ExceptionRequest exceptionRequest) {
+            logger.error("------ Car Not Exist Wrong Id ------");
+            return new ResponseEntity<>(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
         }
     }
 
