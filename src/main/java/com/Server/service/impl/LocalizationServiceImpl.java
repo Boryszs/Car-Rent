@@ -22,7 +22,6 @@ public class LocalizationServiceImpl implements LocalizationService {
         this.localizationRepository = localizationRepository;
     }
 
-    
     @Override
     public Optional<Localization> findById(long id) throws ExceptionRequest {
         if (!localizationRepository.existsById(id)) {

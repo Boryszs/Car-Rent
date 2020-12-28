@@ -14,14 +14,13 @@ import com.Server.repository.ReservationRepository;
 import com.Server.repository.UserRepository;
 import com.Server.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Service
 @Transactional
@@ -117,14 +116,12 @@ public class CarServiceImpl implements CarService {
             throw new ExceptionRequest("Wrong car");
         } else {
             List<Reservation> reservations = reservationRepository.findAll();
-            for(int i = 0;i < reservations.size(); i++){
-                if(reservations.get(i).getCar().getIdcar() == id){
-                    User user = userRepository.findByReservations_Idrent(reservations.get(i).getIdrent());
-                    user.getReservations().remove(reservations.get(i));
-                    userRepository.save(user);
-                    reservationRepository.deleteByIdrent(reservations.get(i).getIdrent());
-                }
-            }
+            IntStream.range(0, reservations.size()).filter(i -> reservations.get(i).getCar().getIdcar() == id).forEachOrdered(i -> {
+                User user = userRepository.findByReservations_Idrent(reservations.get(i).getIdrent());
+                user.getReservations().remove(reservations.get(i));
+                userRepository.save(user);
+                reservationRepository.deleteByIdrent(reservations.get(i).getIdrent());
+            });
             carRepository.deleteByIdcar(id);
         }
     }
