@@ -1,6 +1,5 @@
 package com.Server.service.impl;
 
-import com.Server.model.User;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;

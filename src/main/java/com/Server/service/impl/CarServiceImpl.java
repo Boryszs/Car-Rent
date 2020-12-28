@@ -12,12 +12,9 @@ import com.Server.repository.LocalizationRepository;
 import com.Server.repository.ReservationRepository;
 import com.Server.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;

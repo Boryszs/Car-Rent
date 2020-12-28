@@ -5,13 +5,14 @@ import com.Server.dto.Request.RegisterRequest;
 import com.Server.dto.Response.JwtResponse;
 import com.Server.dto.Response.MessageResponse;
 import com.Server.exception.ExceptionRequest;
-import com.Server.model.*;
+import com.Server.model.Localization;
 import com.Server.security.JwtUtils;
 import com.Server.service.CarService;
 import com.Server.service.LocalizationService;
 import com.Server.service.RoleService;
 import com.Server.service.UserService;
-import com.Server.service.impl.*;
+import com.Server.service.impl.SendMail;
+import com.Server.service.impl.UserDetailsimpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)

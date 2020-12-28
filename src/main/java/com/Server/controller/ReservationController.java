@@ -1,17 +1,15 @@
 package com.Server.controller;
 
 import com.Server.dto.Request.AddReservationRequest;
-import com.Server.dto.Response.CarReservationResponse;
 import com.Server.dto.Response.MessageResponse;
 import com.Server.exception.ExceptionRequest;
-import com.Server.model.Car;
 import com.Server.model.Reservation;
 import com.Server.model.User;
 import com.Server.service.CarService;
 import com.Server.service.LocalizationService;
 import com.Server.service.ReservationService;
 import com.Server.service.UserService;
-import com.Server.service.impl.*;
+import com.Server.service.impl.SendMail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.sql.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 @RequestMapping(value = "/reservation")
