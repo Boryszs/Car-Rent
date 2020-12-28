@@ -10,11 +10,11 @@ public class EditCarRequest {
     private int engine;
     private String city;
     private float money;
-
+    private String image;
     public EditCarRequest() {
     }
 
-    public EditCarRequest(Integer idcar, String mark, String model, String type, int yearProduction, String color, int engine, String city, float money) {
+    public EditCarRequest(Integer idcar, String mark, String model, String type, int yearProduction, String color, int engine, String city, float money,String image) {
         this.idcar = idcar;
         this.mark = mark;
         this.model = model;
@@ -24,6 +24,7 @@ public class EditCarRequest {
         this.engine = engine;
         this.city = city;
         this.money = money;
+        this.image=image;
     }
 
     public void setModel(String model) {
@@ -62,6 +63,10 @@ public class EditCarRequest {
         this.money = money;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getMark() {
         return mark;
     }
@@ -96,5 +101,9 @@ public class EditCarRequest {
 
     public String getModel() {
         return model;
+    }
+
+    public String getImage() {
+        return image;
     }
 }

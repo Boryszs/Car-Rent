@@ -2,9 +2,7 @@ package com.Server.dto.Request;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 public class AddCarRequest {
     @NotBlank
@@ -26,11 +24,14 @@ public class AddCarRequest {
     @NotNull
     @Min(40)
     private float money;
+    @NotBlank
+    private String image;
+
 
     public AddCarRequest() {
     }
 
-    public AddCarRequest(String mark, String model, String type, int yearProduction, String color, int engine, String city, float money) {
+    public AddCarRequest(String mark, String model, String type, int yearProduction, String color, int engine, String city, float money, String image) {
         this.mark = mark;
         this.model = model;
         this.type = type;
@@ -39,6 +40,7 @@ public class AddCarRequest {
         this.engine = engine;
         this.city = city;
         this.money = money;
+        this.image = image;
     }
 
     public void setMark(String mark) {
@@ -104,4 +106,8 @@ public class AddCarRequest {
     public String getModel() {
         return model;
     }
+
+    public String getImage() { return image; }
+
+    public void setImage(String image) { this.image = image; }
 }

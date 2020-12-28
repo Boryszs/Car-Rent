@@ -1,6 +1,5 @@
 package com.Server.dto.Response;
 
-import com.Server.model.Car;
 import com.Server.model.Localization;
 
 import java.util.List;

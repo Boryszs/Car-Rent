@@ -1,5 +1,6 @@
 package com.Server.service.impl;
 
+import com.Server.exception.ExceptionRequest;
 import com.Server.model.Localization;
 import com.Server.repository.LocalizationRepository;
 import com.Server.service.LocalizationService;
@@ -14,17 +15,30 @@ import java.util.Optional;
 @Transactional
 public class LocalizationServiceImpl implements LocalizationService {
 
-    @Autowired
-    LocalizationRepository localizationRepository;
+    private LocalizationRepository localizationRepository;
 
+    @Autowired
+    public LocalizationServiceImpl(LocalizationRepository localizationRepository) {
+        this.localizationRepository = localizationRepository;
+    }
+
+    
     @Override
-    public Optional<Localization> findById(long id) {
-        return localizationRepository.findById(id);
+    public Optional<Localization> findById(long id) throws ExceptionRequest {
+        if (!localizationRepository.existsById(id)) {
+            throw new ExceptionRequest("Bad id localization");
+        } else {
+            return Optional.of(localizationRepository.findById(id).get());
+        }
     }
 
     @Override
-    public Optional<Localization> findByCity(String city) {
-        return localizationRepository.findByCity(city);
+    public Optional<Localization> findByCity(String city) throws ExceptionRequest {
+        if (!localizationRepository.existsByCity(city)) {
+            throw new ExceptionRequest("Bad city localization");
+        } else {
+            return Optional.of(localizationRepository.findByCity(city).get());
+        }
     }
 
     @Override

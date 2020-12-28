@@ -1,15 +1,9 @@
 package com.Server.dto.Request;
 
 
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
-import java.util.Date;
 
 
 public class AddReservationRequest {
@@ -19,16 +13,8 @@ public class AddReservationRequest {
     @NotNull
     @Min(1)
     private int id_car;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Type(type = "date")
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateto;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Type(type = "date")
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate datefrom;
+    private String dateto;
+    private String datefrom;
     @NotBlank
     private String localization_end;
     @NotBlank
@@ -37,7 +23,7 @@ public class AddReservationRequest {
     public AddReservationRequest() {
     }
 
-    public AddReservationRequest(Long id_user, int id_car, LocalDate dateto, LocalDate datefrom, String localization_end, String localization_start) {
+    public AddReservationRequest(Long id_user, int id_car, String dateto, String datefrom, String localization_end, String localization_start) {
         this.id_user = id_user;
         this.id_car = id_car;
         this.dateto = dateto;
@@ -54,11 +40,11 @@ public class AddReservationRequest {
         return id_car;
     }
 
-    public LocalDate getDateto() {
+    public String getDateto() {
         return dateto;
     }
 
-    public LocalDate getDatefrom() {
+    public String getDatefrom() {
         return datefrom;
     }
 
@@ -78,11 +64,11 @@ public class AddReservationRequest {
         this.id_car = id_car;
     }
 
-    public void setDateto(LocalDate dateto) {
+    public void setDateto(String dateto) {
         this.dateto = dateto;
     }
 
-    public void setDatefrom(LocalDate datefrom) {
+    public void setDatefrom(String datefrom) {
         this.datefrom = datefrom;
     }
 

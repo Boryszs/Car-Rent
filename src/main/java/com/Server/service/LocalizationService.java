@@ -1,14 +1,15 @@
 package com.Server.service;
 
+import com.Server.exception.ExceptionRequest;
 import com.Server.model.Localization;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface LocalizationService {
-    Optional<Localization> findById(long id);
+    Optional<Localization> findById(long id) throws ExceptionRequest;
 
-    Optional<Localization> findByCity(String city);
+    Optional<Localization> findByCity(String city) throws ExceptionRequest;
 
     List<Localization> findAll();
 
