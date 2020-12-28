@@ -5,6 +5,7 @@ import com.Server.dto.Response.CarReservationResponse;
 import com.Server.exception.ExceptionRequest;
 import com.Server.model.Reservation;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,8 @@ public interface ReservationService {
     int deleteByIdrent(Long id);
 
     List<Reservation> getCurrentReservation(Long id) throws ExceptionRequest;
+
+    Integer deleteReservation(Long id) throws ExceptionRequest ;
 
     boolean existsByCar_Idcar(int id);
 

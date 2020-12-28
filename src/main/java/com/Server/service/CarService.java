@@ -20,9 +20,11 @@ public interface CarService {
 
     List<Car> getCarNotOrder(QuestionCarRequest questionCarRequest) throws ExceptionRequest;
 
+    void deleteCar(int id) throws ExceptionRequest;
+
     boolean existsByIdcar(int id);
 
-    Integer deleteByIdcar(int id);
+    Integer deleteByIdcar(int id) throws ExceptionRequest;
 
     List<Car> findByLocalizationId(Long id);
 

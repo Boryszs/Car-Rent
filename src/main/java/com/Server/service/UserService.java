@@ -15,6 +15,8 @@ public interface UserService {
 
     List<Reservation> getReservationUser(Long id) throws ExceptionRequest;
 
+    User update(User user);
+
     Boolean existsByEmail(String email);
 
     Optional<User> findByEmail(String email);
