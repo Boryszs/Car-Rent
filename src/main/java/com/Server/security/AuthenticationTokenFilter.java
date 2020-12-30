@@ -17,16 +17,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Class security use to AuthenticationTokenFilter
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 1.0
+ * @since 2020-12-29.
+ */
+
 public class AuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
+    /**JwtUtils generate token*/
     private JwtUtils jwtUtils;
 
     @Autowired
+    /**UserService operation on database table User*/
     private UserDetailsServiceImpl userDetailsService;
-
+    /**Logger use to logger on server.*/
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationTokenFilter.class);
 
     @Override
+    /**Method Filter Token*/
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
@@ -48,6 +58,7 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    /**Method check Authorization*/
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
 

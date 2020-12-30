@@ -21,17 +21,27 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
-
+/**
+ * Class Service implements interface CarService.
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 1.0
+ * @since 2020-12-29.
+ */
 @Service
 @Transactional
 public class CarServiceImpl implements CarService {
 
+    /**carRepository*/
     private CarRepository carRepository;
+    /**reservationRepository*/
     private ReservationRepository reservationRepository;
+    /**localizationRepository*/
     private LocalizationRepository localizationRepository;
+    /**userRepository*/
     private UserRepository  userRepository;
 
     @Autowired
+    /**Constructor*/
     public CarServiceImpl(CarRepository carRepository, ReservationRepository reservationRepository, LocalizationRepository localizationRepository, UserRepository userRepository) {
         this.carRepository = carRepository;
         this.reservationRepository = reservationRepository;
@@ -39,12 +49,21 @@ public class CarServiceImpl implements CarService {
         this.userRepository = userRepository;
     }
 
-
+    /**
+     * Method find all car.
+     * @return List Car.
+     */
     @Override
     public List<Car> findAll() {
         return carRepository.findAll();
     }
 
+    /**
+     * Method to save new car.
+     * @param addCarRequest new data car.
+     * @return return new added car.
+     * @throws ExceptionRequest when request has wrong localization.
+     */
     @Override
     public Car save(AddCarRequest addCarRequest) throws ExceptionRequest {
         if (!localizationRepository.existsByCity(addCarRequest.getCity())) {
@@ -56,6 +75,12 @@ public class CarServiceImpl implements CarService {
 
     }
 
+    /**
+     * Method find car on id
+     * @param id id on find car
+     * @return car on id.
+     * @throws ExceptionRequest when car not exist.
+     */
     @Override
     public Optional<Car> findByIdcar(int id) throws ExceptionRequest {
         if (carRepository.existsByIdcar(id)) {
@@ -66,6 +91,12 @@ public class CarServiceImpl implements CarService {
 
     }
 
+    /**
+     * Method to edit data car.
+     * @param editCar data new car.
+     * @return new data update car.
+     * @throws ExceptionRequest where id car not exist.
+     */
     @Override
     public Car update(EditCarRequest editCar) throws ExceptionRequest {
         if (carRepository.existsByIdcar(editCar.getIdcar())) {
@@ -84,6 +115,12 @@ public class CarServiceImpl implements CarService {
         }
     }
 
+    /**
+     * Method car not order.
+     * @param questionCarRequest question on city and date reservation.
+     * @return List car not order ar.
+     * @throws ExceptionRequest when localization is wrong.
+     */
     @Override
     public List<Car> getCarNotOrder(QuestionCarRequest questionCarRequest) throws ExceptionRequest {
         if(!localizationRepository.existsByCity(questionCarRequest.getCity())){
@@ -111,6 +148,12 @@ public class CarServiceImpl implements CarService {
         }
     }
 
+    /**
+     * Delete car on id.
+     * @param id id car to delete.
+     * @return return id deleting car.
+     * @throws ExceptionRequest when id car is wrong.
+     */
     @Override
     public void deleteCar(int id) throws ExceptionRequest {
         if (!carRepository.existsByIdcar(id)) {
@@ -127,21 +170,43 @@ public class CarServiceImpl implements CarService {
         }
     }
 
+    /**
+     * Method check whether exist car on id.
+     * @param id id car to check.
+     * @return true or false.
+     */
     @Override
     public boolean existsByIdcar(int id) {
         return carRepository.existsByIdcar(id);
     }
 
+    /**
+     * Delete car on id.
+     * @param id id car to delete.
+     * @return return id deleting car.
+     * @throws ExceptionRequest when id car not exist.
+     */
     @Override
     public Integer deleteByIdcar(int id) {
         return carRepository.deleteByIdcar(id);
     }
 
+    /**
+     * Find car on localization.
+     * @param id id localization.
+     * @return return List car witch id localization.
+     */
     @Override
     public List<Car> findByLocalizationId(Long id) {
         return carRepository.findByLocalizationId(id);
     }
 
+    /**
+     * Find car on localization on name city.
+     * @param city name city.
+     * @return return List car on localization city.
+     * @throws ExceptionRequest when city name not exist.
+     */
     @Override
     public List<Car> findByLocalizationCity(String city) throws ExceptionRequest {
         if (localizationRepository.existsByCity(city)) {

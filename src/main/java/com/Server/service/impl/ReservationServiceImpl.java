@@ -2,7 +2,6 @@ package com.Server.service.impl;
 
 import com.Server.dto.Request.AddReservationRequest;
 import com.Server.dto.Response.CarReservationResponse;
-import com.Server.dto.Response.MessageResponse;
 import com.Server.exception.ExceptionRequest;
 import com.Server.model.Car;
 import com.Server.model.Reservation;
@@ -23,17 +22,30 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class Service implements interface LocalizationService.
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 1.0
+ * @since 2020-12-29.
+ */
+
 @Service
 @Transactional
 public class ReservationServiceImpl implements ReservationService {
 
+    /**reservationRepository*/
     private ReservationRepository reservationRepository;
+    /**userRepository*/
     private UserRepository userRepository;
+    /**carRepository*/
     private CarRepository carRepository;
+    /**localizationRepository*/
     private LocalizationRepository localizationRepository;
+    /**sendMail*/
     private SendMail sendMail;
 
     @Autowired
+    /**Constructor*/
     public ReservationServiceImpl(ReservationRepository reservationRepository, UserRepository userRepository, CarRepository carRepository, LocalizationRepository localizationRepository, SendMail sendMail) {
         this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
@@ -42,22 +54,42 @@ public class ReservationServiceImpl implements ReservationService {
         this.sendMail = sendMail;
     }
 
-
+    /**
+     * Find reservation on id
+     * @param id id reservation.
+     * @return reservation data.
+     */
     @Override
     public Optional<Reservation> findByIdrent(Long id) {
         return reservationRepository.findByIdrent(id);
     }
 
+    /**
+     * Check whether reservation on id exist.
+     * @param id id reservation.
+     * @return true or false.
+     */
     @Override
     public boolean existsByIdrent(Long id) {
         return reservationRepository.existsByIdrent(id);
     }
 
+    /**
+     * Delete reservation on id.
+     * @param id id reservation.
+     * @return return int on id delete reservation.
+     */
     @Override
     public int deleteByIdrent(Long id) {
         return reservationRepository.deleteByIdrent(id);
     }
 
+    /**
+     * Return Current reservation user on id user.
+     * @param id id user.
+     * @return List current reservation.
+     * @throws ExceptionRequest when user id not exist.
+     */
     @Override
     public List<Reservation> getCurrentReservation(Long id) throws ExceptionRequest {
         if (!userRepository.existsById(id)) {
@@ -76,6 +108,12 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
+    /**
+     * Delete reservation
+     * @param id id reservation.
+     * @return int id reservation.
+     * @throws ExceptionRequest when reservation not exist.
+     */
     @Override
     public Integer deleteReservation(Long id) throws ExceptionRequest {
         if (reservationRepository.existsByIdrent(id)) {
@@ -92,11 +130,22 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
+    /**
+     * Check whether exist reservation with id car.
+     * @param id id car.
+     * @return true or false.
+     */
     @Override
     public boolean existsByCar_Idcar(int id) {
         return reservationRepository.existsByCar_Idcar(id);
     }
 
+    /**
+     * Save new reservation
+     * @param addReservationRequest data of new reservation.
+     * @return data on new reservation.
+     * @throws ExceptionRequest When data of request is wrong.
+     */
     @Override
     public CarReservationResponse save(AddReservationRequest addReservationRequest) throws ExceptionRequest {
         if (!carRepository.existsByIdcar(addReservationRequest.getId_car())) {
@@ -128,16 +177,32 @@ public class ReservationServiceImpl implements ReservationService {
 
     }
 
+
+    /**
+     * Method return all reservation.
+     * @return List all reservation.
+     */
     @Override
     public List<Reservation> findAll() {
         return reservationRepository.findAll();
     }
 
+
+    /**
+     * find a reservation on id car
+     * @param id id car
+     * @return return List Reservation.
+     */
     @Override
     public List<Reservation> findByCar_Idcar(int id) {
         return reservationRepository.findByCar_Idcar(id);
     }
 
+    /**
+     * Find the Last reservation on car
+     * @param id id car.
+     * @return data reservation.
+     */
     @Override
     public Optional<Reservation> findFirstByCarIdcarOrderByIdrentDesc(int id) {
         return reservationRepository.findFirstByCarIdcarOrderByIdrentDesc(id);

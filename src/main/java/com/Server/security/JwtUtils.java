@@ -10,16 +10,26 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * Class security use to Generate Token JWT.
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 1.0
+ * @since 2020-12-29.
+ */
+
 @Component
 public class JwtUtils {
+    /**Logger use to logger on server.*/
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
     @Value("${jwtSecret}")
+    /**SecretKey*/
     private String jwtSecret;
-
+    /**Time experience token JWT.*/
     @Value("${jwtExpirationMs}")
     private int jwtExpirationMs;
 
+    /**Method used to generate token JWT.*/
     public String generateJwtToken(Authentication authentication) {
         UserDetailsimpl userDetails = (UserDetailsimpl) authentication.getPrincipal();
         return Jwts.builder().setSubject(userDetails.getUsername())
@@ -28,11 +38,12 @@ public class JwtUtils {
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
-
+    /** Method to get username*/
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
+    /**Method validate /token JWT.*/
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

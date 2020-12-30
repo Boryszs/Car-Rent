@@ -10,11 +10,24 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
+/**
+ * Class SendMail use to send mail.
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 1.0
+ * @since 2020-12-29.
+ */
+
 @Service
 public class SendMail {
+    /**Constructor*/
     public SendMail() {
     }
 
+    /**
+     * Method send mail.
+     * @param username username.
+     * @param mess mesage to send.
+     */
     public void sendMail(String username, String mess) {
         String from = "pizza.projekt06@gmail.com";
         String to = "pizza.projekt06@gmail.com";

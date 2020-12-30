@@ -19,18 +19,32 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ *   ReservationController is use to supports operations about database table Reservation.
+ *   @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ *   @version 1.0.
+ *   @since 2020-12-29.
+ */
+
+
 @RequestMapping(value = "/reservation")
 @RestController
 @CrossOrigin
 public class ReservationController {
-
+    /**Logger use to logger on server.*/
     private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
+    /**ReservationService operation on database table Reservation*/
     private ReservationService reservationServiceImpl;
+    /**UserService operation on database table User*/
     private UserService userServiceImpl;
+    /**CarService operation on database table Car*/
     private CarService carServiceImpl;
+    /**LocationSercive operation on database table Localization*/
     private LocalizationService localizationServiceImpl;
+    /**SendMail use to send mail*/
     private SendMail sendMail;
 
+    /**Constructor*/
     @Autowired
     public ReservationController(ReservationService reservationServiceImpl, UserService userServiceImpl, CarService carServiceImpl, LocalizationService localizationServiceImpl, SendMail sendMail) {
         this.reservationServiceImpl = reservationServiceImpl;
@@ -42,6 +56,12 @@ public class ReservationController {
 
 
     //Zwracanie rezerwacji wszystkich
+
+    /**
+     * This method get all reservation.
+     * This method use endpoint /reservation/show.
+     * @return List Reservation all.
+     */
     @ResponseBody
     @GetMapping(value = "/show")
     public List<Reservation> getReservations() {
@@ -49,6 +69,13 @@ public class ReservationController {
     }
 
 
+    /**
+     * This method delete reservation.
+     * This method use endpoint /reservation/delete.
+     * @param id id reservation.
+     * @return return id delete reservation Http.Status 200 or 400.
+     * @exception ExceptionRequest when reservation id not exist.
+     */
     @PostMapping(value = "/delete")
     public ResponseEntity<?> deleteReservation(@RequestParam Long id){
         try {
@@ -61,6 +88,13 @@ public class ReservationController {
 
 
     //Zwracanie rezerwacji po id usera
+    /**
+     * This method get all reservation user about id user.
+     * This method use endpoint /reservation/get.
+     * @param id id user.
+     * @return list reservation Http.Status 200 or 400.
+     * @exception ExceptionRequest when reservation id not exist.
+     */
     @ResponseBody
     @GetMapping(value = "/get")
     public ResponseEntity<?> getReservation(@RequestParam Long id) {
@@ -73,6 +107,14 @@ public class ReservationController {
     }
 
     //Dodawanie rezerwacji
+
+    /**
+     * This method add new reservation user.
+     * This method use endpoint /reservation/add.
+     * @param addReservationRequest data new reservation.
+     * @return return data new reservation Http.Status 200 or 400.
+     * @exception ExceptionRequest when reservation add error.
+     */
     @ResponseBody
     @PostMapping(value = "/add")
     public ResponseEntity<?> addReservation(@Valid @RequestBody AddReservationRequest addReservationRequest){
@@ -85,6 +127,13 @@ public class ReservationController {
     }
 
     //Zwraca aktualne rezerwacje usera po id usera
+    /**
+     * This method get all current reservation user about id user.
+     * This method use endpoint /reservation/get-all-user.
+     * @param id id user.
+     * @return list reservation Http.Status 200 or 400.
+     * @exception ExceptionRequest when user not exist.
+     */
     @ResponseBody
     @GetMapping(value = "/get-all-user")
     public ResponseEntity<?> getReservationById(@RequestParam Long id){

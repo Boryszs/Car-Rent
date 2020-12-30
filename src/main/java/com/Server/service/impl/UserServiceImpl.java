@@ -20,16 +20,27 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class Service implements interface RoleService.
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 1.0
+ * @since 2020-12-29.
+ */
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-
+    /**userRepository*/
     private UserRepository userRepository;
+    /**reservationRepository*/
     private ReservationRepository reservationRepository;
+    /**roleRepository*/
     private RoleRepository roleRepository;
+    /**encoder*/
     private PasswordEncoder encoder;
 
     @Autowired
+    /**Constructor*/
     public UserServiceImpl(UserRepository userRepository, ReservationRepository reservationRepository, RoleRepository roleRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.reservationRepository = reservationRepository;
@@ -37,17 +48,32 @@ public class UserServiceImpl implements UserService {
         this.encoder = encoder;
     }
 
-
+    /**
+     * Find the user on username.
+     * @param username username on user.
+     * @return data on user.
+     */
     @Override
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+    /**
+     * Check whether user exist on username.
+     * @param username username on user.
+     * @return true or false.
+     */
     @Override
     public Boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
     }
 
+    /**
+     * Return reservation user.
+     * @param id id user.
+     * @return List reservation.
+     * @throws ExceptionRequest when id user is wrong.
+     */
     @Override
     public List<Reservation> getReservationUser(Long id) throws ExceptionRequest {
         if (!reservationRepository.existsByIdrent(id)) {
@@ -63,6 +89,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Delete user on id.
+     * @param id id user.
+     * @throws ExceptionRequest when id user is wrong.
+     */
     @Override
     public void deleteUser(Long id) throws ExceptionRequest {
         if(!userRepository.existsById(id)){
@@ -76,11 +107,22 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Update user.
+     * @param user new user data.
+     * @return return new data on user.
+     */
     @Override
     public User update(User user) {
         return userRepository.save(user);
     }
 
+    /**
+     * Update user.
+     * @param editUser new user data.
+     * @return return new data on user.
+     * @throws ExceptionRequest when request data user is wrong.
+     */
     @Override
     public User update(EditUser editUser) throws ExceptionRequest {
         System.out.println(editUser.getId());
@@ -110,16 +152,32 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Check whether user exist on email.
+     * @param email email on user.
+     * @return true or false.
+     */
     @Override
     public Boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
 
+    /**
+     * Find user on email.
+     * @param email email user.
+     * @return data user.
+     */
     @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    /**
+     * Find user on id.
+     * @param id is user.
+     * @return user data
+     * @throws ExceptionRequest when id is wrong
+     */
     @Override
     public Optional<User> findById(Long id) throws ExceptionRequest {
         if (!userRepository.existsById(id)) {
@@ -129,6 +187,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Save new user data.
+     * @param registerRequest user data.
+     * @return new data user.
+     * @throws ExceptionRequest when request data user register is wrong.
+     */
     @Override
     public User save(RegisterRequest registerRequest) throws ExceptionRequest {
         //System.out.print(userRepository.existsByUsername(registerRequest.getUsername()));
@@ -151,16 +215,30 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Get all user.
+     * @return List of all user.
+     */
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    /**
+     * Find Reservation user on id.
+     * @param id is reservation user.
+     * @return User data with list reservation.
+     */
     @Override
     public User findByReservations_Idrent(Long id) {
         return userRepository.findByReservations_Idrent(id);
     }
 
+    /**
+     * Check whether user on id exist.
+     * @param id id user.
+     * @return true or false.
+     */
     @Override
     public Boolean existsById(long id) {
         return userRepository.existsById(id);
