@@ -1,85 +1,353 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Czas generowania: 16 Gru 2020, 18:22
+-- Wersja serwera: 10.4.14-MariaDB
+-- Wersja PHP: 7.2.33
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Baza danych: `bootdb1`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `car`
+--
+
+CREATE TABLE `car` (
+  `id_car` int(11) NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `engine_capacity` int(11) NOT NULL,
+  `mark` varchar(255) NOT NULL,
+  `model` varchar(255) NOT NULL,
+  `money` float NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `year_production` int(11) NOT NULL,
+  `id_localization` bigint(20) DEFAULT NULL,
+  `image` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `car`
+--
+
+INSERT INTO `car` (`id_car`, `color`, `engine_capacity`, `mark`, `model`, `money`, `type`, `year_production`, `id_localization`, `image`) VALUES
+(1, 'czarny', 1200, 'Toyota', 'Yaris', 79, 'hatchback', 2018, 1, 'https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg'),
+(2, 'bialy', 1200, 'Toyota', 'Aygo', 69, 'hatchback', 2017, 3, 'https://image.ceneostatic.pl/data/products/59600749/i-toyota-aygo-ii-2015-benzyna-69km-hatchback-bialy.jpg'),
+(3, 'czerwona', 1000, 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 1, 'https://a.allegroimg.com/original/1138b5/222dd8d44fa98a697a01b0c7ff21/Skoda-Citigo-1-0-MPI-Salon-Polska-Kolor-Czerwony'),
+(4, 'czarna', 1500, 'Ford', 'Fiesta', 89, 'hatchback', 2019, 1, 'https://image.ceneostatic.pl/data/products/61577901/i-ford-fiesta-mk7-2014-benzyna-82km-hatchback-czarny.jpg'),
+(5, 'bialy', 1200, 'Hyundai', 'i20', 89, 'hatchback', 2020, 1, 'https://image.ceneostatic.pl/data/products/59448082/i-hyundai-i20-ii-2016-benzyna-84km-hatchback-bialy.jpg'),
+(6, 'niebieska', 1200, 'Skoda', 'Fabia', 90, 'hatchback', 2018, 1, 'https://image.ceneostatic.pl/data/products/72675374/i-skoda-fabia-iii-2018-km-hatchback-niebieski.jpg'),
+(7, 'czarny', 1400, 'Skoda', 'Rapid', 85, 'hatchback', 2019, 1, 'https://lh3.googleusercontent.com/proxy/6L0YyQQcsZdpAWmqQ7nq6C2GOVvq_9OH7c0gA2Yxom6J0ZcxHAHmcdwY_dkWRAotR8tkkwByXODPaTy46U0xNj88ZOyWWgeN9ma_O2HDIdYdab6BGWb7qi9oSAuTb2xbRWREMQ'),
+(8, 'bialy', 1400, 'Volkswagen', 'Golf', 109, 'hatchback', 2018, 1, 'https://image.ceneostatic.pl/data/products/73084541/i-bialy-vw-golf-vi-2-0-tdi-klimatronic-parktronic.jpg'),
+(9, 'czarny', 1600, 'Skoda', 'Octavia', 120, 'liftback', 2020, 1, 'https://image.ceneostatic.pl/data/products/72678226/i-skoda-octavia-iii-2017-km-hatchback-czarny.jpg'),
+(10, 'czarny', 1600, 'BMW', '118i', 120, 'hatchback', 2018, 1, 'https://i.imged.pl/bmw-118d-e87-2-0d-143km-manual-czarna-2007-zamiana.jpg'),
+(11, 'czarny', 2000, 'Skoda', 'SuperB III', 170, 'liftback', 2018, 1, 'https://www.skoda-dobron.pl/assets/Uploads/fd340cd914/08277507.JPG'),
+(12, 'bialy', 2000, 'BMW', 'serii 3', 179, 'sedan', 2017, 1, 'https://image.ceneostatic.pl/data/products/66655787/i-bmw-seria-3-e90-2011-184km-sedan-bialy.jpg'),
+(13, 'czarny', 2000, 'Audi', 'A6', 199, 'sedan', 2019, 1, 'https://image.ceneostatic.pl/data/products/72676380/i-audi-a6-c7-2013-km-sedan-czarny.jpg'),
+(14, 'bialy', 2000, 'BMW', 'Serii 5', 199, 'sedan', 2018, 1, 'https://b-cache.pl/stock/repo/ab55e4aa-9101-49de-a81d-0de2401999ef/7b918b62-6dbf-4a88-a322-ca68aa669f48/1920_1080_1.jpg'),
+(15, 'czarny', 3000, 'Audi', 'Q 7', 300, 'suv', 2019, 1, 'https://image.ceneostatic.pl/data/products/61374146/i-audi-q7-i-2014-diesel-244km-suv-czarny.jpg'),
+(16, 'czarny', 2200, 'Mercedes', 'GLC', 250, 'suv', 2017, 1, 'https://image.ceneostatic.pl/data/products/72680782/i-mercedes-benz-glc-2016-km-terenowy-czarny.jpg'),
+(17, 'niebieski', 2500, 'BMW', '7', 340, 'sedan', 2019, 1, 'https://www.bmw-autopremium.pl/www/media/75/img/img_9376_1b.jpg'),
+(18, 'czarny', 2000, 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 1, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg'),
+(19, 'czarny', 1200, 'Toyota', 'Yaris', 79, 'hatchback', 2018, 2, 'https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg'),
+(20, 'bialy', 1200, 'Toyota', 'Aygo', 69, 'hatchback', 2017, 2, 'https://image.ceneostatic.pl/data/products/59600749/i-toyota-aygo-ii-2015-benzyna-69km-hatchback-bialy.jpg'),
+(21, 'czerwona', 1000, 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 2, 'https://a.allegroimg.com/original/1138b5/222dd8d44fa98a697a01b0c7ff21/Skoda-Citigo-1-0-MPI-Salon-Polska-Kolor-Czerwony'),
+(22, 'czarna', 1500, 'Ford', 'Fiesta', 89, 'hatchback', 2019, 2, 'https://image.ceneostatic.pl/data/products/61577901/i-ford-fiesta-mk7-2014-benzyna-82km-hatchback-czarny.jpg'),
+(23, 'bialy', 1200, 'Hyundai', 'i20', 89, 'hatchback', 2020, 2, 'https://image.ceneostatic.pl/data/products/59448082/i-hyundai-i20-ii-2016-benzyna-84km-hatchback-bialy.jpg'),
+(24, 'niebieska', 1200, 'Skoda', 'Fabia', 90, 'hatchback', 2018, 2, 'https://image.ceneostatic.pl/data/products/72675374/i-skoda-fabia-iii-2018-km-hatchback-niebieski.jpg'),
+(25, 'czarny', 1400, 'Skoda', 'Rapid', 85, 'hatchback', 2019, 2, 'https://lh3.googleusercontent.com/proxy/6L0YyQQcsZdpAWmqQ7nq6C2GOVvq_9OH7c0gA2Yxom6J0ZcxHAHmcdwY_dkWRAotR8tkkwByXODPaTy46U0xNj88ZOyWWgeN9ma_O2HDIdYdab6BGWb7qi9oSAuTb2xbRWREMQ'),
+(26, 'bialy', 1400, 'Volkswagen', 'Golf', 109, 'hatchback', 2018, 2, 'https://image.ceneostatic.pl/data/products/73084541/i-bialy-vw-golf-vi-2-0-tdi-klimatronic-parktronic.jpg'),
+(27, 'czarny', 1600, 'Skoda', 'Octavia', 120, 'liftback', 2020, 2, 'https://image.ceneostatic.pl/data/products/72678226/i-skoda-octavia-iii-2017-km-hatchback-czarny.jpg'),
+(28, 'czarny', 1600, 'BMW', '118i', 120, 'hatchback', 2018, 2, 'https://i.imged.pl/bmw-118d-e87-2-0d-143km-manual-czarna-2007-zamiana.jpg'),
+(29, 'czarny', 2000, 'Skoda', 'SuperB III', 170, 'liftback', 2018, 2, 'https://www.skoda-dobron.pl/assets/Uploads/fd340cd914/08277507.JPG'),
+(30, 'bialy', 2000, 'BMW', 'serii 3', 179, 'sedan', 2017, 2, 'https://image.ceneostatic.pl/data/products/66655787/i-bmw-seria-3-e90-2011-184km-sedan-bialy.jpg'),
+(31, 'czarny', 2000, 'Audi', 'A6', 199, 'sedan', 2019, 2, 'https://image.ceneostatic.pl/data/products/72676380/i-audi-a6-c7-2013-km-sedan-czarny.jpg'),
+(32, 'bialy', 2000, 'BMW', 'Serii 5', 199, 'sedan', 2018, 2, 'https://b-cache.pl/stock/repo/ab55e4aa-9101-49de-a81d-0de2401999ef/7b918b62-6dbf-4a88-a322-ca68aa669f48/1920_1080_1.jpg'),
+(33, 'czarny', 3000, 'Audi', 'Q 7', 300, 'suv', 2019, 2, 'https://image.ceneostatic.pl/data/products/61374146/i-audi-q7-i-2014-diesel-244km-suv-czarny.jpg'),
+(34, 'czarny', 2200, 'Mercedes', 'GLC', 250, 'suv', 2017, 2, 'https://image.ceneostatic.pl/data/products/72680782/i-mercedes-benz-glc-2016-km-terenowy-czarny.jpg'),
+(35, 'niebieski', 2500, 'BMW', '7', 340, 'sedan', 2019, 2, 'https://www.bmw-autopremium.pl/www/media/75/img/img_9376_1b.jpg'),
+(36, 'czarny', 2000, 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 2, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg'),
+(37, 'czarny', 1200, 'Toyota', 'Yaris', 79, 'hatchback', 2018, 3, 'https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg'),
+(38, 'bialy', 1200, 'Toyota', 'Aygo', 69, 'hatchback', 2017, 3, 'https://image.ceneostatic.pl/data/products/59600749/i-toyota-aygo-ii-2015-benzyna-69km-hatchback-bialy.jpg'),
+(39, 'czerwona', 1000, 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 3, 'https://a.allegroimg.com/original/1138b5/222dd8d44fa98a697a01b0c7ff21/Skoda-Citigo-1-0-MPI-Salon-Polska-Kolor-Czerwony'),
+(40, 'czarna', 1500, 'Ford', 'Fiesta', 89, 'hatchback', 2019, 3, 'https://image.ceneostatic.pl/data/products/61577901/i-ford-fiesta-mk7-2014-benzyna-82km-hatchback-czarny.jpg'),
+(41, 'bialy', 1200, 'Hyundai', 'i20', 89, 'hatchback', 2020, 3, 'https://image.ceneostatic.pl/data/products/59448082/i-hyundai-i20-ii-2016-benzyna-84km-hatchback-bialy.jpg'),
+(42, 'niebieska', 1200, 'Skoda', 'Fabia', 90, 'hatchback', 2018, 3, 'https://image.ceneostatic.pl/data/products/72675374/i-skoda-fabia-iii-2018-km-hatchback-niebieski.jpg'),
+(43, 'czarny', 1400, 'Skoda', 'Rapid', 85, 'hatchback', 2019, 3, 'https://lh3.googleusercontent.com/proxy/6L0YyQQcsZdpAWmqQ7nq6C2GOVvq_9OH7c0gA2Yxom6J0ZcxHAHmcdwY_dkWRAotR8tkkwByXODPaTy46U0xNj88ZOyWWgeN9ma_O2HDIdYdab6BGWb7qi9oSAuTb2xbRWREMQ'),
+(44, 'bialy', 1400, 'Volkswagen', 'Golf', 109, 'hatchback', 2018, 3, 'https://image.ceneostatic.pl/data/products/73084541/i-bialy-vw-golf-vi-2-0-tdi-klimatronic-parktronic.jpg'),
+(45, 'czarny', 1600, 'Skoda', 'Octavia', 120, 'liftback', 2020, 3, 'https://image.ceneostatic.pl/data/products/72678226/i-skoda-octavia-iii-2017-km-hatchback-czarny.jpg'),
+(46, 'czarny', 1600, 'BMW', '118i', 120, 'hatchback', 2018, 3, 'https://i.imged.pl/bmw-118d-e87-2-0d-143km-manual-czarna-2007-zamiana.jpg'),
+(47, 'czarny', 2000, 'Skoda', 'SuperB III', 170, 'liftback', 2018, 3, 'https://www.skoda-dobron.pl/assets/Uploads/fd340cd914/08277507.JPG'),
+(48, 'bialy', 2000, 'BMW', 'serii 3', 179, 'sedan', 2017, 3, 'https://image.ceneostatic.pl/data/products/66655787/i-bmw-seria-3-e90-2011-184km-sedan-bialy.jpg'),
+(49, 'czarny', 2000, 'Audi', 'A6', 199, 'sedan', 2019, 3, 'https://image.ceneostatic.pl/data/products/72676380/i-audi-a6-c7-2013-km-sedan-czarny.jpg'),
+(50, 'bialy', 2000, 'BMW', 'Serii 5', 199, 'sedan', 2018, 3, 'https://b-cache.pl/stock/repo/ab55e4aa-9101-49de-a81d-0de2401999ef/7b918b62-6dbf-4a88-a322-ca68aa669f48/1920_1080_1.jpg'),
+(51, 'czarny', 3000, 'Audi', 'Q 7', 300, 'suv', 2019, 3, 'https://image.ceneostatic.pl/data/products/61374146/i-audi-q7-i-2014-diesel-244km-suv-czarny.jpg'),
+(52, 'czarny', 2200, 'Mercedes', 'GLC', 250, 'suv', 2017, 3, 'https://image.ceneostatic.pl/data/products/72680782/i-mercedes-benz-glc-2016-km-terenowy-czarny.jpg'),
+(53, 'niebieski', 2500, 'BMW', '7', 340, 'sedan', 2019, 3, 'https://www.bmw-autopremium.pl/www/media/75/img/img_9376_1b.jpg'),
+(54, 'czarny', 2000, 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 3, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg'),
+(55, 'czarny', 1200, 'Toyota', 'Yaris', 79, 'hatchback', 2018, 4, 'https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg'),
+(56, 'bialy', 1200, 'Toyota', 'Aygo', 69, 'hatchback', 2017, 4, 'https://image.ceneostatic.pl/data/products/59600749/i-toyota-aygo-ii-2015-benzyna-69km-hatchback-bialy.jpg'),
+(57, 'czerwona', 1000, 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 4, 'https://a.allegroimg.com/original/1138b5/222dd8d44fa98a697a01b0c7ff21/Skoda-Citigo-1-0-MPI-Salon-Polska-Kolor-Czerwony'),
+(58, 'czarna', 1500, 'Ford', 'Fiesta', 89, 'hatchback', 2019, 4, 'https://image.ceneostatic.pl/data/products/61577901/i-ford-fiesta-mk7-2014-benzyna-82km-hatchback-czarny.jpg'),
+(59, 'bialy', 1200, 'Hyundai', 'i20', 89, 'hatchback', 2020, 4, 'https://image.ceneostatic.pl/data/products/59448082/i-hyundai-i20-ii-2016-benzyna-84km-hatchback-bialy.jpg'),
+(60, 'niebieska', 1200, 'Skoda', 'Fabia', 90, 'hatchback', 2018, 4, 'https://image.ceneostatic.pl/data/products/72675374/i-skoda-fabia-iii-2018-km-hatchback-niebieski.jpg'),
+(61, 'czarny', 1400, 'Skoda', 'Rapid', 85, 'hatchback', 2019, 4, 'https://lh3.googleusercontent.com/proxy/6L0YyQQcsZdpAWmqQ7nq6C2GOVvq_9OH7c0gA2Yxom6J0ZcxHAHmcdwY_dkWRAotR8tkkwByXODPaTy46U0xNj88ZOyWWgeN9ma_O2HDIdYdab6BGWb7qi9oSAuTb2xbRWREMQ'),
+(62, 'bialy', 1400, 'Volkswagen', 'Golf', 109, 'hatchback', 2018, 4, 'https://image.ceneostatic.pl/data/products/73084541/i-bialy-vw-golf-vi-2-0-tdi-klimatronic-parktronic.jpg'),
+(63, 'czarny', 1600, 'Skoda', 'Octavia', 120, 'liftback', 2020, 4, 'https://image.ceneostatic.pl/data/products/72678226/i-skoda-octavia-iii-2017-km-hatchback-czarny.jpg'),
+(64, 'czarny', 1600, 'BMW', '118i', 120, 'hatchback', 2018, 4, 'https://i.imged.pl/bmw-118d-e87-2-0d-143km-manual-czarna-2007-zamiana.jpg'),
+(65, 'czarny', 2000, 'Skoda', 'SuperB III', 170, 'liftback', 2018, 4, 'https://www.skoda-dobron.pl/assets/Uploads/fd340cd914/08277507.JPG'),
+(66, 'bialy', 2000, 'BMW', 'serii 3', 179, 'sedan', 2017, 4, 'https://image.ceneostatic.pl/data/products/66655787/i-bmw-seria-3-e90-2011-184km-sedan-bialy.jpg'),
+(67, 'czarny', 2000, 'Audi', 'A6', 199, 'sedan', 2019, 4, 'https://image.ceneostatic.pl/data/products/72676380/i-audi-a6-c7-2013-km-sedan-czarny.jpg'),
+(68, 'bialy', 2000, 'BMW', 'Serii 5', 199, 'sedan', 2018, 4, 'https://b-cache.pl/stock/repo/ab55e4aa-9101-49de-a81d-0de2401999ef/7b918b62-6dbf-4a88-a322-ca68aa669f48/1920_1080_1.jpg'),
+(69, 'czarny', 3000, 'Audi', 'Q 7', 300, 'suv', 2019, 4, 'https://image.ceneostatic.pl/data/products/61374146/i-audi-q7-i-2014-diesel-244km-suv-czarny.jpg'),
+(70, 'czarny', 2200, 'Mercedes', 'GLC', 250, 'suv', 2017, 4, 'https://image.ceneostatic.pl/data/products/72680782/i-mercedes-benz-glc-2016-km-terenowy-czarny.jpg'),
+(71, 'niebieski', 2500, 'BMW', '7', 340, 'sedan', 2019, 4, 'https://www.bmw-autopremium.pl/www/media/75/img/img_9376_1b.jpg'),
+(72, 'czarny', 2000, 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 4, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `localization`
+--
+
+CREATE TABLE `localization` (
+  `id_localization` bigint(20) NOT NULL,
+  `city` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `localization`
+--
+
 INSERT INTO `localization` (`id_localization`, `city`) VALUES
 (1, 'Tarnow'),
 (2, 'Krakow'),
 (3, 'Rzeszow'),
 (4, 'Nowy Targ');
 
-INSERT INTO `car` (`id_car`, `color`, `engine_capacity`, `mark`, `model`, `money`, `type`, `year_production`, `id_localization`) VALUES
-(1, 'czarny', 1200, 'Toyota', 'Yaris', 79, 'hatchback', 2018, 1),
-(2, 'bialy', 1200, 'Toyota', 'Aygo', 69, 'hatchback', 2017, 1),
-(3, 'czerwona', 1000, 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 1),
-(4, 'czarna', 1500, 'Ford', 'Fiesta', 89, 'hatchback', 2019, 1),
-(5, 'bialy', 1200, 'Hyundai', 'i20', 89, 'hatchback', 2020, 1),
-(6, 'niebieska', 1200, 'Skoda', 'Fabia', 90, 'hatchback', 2018, 1),
-(7, 'czarny', 1400, 'Skoda', 'Rapid', 85, 'hatchback', 2019, 1),
-(8, 'bialy', 1400, 'Volkswagen', 'Golf', 109, 'hatchback', 2018, 1),
-(9, 'czarny', 1600, 'Skoda', 'Octavia', 120, 'liftback', 2020, 1),
-(10, 'czarny', 1600, 'BMW', '118i', 120, 'hatchback', 2018, 1),
-(11, 'czarny', 2000, 'Skoda', 'SuperB III', 170, 'liftback', 2018, 1),
-(12, 'bialy', 2000, 'BMW', 'serii 3', 179, 'sedan', 2017, 1),
-(13, 'czarny', 2000, 'Audi', 'A6', 199, 'sedan', 2019, 1),
-(14, 'bialy', 2000, 'BMW', 'Serii 5', 199, 'sedan', 2018, 1),
-(15, 'czarny', 3000, 'Audi', 'Q 7', 300, 'suv', 2019, 1),
-(16, 'czarny', 2200, 'Mercedes', 'GLC', 250, 'suv', 2017, 1),
-(17, 'niebieski', 2500, 'BMW', '7', 340, 'sedan', 2019, 1),
-(18, 'czarny', 2000, 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 1),
-(19, 'czarny', 1200, 'Toyota', 'Yaris', 79, 'hatchback', 2018, 2),
-(20, 'bialy', 1200, 'Toyota', 'Aygo', 69, 'hatchback', 2017, 2),
-(21, 'czerwona', 1000, 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 2),
-(22, 'czarna', 1500, 'Ford', 'Fiesta', 89, 'hatchback', 2019, 2),
-(23, 'bialy', 1200, 'Hyundai', 'i20', 89, 'hatchback', 2020, 2),
-(24, 'niebieska', 1200, 'Skoda', 'Fabia', 90, 'hatchback', 2018, 2),
-(25, 'czarny', 1400, 'Skoda', 'Rapid', 85, 'hatchback', 2019, 2),
-(26, 'bialy', 1400, 'Volkswagen', 'Golf', 109, 'hatchback', 2018, 2),
-(27, 'czarny', 1600, 'Skoda', 'Octavia', 120, 'liftback', 2020, 2),
-(28, 'czarny', 1600, 'BMW', '118i', 120, 'hatchback', 2018, 2),
-(29, 'czarny', 2000, 'Skoda', 'SuperB III', 170, 'liftback', 2018, 2),
-(30, 'bialy', 2000, 'BMW', 'serii 3', 179, 'sedan', 2017, 2),
-(31, 'czarny', 2000, 'Audi', 'A6', 199, 'sedan', 2019, 2),
-(32, 'bialy', 2000, 'BMW', 'Serii 5', 199, 'sedan', 2018, 2),
-(33, 'czarny', 3000, 'Audi', 'Q 7', 300, 'suv', 2019, 2),
-(34, 'czarny', 2200, 'Mercedes', 'GLC', 250, 'suv', 2017, 2),
-(35, 'niebieski', 2500, 'BMW', '7', 340, 'sedan', 2019, 2),
-(36, 'czarny', 2000, 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 2),
-(37, 'czarny', 1200, 'Toyota', 'Yaris', 79, 'hatchback', 2018, 3),
-(38, 'bialy', 1200, 'Toyota', 'Aygo', 69, 'hatchback', 2017, 3),
-(39, 'czerwona', 1000, 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 3),
-(40, 'czarna', 1500, 'Ford', 'Fiesta', 89, 'hatchback', 2019, 3),
-(41, 'bialy', 1200, 'Hyundai', 'i20', 89, 'hatchback', 2020, 3),
-(42, 'niebieska', 1200, 'Skoda', 'Fabia', 90, 'hatchback', 2018, 3),
-(43, 'czarny', 1400, 'Skoda', 'Rapid', 85, 'hatchback', 2019, 3),
-(44, 'bialy', 1400, 'Volkswagen', 'Golf', 109, 'hatchback', 2018, 3),
-(45, 'czarny', 1600, 'Skoda', 'Octavia', 120, 'liftback', 2020, 3),
-(46, 'czarny', 1600, 'BMW', '118i', 120, 'hatchback', 2018, 3),
-(47, 'czarny', 2000, 'Skoda', 'SuperB III', 170, 'liftback', 2018, 3),
-(48, 'bialy', 2000, 'BMW', 'serii 3', 179, 'sedan', 2017, 3),
-(49, 'czarny', 2000, 'Audi', 'A6', 199, 'sedan', 2019, 3),
-(50, 'bialy', 2000, 'BMW', 'Serii 5', 199, 'sedan', 2018, 3),
-(51, 'czarny', 3000, 'Audi', 'Q 7', 300, 'suv', 2019, 3),
-(52, 'czarny', 2200, 'Mercedes', 'GLC', 250, 'suv', 2017, 3),
-(53, 'niebieski', 2500, 'BMW', '7', 340, 'sedan', 2019, 3),
-(54, 'czarny', 2000, 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 3),
-(55, 'czarny', 1200, 'Toyota', 'Yaris', 79, 'hatchback', 2018, 4),
-(56, 'bialy', 1200, 'Toyota', 'Aygo', 69, 'hatchback', 2017, 4),
-(57, 'czerwona', 1000, 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 4),
-(58, 'czarna', 1500, 'Ford', 'Fiesta', 89, 'hatchback', 2019, 4),
-(59, 'bialy', 1200, 'Hyundai', 'i20', 89, 'hatchback', 2020, 4),
-(60, 'niebieska', 1200, 'Skoda', 'Fabia', 90, 'hatchback', 2018, 4),
-(61, 'czarny', 1400, 'Skoda', 'Rapid', 85, 'hatchback', 2019, 4),
-(62, 'bialy', 1400, 'Volkswagen', 'Golf', 109, 'hatchback', 2018, 4),
-(63, 'czarny', 1600, 'Skoda', 'Octavia', 120, 'liftback', 2020, 4),
-(64, 'czarny', 1600, 'BMW', '118i', 120, 'hatchback', 2018, 4),
-(65, 'czarny', 2000, 'Skoda', 'SuperB III', 170, 'liftback', 2018, 4),
-(66, 'bialy', 2000, 'BMW', 'serii 3', 179, 'sedan', 2017, 4),
-(67, 'czarny', 2000, 'Audi', 'A6', 199, 'sedan', 2019, 4),
-(68, 'bialy', 2000, 'BMW', 'Serii 5', 199, 'sedan', 2018, 4),
-(69, 'czarny', 3000, 'Audi', 'Q 7', 300, 'suv', 2019, 4),
-(70, 'czarny', 2200, 'Mercedes', 'GLC', 250, 'suv', 2017, 4),
-(71, 'niebieski', 2500, 'BMW', '7', 340, 'sedan', 2019, 4),
-(72, 'czarny', 2000, 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 4);
+-- --------------------------------------------------------
 
+--
+-- Struktura tabeli dla tabeli `reservation`
+--
 
+CREATE TABLE `reservation` (
+  `id_rent` bigint(20) NOT NULL,
+  `data_from` date DEFAULT NULL,
+  `data_to` date DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `id_car` int(11) DEFAULT NULL,
+  `localization_end` bigint(20) DEFAULT NULL,
+  `localization_start` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `roles`
+--
+
+CREATE TABLE `roles` (
+  `id_role` int(11) NOT NULL,
+  `name` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `roles`
+--
 
 INSERT INTO `roles` (`id_role`, `name`) VALUES
 (1, 'ROLE_ADMIN'),
 (2, 'ROLE_USER');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `users`
+--
+
+CREATE TABLE `users` (
+  `id_user` bigint(20) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(120) DEFAULT NULL,
+  `username` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `users`
+--
+
+INSERT INTO `users` (`id_user`, `email`, `password`, `username`) VALUES
+(1, 'aa10@op.pl', '$2a$10$OIqMfBGp.uYLJVQofLkq0e2vXyc8KaD5Gobj0e.IyMJeLE24DLami', 'admin3'),
+(2, 'aa10@op.pl', '$2a$10$WGjzdaq.cZrmJcnDC/wwauwoyU7hrdmFH/lnctO14pd2hhbLxfB2q', 'admin'),
+(3, 'kamil@o2.pl', '$2a$10$C0ybyFGiq/QiBa7KXlS6xexrxUyOMWOc.4YcrHVaJlBL96WVYl9/u', 'kamil');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `users_reservation`
+--
+
+CREATE TABLE `users_reservation` (
+  `id_users` bigint(20) NOT NULL,
+  `id_rent` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `users_roles`
+--
+
+CREATE TABLE `users_roles` (
+  `id_users` bigint(20) NOT NULL,
+  `id_roles` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `users_roles`
+--
+
+INSERT INTO `users_roles` (`id_users`, `id_roles`) VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2),
+(3, 2);
+
+--
+-- Indeksy dla zrzutów tabel
+--
+
+--
+-- Indeksy dla tabeli `car`
+--
+ALTER TABLE `car`
+  ADD PRIMARY KEY (`id_car`),
+  ADD KEY `FKj902asl21ipa1rc988nv0882u` (`id_localization`);
+
+--
+-- Indeksy dla tabeli `localization`
+--
+ALTER TABLE `localization`
+  ADD PRIMARY KEY (`id_localization`);
+
+--
+-- Indeksy dla tabeli `reservation`
+--
+ALTER TABLE `reservation`
+  ADD PRIMARY KEY (`id_rent`),
+  ADD KEY `FKevbx68glv1rnq9th5petwly67` (`id_car`),
+  ADD KEY `FKbko48ktbtffhfjyfeay0w6pu2` (`localization_end`),
+  ADD KEY `FK9hsrp4j7vjqlkdxge2v4x37er` (`localization_start`);
+
+--
+-- Indeksy dla tabeli `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id_role`);
+
+--
+-- Indeksy dla tabeli `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- Indeksy dla tabeli `users_reservation`
+--
+ALTER TABLE `users_reservation`
+  ADD KEY `FK4p91b5fqdslj3ds915j1a35b6` (`id_rent`),
+  ADD KEY `FKeaxyexsuxska5fjh5re00iahv` (`id_users`);
+
+--
+-- Indeksy dla tabeli `users_roles`
+--
+ALTER TABLE `users_roles`
+  ADD KEY `FKb7c3ykbm2y176wujc2k5ci6l7` (`id_roles`),
+  ADD KEY `FKq0tw71wffd6bfr4fofq7iiqqi` (`id_users`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT dla tabeli `car`
+--
+ALTER TABLE `car`
+  MODIFY `id_car` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT dla tabeli `localization`
+--
+ALTER TABLE `localization`
+  MODIFY `id_localization` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT dla tabeli `reservation`
+--
+ALTER TABLE `reservation`
+  MODIFY `id_rent` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT dla tabeli `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT dla tabeli `users`
+--
+ALTER TABLE `users`
+  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `car`
+--
+ALTER TABLE `car`
+  ADD CONSTRAINT `FKj902asl21ipa1rc988nv0882u` FOREIGN KEY (`id_localization`) REFERENCES `localization` (`id_localization`);
+
+--
+-- Ograniczenia dla tabeli `reservation`
+--
+ALTER TABLE `reservation`
+  ADD CONSTRAINT `FK9hsrp4j7vjqlkdxge2v4x37er` FOREIGN KEY (`localization_start`) REFERENCES `localization` (`id_localization`),
+  ADD CONSTRAINT `FKbko48ktbtffhfjyfeay0w6pu2` FOREIGN KEY (`localization_end`) REFERENCES `localization` (`id_localization`),
+  ADD CONSTRAINT `FKevbx68glv1rnq9th5petwly67` FOREIGN KEY (`id_car`) REFERENCES `car` (`id_car`);
+
+--
+-- Ograniczenia dla tabeli `users_reservation`
+--
+ALTER TABLE `users_reservation`
+  ADD CONSTRAINT `FK4p91b5fqdslj3ds915j1a35b6` FOREIGN KEY (`id_rent`) REFERENCES `reservation` (`id_rent`),
+  ADD CONSTRAINT `FKeaxyexsuxska5fjh5re00iahv` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_user`);
+
+--
+-- Ograniczenia dla tabeli `users_roles`
+--
+ALTER TABLE `users_roles`
+  ADD CONSTRAINT `FKb7c3ykbm2y176wujc2k5ci6l7` FOREIGN KEY (`id_roles`) REFERENCES `roles` (`id_role`),
+  ADD CONSTRAINT `FKq0tw71wffd6bfr4fofq7iiqqi` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_user`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
