@@ -9,7 +9,7 @@
 - Spring Data   
 - Javax Mail  
 - Hibernate  
-- JSON Web Token Support For The JVM  
+- JSON Web Token 
 ##### Dokumentacja Servera:  
 [Dokumentacja Servera](https://boryszs.github.io/Car-Rent/)
   
