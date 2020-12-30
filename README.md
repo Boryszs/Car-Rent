@@ -1,7 +1,7 @@
 # Car-Rental  
 ##### Projekt wykonany w ramach zajęć Podstawy Programowania Systemów Mobilnych II  
 ###### Język Programowania:  
-- Java versia 15.  
+- Java wersja 15.  
 ###### Użyte technologie:
 - Spring Boot  
 - Spring Security  
