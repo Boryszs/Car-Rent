@@ -17,15 +17,15 @@
 ```sh
 POST 
 ​/user​/edit  
-    {
-    "id": 0,
-    "username": "string",
-    "email": "string",
-    "role": [
-    "string"
-    ],
-    "password": "string"
-    }
+{
+"id": 0,
+"username": "string",
+"email": "string",
+"role": [
+"string"
+],
+"password": "string"
+}
 ```  
 
 ```sh
@@ -90,12 +90,74 @@ GET
 
 ```sh
 GET
-​/reservation​/get?id = id
+​/reservation​/get?id = id  
+[
+  {
+    "idrent": 0,
+    "car": {
+      "idcar": 0,
+      "mark": "string",
+      "model": "string",
+      "type": "string",
+      "yearProduction": 0,
+      "color": "string",
+      "engineCapacity": 0,
+      "money": 0,
+      "image": "string",
+      "localization": {
+        "id": 0,
+        "city": "string"
+      }
+    },
+    "dataFrom": "2020-12-30T02:34:34.327Z",
+    "dataTo": "2020-12-30T02:34:34.327Z",
+    "localizationStart": {
+      "id": 0,
+      "city": "string"
+    },
+    "localizationEnd": {
+      "id": 0,
+      "city": "string"
+    },
+    "price": 0
+  }
+]
 ```   
 
 ```sh
 GET
-​/reservation​/get-all-user?id = id
+​/reservation​/get-all-user?id = id  
+[
+  {
+    "idrent": 0,
+    "car": {
+      "idcar": 0,
+      "mark": "string",
+      "model": "string",
+      "type": "string",
+      "yearProduction": 0,
+      "color": "string",
+      "engineCapacity": 0,
+      "money": 0,
+      "image": "string",
+      "localization": {
+        "id": 0,
+        "city": "string"
+      }
+    },
+    "dataFrom": "2020-12-30T02:34:34.327Z",
+    "dataTo": "2020-12-30T02:34:34.327Z",
+    "localizationStart": {
+      "id": 0,
+      "city": "string"
+    },
+    "localizationEnd": {
+      "id": 0,
+      "city": "string"
+    },
+    "price": 0
+  }
+]
 ```  
   
 ##### authentication-controller  
@@ -119,6 +181,25 @@ POST
 {
   "username": "string",
   "password": "string"
+}  
+
+Response  
+{
+    "token": "string",
+    "type": "string",
+    "id": 0,
+    "username": "string",
+    "email": "string",
+    "localizations": [
+        {
+            "id": 0,
+            "city": "string"
+        }
+    ],
+    "roles": [
+        "string",
+        "string"
+    ]
 }
 ```  
 
@@ -133,17 +214,36 @@ POST
 
 ```sh
 GET 
-​/city​/show-id?id = id 
+​/city​/show-id?id = id  
+
+{
+    "id": 0,
+    "city": "string"
+}
 ```  
 
 ```sh  
 GET
 ​/city​/show-cit?city = city
+{
+    "id": 0,
+    "city": "string"
+}
 ```  
 
 ```sh  
 GET
 ​/city​/show-all
+[
+  {
+    "id": 0,
+    "city": "string"
+  },
+  {
+    "id": 0,
+    "city": "string"
+  }
+]
 ```   
 
 ##### car-controller
@@ -198,16 +298,97 @@ POST
 ```sh  
 GET
 ​/car​/show-car-all
+  [
+   {
+      "idcar": 0,
+      "mark": "string",
+      "model": "string",
+      "type": "string",
+      "yearProduction": 0,
+      "color": "string",
+      "engineCapacity": 0,
+      "money": 0,
+      "image": "string",
+      "localization": {
+        "id": 0,
+        "city": "string"
+      }
+    },
+    {
+      "idcar": 0,
+      "mark": "string",
+      "model": "string",
+      "type": "string",
+      "yearProduction": 0,
+      "color": "string",
+      "engineCapacity": 0,
+      "money": 0,
+      "image": "string",
+      "localization": {
+        "id": 0,
+        "city": "string"
+      }
+    },
+    
+  ]
 ```   
 
 ```sh  
 GET
 ​/car​/get-car?id = id
+    {
+      "idcar": 0,
+      "mark": "string",
+      "model": "string",
+      "type": "string",
+      "yearProduction": 0,
+      "color": "string",
+      "engineCapacity": 0,
+      "money": 0,
+      "image": "string",
+      "localization": {
+        "id": 0,
+        "city": "string"
+      }
+    },
 ```     
 
 ```sh  
 GET
-​/car​/get-car-localization?city = city
+​/car​/get-car-localization?city = city  
+  [
+   {
+      "idcar": 0,
+      "mark": "string",
+      "model": "string",
+      "type": "string",
+      "yearProduction": 0,
+      "color": "string",
+      "engineCapacity": 0,
+      "money": 0,
+      "image": "string",
+      "localization": {
+        "id": 0,
+        "city": "string"
+      }
+    },
+    {
+      "idcar": 0,
+      "mark": "string",
+      "model": "string",
+      "type": "string",
+      "yearProduction": 0,
+      "color": "string",
+      "engineCapacity": 0,
+      "money": 0,
+      "image": "string",
+      "localization": {
+        "id": 0,
+        "city": "string"
+      }
+    },
+    
+  ]
 ```   
 
 ##### test-controller  
