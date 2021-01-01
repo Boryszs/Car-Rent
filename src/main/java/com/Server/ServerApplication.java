@@ -26,7 +26,6 @@ public class ServerApplication {
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.2.0</version>
-
 			</plugin>
 		</plugins>
 	</build>
@@ -41,5 +40,3 @@ public class ServerApplication {
 	</reporting>
 	 */
 }
-
-
