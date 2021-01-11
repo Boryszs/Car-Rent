@@ -44,7 +44,6 @@ public class UserController {
     }
 
     //Zmiana danych użytkownika
-
     /**
      * This method edit user data.
      * This method use endpoint /user/edit.
@@ -55,14 +54,15 @@ public class UserController {
     @PostMapping("/edit")
     public ResponseEntity<?> editUser(@Valid @RequestBody EditUser editUser) {
         try {
+            logger.info("------ User edited successfully ------");
             return new ResponseEntity<>(userService.update(editUser), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Error " + exceptionRequest.getErr() + "------");
             return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
         }
     }
-    //Usuwa User.
 
+    //Usuwa User.
     /**
      * This method delete user on id.
      * This method use endpoint /user/delete.
@@ -74,6 +74,7 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@Valid @RequestParam Long id) {
         try {
             userService.deleteUser(id);
+            logger.info("------ User deleted successfully ------");
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Error User Not Exist ------");

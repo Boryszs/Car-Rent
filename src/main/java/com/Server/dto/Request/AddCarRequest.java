@@ -1,5 +1,7 @@
 package com.Server.dto.Request;
 
+import lombok.*;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,7 +12,12 @@ import javax.validation.constraints.NotNull;
  * @version 1.0
  * @since 2020-12-29.
  */
-
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class AddCarRequest {
     @NotBlank
     /**Mark car*/
@@ -44,152 +51,4 @@ public class AddCarRequest {
     private String image;
 
 
-    /**
-     * Constructor
-     */
-    public AddCarRequest() {
-    }
-
-    /**
-     * Constructor
-     */
-    public AddCarRequest(String mark, String model, String type, int yearProduction, String color, int engine, String city, float money, String image) {
-        this.mark = mark;
-        this.model = model;
-        this.type = type;
-        this.yearProduction = yearProduction;
-        this.color = color;
-        this.engine = engine;
-        this.city = city;
-        this.money = money;
-        this.image = image;
-    }
-
-    /**
-     * @param mark setMark
-     */
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
-
-    /**
-     * @param model setModel
-     */
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    /**
-     * @param type setType
-     */
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     * @param yearProduction setYearProduction
-     */
-    public void setYearProduction(int yearProduction) {
-        this.yearProduction = yearProduction;
-    }
-
-    /**
-     * @param color setColor
-     */
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    /**
-     * @param engine setEngine
-     */
-    public void setEngine(int engine) {
-        this.engine = engine;
-    }
-
-    /**
-     * @param city setCity
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    /**
-     * @param money setMoney
-     */
-    public void setMoney(float money) {
-        this.money = money;
-    }
-
-    /**
-     * @return Mark
-     */
-    public String getMark() {
-        return mark;
-    }
-
-    /**
-     *
-     * @return Type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @return YearProduction
-     */
-    public int getYearProduction() {
-        return yearProduction;
-    }
-
-    /**
-     * @return Color
-     */
-    public String getColor() {
-        return color;
-    }
-
-    /**
-     * @return Engine
-     */
-    public int getEngine() {
-        return engine;
-    }
-
-    /**
-     * @return City
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     * @return Money
-     */
-    public float getMoney() {
-        return money;
-    }
-
-    /**
-     * @return Model
-     */
-    public String getModel() {
-        return model;
-    }
-
-    /**
-     * @return Image
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * @param image setImage
-     */
-    public void setImage(String image) {
-        this.image = image;
-    }
 }

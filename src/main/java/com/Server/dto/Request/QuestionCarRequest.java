@@ -1,5 +1,7 @@
 package com.Server.dto.Request;
 
+import lombok.*;
+
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -9,8 +11,13 @@ import javax.validation.constraints.NotBlank;
  * @since 2020-12-29.
  */
 
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class QuestionCarRequest {
-
     @NotBlank
     /**city*/
     private String city;
@@ -20,63 +27,4 @@ public class QuestionCarRequest {
     @NotBlank
     /**dateTo*/
     private String dateTo;
-
-    /**Constructor*/
-    public QuestionCarRequest() {
-    }
-
-    /**Constructor*/
-    public QuestionCarRequest(String city, String dateFrom, String dateTo) {
-        this.city = city;
-        this.dateFrom = dateFrom;
-        this.dateTo = dateTo;
-    }
-
-    /**
-     *
-     * @return City
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     *
-     * @return DateFrom
-     */
-     public String getDateFrom() {
-     return dateFrom;
-     }
-
-     /**
-     *
-     * @return DateTo
-     */
-    public String getDateTo() {
-        return dateTo;
-    }
-
-    /**
-     *
-     * @param city setCity
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    /**
-     *
-     * @param dateFrom setDateFrom
-     */
-    public void setDateFrom(String dateFrom) {
-        this.dateFrom = dateFrom;
-    }
-
-    /**
-     *
-     * @param dateTo setDateTo
-     */
-    public void setDateTo(String dateTo) {
-        this.dateTo = dateTo;
-    }
 }

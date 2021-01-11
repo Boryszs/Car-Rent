@@ -106,7 +106,6 @@ public class AuthenticationController {
     }
 
     //Rejestracja.
-
     /**
      * This method is use to register user.
      * This method use endpoint /register.
@@ -118,6 +117,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
         try {
+            logger.info("------ User successfully registered------");
             return  new ResponseEntity<>(userServiceImpl.save(registerRequest),HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ User Not Exist ------");

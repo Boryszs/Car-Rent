@@ -1,6 +1,8 @@
 package com.Server.dto.Request;
 
 
+import lombok.*;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -12,6 +14,12 @@ import java.util.Set;
  * @since 2020-12-29.
  */
 
+@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class RegisterRequest {
 
     @Size(min = 3)
@@ -30,72 +38,4 @@ public class RegisterRequest {
     //@Pattern(regexp="^[A-Za-z0-9]")
     /**password*/
     private String password;
-
-    /**Constructor*/
-    public RegisterRequest() {
-    }
-
-    /**
-     *
-     * @return Username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     *
-     * @param username setUsername
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
-     *
-     * @return Email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     *
-     * @param email setEmail
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     *
-     * @return Password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     *
-     * @param password setPassword
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
-     *
-     * @return Set String
-     */
-    public Set<String> getRole() {
-        return this.role;
-    }
-
-    /**
-     *
-     * @param role setRole
-     */
-    public void setRole(Set<String> role) {
-        this.role = role;
-    }
 }

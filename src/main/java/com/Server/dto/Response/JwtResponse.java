@@ -1,6 +1,7 @@
 package com.Server.dto.Response;
 
 import com.Server.model.Localization;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,6 +12,12 @@ import java.util.List;
  * @since 2020-12-29.
  */
 
+@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class JwtResponse {
 
     /**token*/
@@ -29,6 +36,15 @@ public class JwtResponse {
     private List<String> roles;
 
     /**Constructor*/
+    /**
+     *
+     * @param token Token
+     * @param id ID
+     * @param username Name of User
+     * @param email Email of User
+     * @param localizations All Localizations
+     * @param roles Role of User
+     */
     public JwtResponse(String token, Long id, String username, String email, List<Localization> localizations, List<String> roles) {
         this.token = token;
         this.type = type;
@@ -37,118 +53,6 @@ public class JwtResponse {
         this.email = email;
         this.localizations = localizations;
         this.roles = roles;
-    }
-
-    /**
-     *
-     * @return Localizations
-     */
-    public List<Localization> getLocalizations() {
-        return localizations;
-    }
-
-    /**
-     *
-     * @return Type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     *
-     * @return Token
-     */
-    public String getToken() {
-        return token;
-    }
-
-    /**
-     *
-     * @param token setToken
-     */
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    /**
-     *
-     * @return Id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     *
-     * @param id Id
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     *
-     * @return Email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     *
-     * @param email setEmail
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     *
-     * @return Username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     *
-     * @param username setUsername
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
-     *
-     * @return Roles
-     */
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    /**
-     *
-     * @param type setType
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     *
-     * @param roles setRoles
-     */
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
-
-    /**
-     *
-     * @param localizations setLocalizations
-     */
-    public void setLocalizations(List<Localization> localizations) {
-        this.localizations = localizations;
     }
 }
 
