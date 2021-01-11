@@ -10,6 +10,7 @@ import com.Server.model.User;
 import com.Server.repository.ReservationRepository;
 import com.Server.repository.RoleRepository;
 import com.Server.repository.UserRepository;
+import com.Server.service.SendMail;
 import com.Server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,14 +39,17 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
     /**encoder*/
     private PasswordEncoder encoder;
+    /**sendMail*/
+    private SendMail sendMail;
 
     @Autowired
     /**Constructor*/
-    public UserServiceImpl(UserRepository userRepository, ReservationRepository reservationRepository, RoleRepository roleRepository, PasswordEncoder encoder) {
+    public UserServiceImpl(UserRepository userRepository, ReservationRepository reservationRepository, RoleRepository roleRepository, PasswordEncoder encoder, SendMail sendMail) {
         this.userRepository = userRepository;
         this.reservationRepository = reservationRepository;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
+        this.sendMail = sendMail;
     }
 
     /**
@@ -199,7 +203,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByUsername(registerRequest.getUsername())) {
             throw new ExceptionRequest("User Exist");
         } else {
-            //sendMail.sendMail(registerRequest.getUsername(), "Thank you for register account.");
+            sendMail.sendMail(registerRequest, "Thank you for register account.");
             List<Role> roles = new LinkedList<>();
             if (registerRequest.getRole().isEmpty()) {
                 roles.add(roleRepository.findByName(Roles.ROLE_USER).get());

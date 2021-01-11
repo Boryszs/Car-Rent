@@ -8,7 +8,7 @@ import com.Server.service.CarService;
 import com.Server.service.LocalizationService;
 import com.Server.service.ReservationService;
 import com.Server.service.UserService;
-import com.Server.service.impl.SendMail;
+import com.Server.service.impl.SendMailImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,16 +41,16 @@ public class ReservationController {
     /**LocationSercive operation on database table Localization*/
     private LocalizationService localizationServiceImpl;
     /**SendMail use to send mail*/
-    private SendMail sendMail;
+    private SendMailImpl sendMailImpl;
 
     /**Constructor*/
     @Autowired
-    public ReservationController(ReservationService reservationServiceImpl, UserService userServiceImpl, CarService carServiceImpl, LocalizationService localizationServiceImpl, SendMail sendMail) {
+    public ReservationController(ReservationService reservationServiceImpl, UserService userServiceImpl, CarService carServiceImpl, LocalizationService localizationServiceImpl, SendMailImpl sendMailImpl) {
         this.reservationServiceImpl = reservationServiceImpl;
         this.userServiceImpl = userServiceImpl;
         this.carServiceImpl = carServiceImpl;
         this.localizationServiceImpl = localizationServiceImpl;
-        this.sendMail = sendMail;
+        this.sendMailImpl = sendMailImpl;
     }
 
     //Zwracanie rezerwacji wszystkich

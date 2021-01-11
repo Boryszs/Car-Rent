@@ -11,7 +11,7 @@ import com.Server.service.CarService;
 import com.Server.service.LocalizationService;
 import com.Server.service.RoleService;
 import com.Server.service.UserService;
-import com.Server.service.impl.SendMail;
+import com.Server.service.impl.SendMailImpl;
 import com.Server.service.impl.UserDetailsimpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,12 +56,12 @@ public class AuthenticationController {
     /**CarService operation on database table Car*/
     private CarService carServiceImpl;
     /**SendMail use to send mail*/
-    private SendMail sendMail;
+    private SendMailImpl sendMailImpl;
 
 
     /**Constructor*/
     @Autowired
-    public AuthenticationController(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserService userServiceImpl, LocalizationService localizationServiceImpl, RoleService roleServiceImpl, PasswordEncoder encoder, CarService carServiceImpl, SendMail sendMail) {
+    public AuthenticationController(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserService userServiceImpl, LocalizationService localizationServiceImpl, RoleService roleServiceImpl, PasswordEncoder encoder, CarService carServiceImpl, SendMailImpl sendMailImpl) {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
         this.userServiceImpl = userServiceImpl;
@@ -69,7 +69,7 @@ public class AuthenticationController {
         this.roleServiceImpl = roleServiceImpl;
         this.encoder = encoder;
         this.carServiceImpl = carServiceImpl;
-        this.sendMail = sendMail;
+        this.sendMailImpl = sendMailImpl;
     }
 
     //Logowanie

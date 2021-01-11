@@ -42,16 +42,16 @@ public class ReservationServiceImpl implements ReservationService {
     /**localizationRepository*/
     private LocalizationRepository localizationRepository;
     /**sendMail*/
-    private SendMail sendMail;
+    private SendMailImpl sendMailImpl;
 
     @Autowired
     /**Constructor*/
-    public ReservationServiceImpl(ReservationRepository reservationRepository, UserRepository userRepository, CarRepository carRepository, LocalizationRepository localizationRepository, SendMail sendMail) {
+    public ReservationServiceImpl(ReservationRepository reservationRepository, UserRepository userRepository, CarRepository carRepository, LocalizationRepository localizationRepository, SendMailImpl sendMailImpl) {
         this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
         this.carRepository = carRepository;
         this.localizationRepository = localizationRepository;
-        this.sendMail = sendMail;
+        this.sendMailImpl = sendMailImpl;
     }
 
     /**

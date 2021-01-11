@@ -77,4 +77,12 @@ public class User {
         this.roles = roles;
     }
 
+    /**
+     *
+     * @param reservations setReservations
+     */
+    public void setReservations(Reservation reservations) {
+        this.reservations.add(reservations);
+    }
+
 }
