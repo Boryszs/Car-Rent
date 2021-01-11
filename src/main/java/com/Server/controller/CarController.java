@@ -29,7 +29,6 @@ import java.util.List;
  *   @since 2020-12-29.
  */
 
-
 @RequestMapping(value = "/car")
 @RestController
 @CrossOrigin
@@ -52,7 +51,6 @@ public class CarController {
         this.localizationServiceImpl = localizationServiceImpl;
     }
 
-
     //Dodawanie samochodu
     /**
      * This method add car.
@@ -64,13 +62,13 @@ public class CarController {
     @PostMapping("/addcar")
     public ResponseEntity<?> addCar(@Valid @RequestBody AddCarRequest addCarRequest) {
         try {
+            logger.info("------ Car added successfully ------");
             return new ResponseEntity<>(carServiceImpl.save(addCarRequest), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Localization Not Exist To Add Car ------");
             return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
         }
     }
-
 
     //Zwraca wszystkie samochody.
     /**
@@ -84,9 +82,7 @@ public class CarController {
         return carServiceImpl.findAll();
     }
 
-
     //Zwraca samochody w zaleznosci od lokazlizacji
-
     /**
      * This method get car about localization
      * This method use endpoint /car/get-car-localization.
@@ -98,6 +94,7 @@ public class CarController {
     @GetMapping(value = "/get-car-localization")
     public ResponseEntity<?> showCarLocalization(@RequestParam String city) {
         try {
+            logger.info("------ Car locations displayed successfully ------");
             return new ResponseEntity<>(carServiceImpl.findByLocalizationCity(city), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Localization Not Exist To Get Car ------");
@@ -105,9 +102,7 @@ public class CarController {
         }
     }
 
-
     //Usuwa samochody
-
     /**
      * This method delete car.
      * This method use endpoint /car/delete-car.
@@ -118,6 +113,7 @@ public class CarController {
     public ResponseEntity<?> deleteCar(@RequestParam int id) {
         try {
             carServiceImpl.deleteCar(id);
+            logger.info("------ The car was successfully deleted ------");
             return new ResponseEntity(HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Car Not Exist Wrong Id ------");
@@ -125,9 +121,7 @@ public class CarController {
         }
     }
 
-
     //Zwracanie samochody po id
-
     /**
      * This method get car about id.
      * This method use endpoint /car/get-car.
@@ -139,6 +133,7 @@ public class CarController {
     @GetMapping("/get-car")
     public ResponseEntity<?> getCar(@RequestParam int id) {
         try {
+            logger.info("------ Cars displayed successfully ------");
             return new ResponseEntity(carServiceImpl.findByIdcar(id).get(), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Car Not Exist Wrong Id ------");
@@ -146,9 +141,7 @@ public class CarController {
         }
     }
 
-
     //Zwraca samochody dostepne
-
     /**
      * This method return all available car.
      * This method use endpoint /car/get-cars.
@@ -159,13 +152,13 @@ public class CarController {
     @PostMapping("/get-cars")
     public ResponseEntity<?> checkCarNotOrderDate(@Valid @RequestBody QuestionCarRequest questionCarRequest){
         try {
+            logger.info("------ Successfully displays available cars ------");
             return new ResponseEntity(carServiceImpl.getCarNotOrder(questionCarRequest), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Localization Not Exist Wrong City Name ------");
             return new ResponseEntity<>(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
         }
     }
-
 
     //Edytowanie danych samochodu
     /**
@@ -178,6 +171,7 @@ public class CarController {
     @PostMapping("/edit-car")
     public ResponseEntity<?> editCar(@RequestBody EditCarRequest editCarRequest) {
         try {
+            logger.info("------ The car was successfully edited ------");
             return new ResponseEntity<>(carServiceImpl.update(editCarRequest), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Car Not Exist Wrong Id ------");

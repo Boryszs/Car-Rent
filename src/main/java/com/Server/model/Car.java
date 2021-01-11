@@ -1,5 +1,7 @@
 package com.Server.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -9,7 +11,11 @@ import javax.validation.constraints.NotNull;
  * @version 1.0
  * @since 2020-12-29.
  */
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "car")
 public class Car {
@@ -58,13 +64,21 @@ public class Car {
     @JoinColumn(name = "id_localization", referencedColumnName = "id_localization")
     private Localization localization;
 
-    /**Constructor*/
-    public Car() {
-    }
 
-    /**Constructor*/
+
+    /** Constructor Class Car
+     *
+     * @param mark Car Brand Name
+     * @param model Car Model Name
+     * @param type Car Type Name
+     * @param yearProduction Year of car production
+     * @param color Color of Car
+     * @param engineCapacity Car Engine Capacity
+     * @param money Money for the Car
+     * @param localization Car Location
+     * @param image Url to photo of the Car
+     */
     public Car(String mark, String model, String type, int yearProduction, String color, int engineCapacity, float money, Localization localization, String image) {
-        this.idcar = idcar;
         this.mark = mark;
         this.model = model;
         this.type = type;
@@ -76,159 +90,4 @@ public class Car {
         this.image = image;
     }
 
-    /**
-     *
-     * @return Idcar
-     */
-    public int getIdcar() {
-        return idcar;
-    }
-
-    /**
-     *
-     * @return Model
-     */
-    public String getModel() {
-        return model;
-    }
-
-    /**
-     *
-     * @param idcar setIdcar
-     */
-    public void setIdcar(int idcar) {
-        this.idcar = idcar;
-    }
-
-    /**
-     *
-     * @return Mark
-     */
-    public String getMark() {
-        return mark;
-    }
-
-    /**
-     *
-     * @param mark setMark
-     */
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
-
-    /**
-     *
-     * @return Type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     *
-     * @param type setType
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     *
-     * @return YearProduction
-     */
-    public int getYearProduction() {
-        return yearProduction;
-    }
-
-    /**
-     *
-     * @param yearProduction setYearProduction
-     */
-    public void setYearProduction(int yearProduction) {
-        this.yearProduction = yearProduction;
-    }
-
-    /**
-     *
-     * @return Color
-     */
-    public String getColor() {
-        return color;
-    }
-
-    /**
-     *
-     * @param color setColor
-     */
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    /**
-     *
-     * @return EngineCapacity
-     */
-    public int getEngineCapacity() {
-        return engineCapacity;
-    }
-
-    /**
-     *
-     * @param engineCapacity setEngineCapacity
-     */
-    public void setEngineCapacity(int engineCapacity) {
-        this.engineCapacity = engineCapacity;
-    }
-
-    /**
-     *
-     * @return Localization
-     */
-    public Localization getLocalization() {
-        return localization;
-    }
-
-    /**
-     *
-     * @param localization setLocalization
-     */
-    public void setLocalization(Localization localization) {
-        this.localization = localization;
-    }
-
-    /**
-     *
-     * @return Money
-     */
-    public float getMoney() {
-        return money;
-    }
-
-    /**
-     *
-     * @param money setMoney
-     */
-    public void setMoney(float money) {
-        this.money = money;
-    }
-
-    /**
-     *
-     * @param model setModel
-     */
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    /**
-     *
-     * @return Image
-     */
-    public String getImage() { return image; }
-
-    /**
-     *
-     * @param image setImage
-     */
-    public void setImage(String image) { this.image = image; }
 }

@@ -1,5 +1,7 @@
 package com.Server.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 /**
@@ -8,7 +10,11 @@ import javax.persistence.*;
  * @version 1.0
  * @since 2020-12-29.
  */
-
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -23,45 +29,4 @@ public class Role {
     /***/
     private Roles name;
 
-    /**Constructor*/
-    public Role() {
-    }
-
-    /**Constructor*/
-    public Role(Integer id, Roles name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    /**
-     *
-     * @return Id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     *
-     * @return Name
-     */
-    public Roles getName() {
-        return name;
-    }
-
-    /**
-     *
-     * @param id setId
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     *
-     * @param name setName
-     */
-    public void setName(Roles name) {
-        this.name = name;
-    }
 }

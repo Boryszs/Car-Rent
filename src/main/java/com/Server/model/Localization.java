@@ -1,5 +1,7 @@
 package com.Server.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -9,7 +11,11 @@ import javax.validation.constraints.NotNull;
  * @version 1.0
  * @since 2020-12-29.
  */
-
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "localization")
 public class Localization {
@@ -24,44 +30,14 @@ public class Localization {
     /**city*/
     private String city;
 
-    /**Constructor*/
-    public Localization() {
-    }
 
-    /**Constructor*/
+
+    /** Constructor Class Localization
+     *
+     * @param city Car location city
+     */
     public Localization(String city) {
         this.city = city;
     }
 
-    /**
-     *
-     * @return Id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     *
-     * @param id Id
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     *
-     * @return City
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     *
-     * @param city setCity
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
 }

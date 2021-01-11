@@ -37,7 +37,6 @@ public class LocalizationController {
         this.localizationServiceImpl = localizationServiceImpl;
     }
 
-
     //Zwraca wszystkie lokalizacje
     /**
      * This method get all localization.
@@ -62,6 +61,7 @@ public class LocalizationController {
     @GetMapping(value = "/show-id")
     public ResponseEntity<?> showLocalizationId(@RequestParam int id) {
         try {
+            logger.info("------ Successfully returned location after id ------");
             return new ResponseEntity<>(localizationServiceImpl.findById(id).get(), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Localization Id City Not Exist To Get ------");
@@ -80,13 +80,13 @@ public class LocalizationController {
     @GetMapping(value = "/show-city")
     public ResponseEntity<?> showLocalizationCity(@RequestParam String city) {
         try {
+            logger.info("------ Location by city name was returned successfully ------");
             return new ResponseEntity<>(localizationServiceImpl.findByCity(city).get(), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Localization Name City Not Exist To Get ------");
             return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
         }
     }
-
 
     //Dodaje nowa lokalizacje
     /**
@@ -98,6 +98,7 @@ public class LocalizationController {
     @PostMapping(value = "/add")
     public ResponseEntity<?> addcity(@RequestBody CityRequest cityRequest) {
         localizationServiceImpl.save(new Localization(cityRequest.getCity()));
+        logger.info("------ City location added successfully ------");
         return new ResponseEntity(HttpStatus.OK);
     }
 

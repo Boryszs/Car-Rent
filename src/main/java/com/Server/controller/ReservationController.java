@@ -26,7 +26,6 @@ import java.util.List;
  *   @since 2020-12-29.
  */
 
-
 @RequestMapping(value = "/reservation")
 @RestController
 @CrossOrigin
@@ -54,9 +53,7 @@ public class ReservationController {
         this.sendMail = sendMail;
     }
 
-
     //Zwracanie rezerwacji wszystkich
-
     /**
      * This method get all reservation.
      * This method use endpoint /reservation/show.
@@ -79,13 +76,13 @@ public class ReservationController {
     @PostMapping(value = "/delete")
     public ResponseEntity<?> deleteReservation(@RequestParam Long id){
         try {
+            logger.info("------ The reservation was successfully deleted ------");
             return new ResponseEntity(reservationServiceImpl.deleteReservation(id), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Reservation Id Not Exist To Delete ------");
             return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
         }
     }
-
 
     //Zwracanie rezerwacji po id usera
     /**
@@ -99,6 +96,7 @@ public class ReservationController {
     @GetMapping(value = "/get")
     public ResponseEntity<?> getReservation(@RequestParam Long id) {
         try {
+            logger.info("------ Reservations displayed successfully ------");
             return new ResponseEntity(userServiceImpl.getReservationUser(id), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Reservation Id Not Exist To Get ------");
@@ -119,6 +117,7 @@ public class ReservationController {
     @PostMapping(value = "/add")
     public ResponseEntity<?> addReservation(@Valid @RequestBody AddReservationRequest addReservationRequest){
         try {
+            logger.info("------ Reservations added successfully ------");
             return new ResponseEntity(reservationServiceImpl.save(addReservationRequest), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Reservation Add Error ------");
@@ -138,6 +137,7 @@ public class ReservationController {
     @GetMapping(value = "/get-all-user")
     public ResponseEntity<?> getReservationById(@RequestParam Long id){
         try {
+            logger.info("------ Successfully displayed user bookings ------");
             return new ResponseEntity(reservationServiceImpl.getCurrentReservation(id), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ User Not Exist ------");

@@ -1,5 +1,6 @@
 package com.Server.model;
 
+import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -11,7 +12,11 @@ import java.util.Date;
  * @version 1.0
  * @since 2020-12-29.
  */
-
+@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "reservation")
 public class Reservation {
@@ -54,12 +59,17 @@ public class Reservation {
     /**price*/
     private float price;
 
-    /**Constructor*/
-    public Reservation() {
 
-    }
-
-    /**Constructor*/
+    /** Constructor Class Reservation
+     *
+     * @param car Car Class Object
+     * @param user User Class Object
+     * @param dataFrom Date of the reservation start
+     * @param dataTo Date of the reservation end
+     * @param localizationStart The city where the reservations started
+     * @param localizationEnd The city where the reservations ended
+     * @param price  Reservation cost
+     */
     public Reservation(Car car, User user, Date dataFrom, Date dataTo, Localization localizationStart, Localization localizationEnd, float price) {
         this.car = car;
         this.dataFrom = dataFrom;
@@ -69,115 +79,4 @@ public class Reservation {
         this.price = price;
     }
 
-    /**
-     *
-     * @return Idrent
-     */
-    public Long getIdrent() {
-        return idrent;
-    }
-
-    /**
-     *
-     * @param idrent Idrent
-     */
-    public void setIdrent(Long idrent) {
-        this.idrent = idrent;
-    }
-
-    /**
-     *
-     * @return Car
-     */
-    public Car getCar() {
-        return car;
-    }
-
-    /**
-     *
-     * @param car setCar
-     */
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    /**
-     *
-     * @return DataFrom
-     */
-    public Date getDataFrom() {
-        return dataFrom;
-    }
-
-    /**
-     *
-     * @param dataFrom setDataFrom
-     */
-    public void setDataFrom(Date dataFrom) {
-        this.dataFrom = dataFrom;
-    }
-
-    /**
-     *
-     * @return DataTo
-     */
-    public Date getDataTo() {
-        return dataTo;
-    }
-
-    /**
-     *
-     * @param dataTo setDataTo
-     */
-    public void setDataTo(Date dataTo) {
-        this.dataTo = dataTo;
-    }
-
-    /**
-     *
-     * @return LocalizationStart
-     */
-    public Localization getLocalizationStart() {
-        return localizationStart;
-    }
-
-    /**
-     *
-     * @param localizationStart setLocalizationStart
-     */
-    public void setLocalizationStart(Localization localizationStart) {
-        this.localizationStart = localizationStart;
-    }
-
-    /**
-     *
-     * @return LocalizationEnd
-     */
-    public Localization getLocalizationEnd() {
-        return localizationEnd;
-    }
-
-    /**
-     *
-     * @param localizationEnd setLocalizationEnd
-     */
-    public void setLocalizationEnd(Localization localizationEnd) {
-        this.localizationEnd = localizationEnd;
-    }
-
-    /**
-     *
-     * @return Price
-     */
-    public float getPrice() {
-        return price;
-    }
-
-    /**
-     *
-     * @param price setPrice
-     */
-    public void setPrice(float price) {
-        this.price = price;
-    }
 }
