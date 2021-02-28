@@ -19,7 +19,11 @@ import javax.persistence.*;
 @Table(name = "roles")
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="webuser_idwebuser_seq",
+            sequenceName="webuser_idwebuser_seq",
+            allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator="webuser_idwebuser_seq")
     @Column(name = "id_role")
     /***/
     private Integer id;

@@ -21,7 +21,11 @@ import javax.validation.constraints.NotNull;
 public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="webuser_idwebuser_seq",
+            sequenceName="webuser_idwebuser_seq",
+            allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator="webuser_idwebuser_seq")
     @Column(name = "id_car")
     /**idcar*/
     private int idcar;
