@@ -33,15 +33,15 @@ public class ReservationController {
     /**Logger use to logger on server.*/
     private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
     /**ReservationService operation on database table Reservation*/
-    private ReservationService reservationServiceImpl;
+    private final ReservationService reservationServiceImpl;
     /**UserService operation on database table User*/
-    private UserService userServiceImpl;
+    private final UserService userServiceImpl;
     /**CarService operation on database table Car*/
-    private CarService carServiceImpl;
+    private final CarService carServiceImpl;
     /**LocationSercive operation on database table Localization*/
-    private LocalizationService localizationServiceImpl;
+    private final LocalizationService localizationServiceImpl;
     /**SendMail use to send mail*/
-    private SendMailImpl sendMailImpl;
+    private final SendMailImpl sendMailImpl;
 
     /**Constructor*/
     @Autowired
@@ -80,7 +80,7 @@ public class ReservationController {
             return new ResponseEntity(reservationServiceImpl.deleteReservation(id), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Reservation Id Not Exist To Delete ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -100,7 +100,7 @@ public class ReservationController {
             return new ResponseEntity(userServiceImpl.getReservationUser(id), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Reservation Id Not Exist To Get ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -121,7 +121,7 @@ public class ReservationController {
             return new ResponseEntity(reservationServiceImpl.save(addReservationRequest), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Reservation Add Error ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -141,7 +141,7 @@ public class ReservationController {
             return new ResponseEntity(reservationServiceImpl.getCurrentReservation(id), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ User Not Exist ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 }

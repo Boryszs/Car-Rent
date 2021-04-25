@@ -32,13 +32,13 @@ import java.util.stream.IntStream;
 public class CarServiceImpl implements CarService {
 
     /**carRepository*/
-    private CarRepository carRepository;
+    private final CarRepository carRepository;
     /**reservationRepository*/
-    private ReservationRepository reservationRepository;
+    private final ReservationRepository reservationRepository;
     /**localizationRepository*/
-    private LocalizationRepository localizationRepository;
+    private final LocalizationRepository localizationRepository;
     /**userRepository*/
-    private UserRepository  userRepository;
+    private final UserRepository  userRepository;
 
     @Autowired
     /**Constructor*/
@@ -82,7 +82,7 @@ public class CarServiceImpl implements CarService {
      * @throws ExceptionRequest when car not exist.
      */
     @Override
-    public Optional<Car> findByIdcar(int id) throws ExceptionRequest {
+    public Optional<Car> findByIdCar(int id) throws ExceptionRequest {
         if (carRepository.existsByIdcar(id)) {
             return carRepository.findByIdcar(id);
         } else {
@@ -176,7 +176,7 @@ public class CarServiceImpl implements CarService {
      * @return true or false.
      */
     @Override
-    public boolean existsByIdcar(int id) {
+    public boolean existsByIdCar(int id) {
         return carRepository.existsByIdcar(id);
     }
 
@@ -187,7 +187,7 @@ public class CarServiceImpl implements CarService {
      * @throws ExceptionRequest when id car not exist.
      */
     @Override
-    public Integer deleteByIdcar(int id) {
+    public Integer deleteByIdCar(int id) {
         return carRepository.deleteByIdcar(id);
     }
 

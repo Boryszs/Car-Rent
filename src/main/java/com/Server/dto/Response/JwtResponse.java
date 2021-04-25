@@ -3,6 +3,7 @@ package com.Server.dto.Response;
 import com.Server.model.Localization;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class JwtResponse {
+public class JwtResponse implements Serializable {
 
     /**token*/
     private String token;

@@ -2,6 +2,8 @@ package com.Server.dto.Request;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 /**
  * Class DTO use to city request.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
@@ -15,7 +17,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CityRequest {
+public class CityRequest implements Serializable {
 
     /**City*/
     private String city;

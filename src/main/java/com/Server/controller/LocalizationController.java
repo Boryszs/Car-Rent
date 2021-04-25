@@ -65,7 +65,7 @@ public class LocalizationController {
             return new ResponseEntity<>(localizationServiceImpl.findById(id).get(), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Localization Id City Not Exist To Get ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -84,7 +84,7 @@ public class LocalizationController {
             return new ResponseEntity<>(localizationServiceImpl.findByCity(city).get(), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Localization Name City Not Exist To Get ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 

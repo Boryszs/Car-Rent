@@ -2,6 +2,8 @@ package com.Server.dto.Request;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 /**
  * Class DTO use to edit car.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
@@ -14,7 +16,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class EditCarRequest {
+public class EditCarRequest implements Serializable {
     /**idcar*/
     private Integer idcar;
     /**mark*/

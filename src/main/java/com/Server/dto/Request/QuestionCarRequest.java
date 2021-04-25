@@ -3,6 +3,7 @@ package com.Server.dto.Request;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 /**
  * Class DTO use to query a reservation.
@@ -17,7 +18,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class QuestionCarRequest {
+public class QuestionCarRequest implements Serializable {
     @NotBlank
     /**city*/
     private String city;

@@ -23,7 +23,7 @@ import java.util.Optional;
 public class RoleServiceImpl implements RoleService {
 
     /**roleRepository*/
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
     /**Constructor*/

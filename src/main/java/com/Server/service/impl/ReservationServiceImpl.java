@@ -34,15 +34,15 @@ import java.util.Optional;
 public class ReservationServiceImpl implements ReservationService {
 
     /**reservationRepository*/
-    private ReservationRepository reservationRepository;
+    private final ReservationRepository reservationRepository;
     /**userRepository*/
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     /**carRepository*/
-    private CarRepository carRepository;
+    private final CarRepository carRepository;
     /**localizationRepository*/
-    private LocalizationRepository localizationRepository;
+    private final LocalizationRepository localizationRepository;
     /**sendMail*/
-    private SendMailImpl sendMailImpl;
+    private final SendMailImpl sendMailImpl;
 
     @Autowired
     /**Constructor*/
@@ -60,7 +60,7 @@ public class ReservationServiceImpl implements ReservationService {
      * @return reservation data.
      */
     @Override
-    public Optional<Reservation> findByIdrent(Long id) {
+    public Optional<Reservation> findByIdRent(Long id) {
         return reservationRepository.findByIdrent(id);
     }
 
@@ -70,7 +70,7 @@ public class ReservationServiceImpl implements ReservationService {
      * @return true or false.
      */
     @Override
-    public boolean existsByIdrent(Long id) {
+    public boolean existsByIdRent(Long id) {
         return reservationRepository.existsByIdrent(id);
     }
 
@@ -80,7 +80,7 @@ public class ReservationServiceImpl implements ReservationService {
      * @return return int on id delete reservation.
      */
     @Override
-    public int deleteByIdrent(Long id) {
+    public int deleteByIdRent(Long id) {
         return reservationRepository.deleteByIdrent(id);
     }
 
@@ -136,7 +136,7 @@ public class ReservationServiceImpl implements ReservationService {
      * @return true or false.
      */
     @Override
-    public boolean existsByCar_Idcar(int id) {
+    public boolean existsByCarIdCar(int id) {
         return reservationRepository.existsByCar_Idcar(id);
     }
 
@@ -194,7 +194,7 @@ public class ReservationServiceImpl implements ReservationService {
      * @return return List Reservation.
      */
     @Override
-    public List<Reservation> findByCar_Idcar(int id) {
+    public List<Reservation> findByCarIdCar(int id) {
         return reservationRepository.findByCar_Idcar(id);
     }
 
@@ -204,7 +204,7 @@ public class ReservationServiceImpl implements ReservationService {
      * @return data reservation.
      */
     @Override
-    public Optional<Reservation> findFirstByCarIdcarOrderByIdrentDesc(int id) {
+    public Optional<Reservation> findFirstByCarIdCarOrderByIdRentDesc(int id) {
         return reservationRepository.findFirstByCarIdcarOrderByIdrentDesc(id);
     }
 }

@@ -20,21 +20,21 @@ public interface ReservationService {
      * @param id id reservation.
      * @return reservation data.
      */
-    Optional<Reservation> findByIdrent(Long id);
+    Optional<Reservation> findByIdRent(Long id);
 
     /**
      * Check whether reservation on id exist.
      * @param id id reservation.
      * @return true or false.
      */
-    boolean existsByIdrent(Long id);
+    boolean existsByIdRent(Long id);
 
     /**
      * Delete reservation on id.
      * @param id id reservation.
      * @return return int on id delete reservation.
      */
-    int deleteByIdrent(Long id);
+    int deleteByIdRent(Long id);
 
     /**
      * Return Current reservation user on id user.
@@ -57,7 +57,7 @@ public interface ReservationService {
      * @param id id car.
      * @return true or false.
      */
-    boolean existsByCar_Idcar(int id);
+    boolean existsByCarIdCar(int id);
 
     /**
      * Save new reservation
@@ -78,12 +78,12 @@ public interface ReservationService {
      * @param id id car
      * @return return List Reservation.
      */
-    List<Reservation> findByCar_Idcar(int id);
+    List<Reservation> findByCarIdCar(int id);
 
     /**
      * Find the Last reservation on car
      * @param id id car.
      * @return data reservation.
      */
-    Optional<Reservation> findFirstByCarIdcarOrderByIdrentDesc(int id);
+    Optional<Reservation> findFirstByCarIdCarOrderByIdRentDesc(int id);
 }

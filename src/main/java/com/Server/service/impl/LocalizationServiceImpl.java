@@ -23,7 +23,7 @@ import java.util.Optional;
 public class LocalizationServiceImpl implements LocalizationService {
 
     /**localizationRepository*/
-    private LocalizationRepository localizationRepository;
+    private final LocalizationRepository localizationRepository;
 
     @Autowired
     /**Constructor*/

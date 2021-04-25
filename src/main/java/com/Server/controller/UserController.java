@@ -33,7 +33,7 @@ public class UserController {
     /**
      * UserService operation on database table User
      */
-    private UserService userService;
+    private final UserService userService;
 
     /**
      * Constructor
@@ -57,8 +57,8 @@ public class UserController {
             logger.info("------ User edited successfully ------");
             return new ResponseEntity<>(userService.update(editUser), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
-            logger.error("------ Error " + exceptionRequest.getErr() + "------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            logger.error("------ Error " + exceptionRequest.getError() + "------");
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -78,7 +78,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Error User Not Exist ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 }

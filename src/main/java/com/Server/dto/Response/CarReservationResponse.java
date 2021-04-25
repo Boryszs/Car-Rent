@@ -3,6 +3,7 @@ package com.Server.dto.Response;
 import lombok.*;
 import org.springframework.boot.convert.DataSizeUnit;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -17,7 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CarReservationResponse {
+public class CarReservationResponse implements Serializable {
     /**mark*/
     private String mark;
     /**model*/

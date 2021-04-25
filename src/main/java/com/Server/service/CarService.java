@@ -36,7 +36,7 @@ public interface CarService {
      * @return car on id.
      * @throws ExceptionRequest when car not exist.
      */
-    Optional<Car> findByIdcar(int id) throws ExceptionRequest;
+    Optional<Car> findByIdCar(int id) throws ExceptionRequest;
 
     /**
      * Method to edit data car.
@@ -67,7 +67,7 @@ public interface CarService {
      * @param id id car to check.
      * @return true or false.
      */
-    boolean existsByIdcar(int id);
+    boolean existsByIdCar(int id);
 
     /**
      * Delete car on id.
@@ -75,7 +75,7 @@ public interface CarService {
      * @return return id deleting car.
      * @throws ExceptionRequest when id car not exist.
      */
-    Integer deleteByIdcar(int id) throws ExceptionRequest;
+    Integer deleteByIdCar(int id) throws ExceptionRequest;
 
     /**
      * Find car on localization.

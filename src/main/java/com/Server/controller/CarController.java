@@ -9,9 +9,6 @@ import com.Server.model.Car;
 import com.Server.service.CarService;
 import com.Server.service.LocalizationService;
 import com.Server.service.ReservationService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,14 +56,14 @@ public class CarController {
      * @return Data added new car Http.Status 200 or 400.
      * @throws ExceptionRequest when localization not exist
      */
-    @PostMapping("/addcar")
+    @PostMapping("/add-car")
     public ResponseEntity<?> addCar(@Valid @RequestBody AddCarRequest addCarRequest) {
         try {
             logger.info("------ Car added successfully ------");
             return new ResponseEntity<>(carServiceImpl.save(addCarRequest), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Localization Not Exist To Add Car ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -98,7 +95,7 @@ public class CarController {
             return new ResponseEntity<>(carServiceImpl.findByLocalizationCity(city), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Localization Not Exist To Get Car ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -117,7 +114,7 @@ public class CarController {
             return new ResponseEntity(HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Car Not Exist Wrong Id ------");
-            return new ResponseEntity<>(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -134,10 +131,10 @@ public class CarController {
     public ResponseEntity<?> getCar(@RequestParam int id) {
         try {
             logger.info("------ Cars displayed successfully ------");
-            return new ResponseEntity(carServiceImpl.findByIdcar(id).get(), HttpStatus.OK);
+            return new ResponseEntity(carServiceImpl.findByIdCar(id).get(), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Car Not Exist Wrong Id ------");
-            return new ResponseEntity<>(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -156,7 +153,7 @@ public class CarController {
             return new ResponseEntity(carServiceImpl.getCarNotOrder(questionCarRequest), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Localization Not Exist Wrong City Name ------");
-            return new ResponseEntity<>(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -175,7 +172,7 @@ public class CarController {
             return new ResponseEntity<>(carServiceImpl.update(editCarRequest), HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ Car Not Exist Wrong Id ------");
-            return new ResponseEntity<>(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 }

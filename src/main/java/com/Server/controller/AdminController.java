@@ -25,7 +25,7 @@ public class AdminController {
      * This method use endpoint /admin/test
      * @return Text hello where server is working Http.Status 200.
      */
-    @GetMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/test")
     public String getString() {
         return "hello";
     }
@@ -35,7 +35,7 @@ public class AdminController {
      * This method use endpoint /admin/about
      * @return Text about company to client Http.Status 200.
      */
-    @GetMapping(value = "/about", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/about")
     public String getAbout() {
         return "about company";
     }

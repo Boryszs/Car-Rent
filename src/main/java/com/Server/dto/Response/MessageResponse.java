@@ -2,6 +2,8 @@ package com.Server.dto.Response;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 /**
  * Class DTO get Message text.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
@@ -15,7 +17,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class MessageResponse {
+public class MessageResponse implements Serializable {
     /**message*/
     String message;
 }

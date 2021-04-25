@@ -6,6 +6,7 @@ import lombok.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * Class DTO use to add reservation.
@@ -19,7 +20,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class AddReservationRequest {
+public class AddReservationRequest implements Serializable {
     @NotNull
     @Min(1)
     /**id user*/

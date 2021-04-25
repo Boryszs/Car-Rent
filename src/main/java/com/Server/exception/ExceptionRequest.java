@@ -9,42 +9,42 @@ package com.Server.exception;
 
 public class ExceptionRequest extends Exception {
     /**err*/
-    private String err;
+    private String error;
 
     /**Constructor*/
-    public ExceptionRequest(String err) {
-        this.err = err;
+    public ExceptionRequest(String error) {
+        this.error = error;
     }
 
     /**Constructor*/
-    public ExceptionRequest(String s, String err) {
+    public ExceptionRequest(String s, String error) {
         super(s);
-        this.err = err;
+        this.error = error;
     }
 
     /**Constructor*/
-    public ExceptionRequest(String s, Throwable throwable, String err) {
+    public ExceptionRequest(String s, Throwable throwable, String error) {
         super(s, throwable);
-        this.err = err;
+        this.error = error;
     }
 
     /**Constructor*/
-    public ExceptionRequest(Throwable throwable, String err) {
+    public ExceptionRequest(Throwable throwable, String error) {
         super(throwable);
-        this.err = err;
+        this.error = error;
     }
 
     /**Constructor*/
-    public ExceptionRequest(String s, Throwable throwable, boolean b, boolean b1, String err) {
+    public ExceptionRequest(String s, Throwable throwable, boolean b, boolean b1, String error) {
         super(s, throwable, b, b1);
-        this.err = err;
+        this.error = error;
     }
 
     /**
      *
      * @return message error.
      */
-    public String getErr() {
-        return err;
+    public String getError() {
+        return error;
     }
 }

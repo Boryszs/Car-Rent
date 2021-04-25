@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -42,21 +43,21 @@ public class AuthenticationController {
     /**Logger use to logger on server.*/
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     /**AuthenticationManager us to authentication*/
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
     /**JwtUtils generate token*/
-    private JwtUtils jwtUtils;
+    private final JwtUtils jwtUtils;
     /**UserService operation on database table User*/
-    private UserService userServiceImpl;
+    private final UserService userServiceImpl;
     /**LocationSercive operation on database table Localization*/
-    private LocalizationService localizationServiceImpl;
+    private final LocalizationService localizationServiceImpl;
     /**RoleService operation on database table Role*/
-    private RoleService roleServiceImpl;
+    private final RoleService roleServiceImpl;
     /**PasswordEncoder encoder password*/
-    private PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
     /**CarService operation on database table Car*/
-    private CarService carServiceImpl;
+    private final CarService carServiceImpl;
     /**SendMail use to send mail*/
-    private SendMailImpl sendMailImpl;
+    private final SendMailImpl sendMailImpl;
 
 
     /**Constructor*/
@@ -91,7 +92,7 @@ public class AuthenticationController {
 
         UserDetailsimpl userDetails = (UserDetailsimpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
+                .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
         List<Localization> localizations = localizationServiceImpl.findAll();
 
@@ -121,7 +122,7 @@ public class AuthenticationController {
             return  new ResponseEntity<>(userServiceImpl.save(registerRequest),HttpStatus.OK);
         } catch (ExceptionRequest exceptionRequest) {
             logger.error("------ User Not Exist ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getErr()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 }

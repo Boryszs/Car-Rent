@@ -234,7 +234,7 @@ public class UserServiceImpl implements UserService {
      * @return User data with list reservation.
      */
     @Override
-    public User findByReservations_Idrent(Long id) {
+    public User findByReservationsIdRent(Long id) {
         return userRepository.findByReservations_Idrent(id);
     }
 

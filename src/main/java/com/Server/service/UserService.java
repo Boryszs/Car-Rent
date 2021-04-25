@@ -103,7 +103,7 @@ public interface UserService {
      * @param id is reservation user.
      * @return User data with list reservation.
      */
-    User findByReservations_Idrent(Long id);
+    User findByReservationsIdRent(Long id);
 
     /**
      * Check whether user on id exist.
