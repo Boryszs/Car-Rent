@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 /**
  * Entity car to store Users data.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 @Data
 @NoArgsConstructor
@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "car")
 public class Car {
 
@@ -60,8 +61,8 @@ public class Car {
     private String image;
 
     /**localization*/
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_localization", referencedColumnName = "id_localization")
+    @OneToOne
+    @JoinColumn(name = "id_localization")
     private Localization localization;
 
 

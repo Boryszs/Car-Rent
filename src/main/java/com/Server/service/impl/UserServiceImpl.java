@@ -2,7 +2,7 @@ package com.Server.service.impl;
 
 import com.Server.dto.Request.EditUser;
 import com.Server.dto.Request.RegisterRequest;
-import com.Server.exception.ExceptionRequest;
+import com.Server.exception.WrongDataException;
 import com.Server.model.Reservation;
 import com.Server.model.Role;
 import com.Server.model.Roles;
@@ -24,8 +24,8 @@ import java.util.Optional;
 /**
  * Class Service implements interface RoleService.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 @Service
@@ -76,15 +76,15 @@ public class UserServiceImpl implements UserService {
      * Return reservation user.
      * @param id id user.
      * @return List reservation.
-     * @throws ExceptionRequest when id user is wrong.
+     * @throws WrongDataException when id user is wrong.
      */
     @Override
-    public List<Reservation> getReservationUser(Long id) throws ExceptionRequest {
+    public List<Reservation> getReservationUser(Long id) throws WrongDataException {
         if (!reservationRepository.existsByIdrent(id)) {
-            throw new ExceptionRequest("Reservation not exist!!!");
+            throw new WrongDataException("Reservation not exist!!!");
         } else {
             if (!userRepository.existsById(id)) {
-                throw new ExceptionRequest("User not Exist");
+                throw new WrongDataException("User not Exist");
             } else {
                 User user = userRepository.findById(id).get();
                 List<Reservation> reservations = user.getReservations();
@@ -96,12 +96,12 @@ public class UserServiceImpl implements UserService {
     /**
      * Delete user on id.
      * @param id id user.
-     * @throws ExceptionRequest when id user is wrong.
+     * @throws WrongDataException when id user is wrong.
      */
     @Override
-    public void deleteUser(Long id) throws ExceptionRequest {
+    public void deleteUser(Long id) throws WrongDataException {
         if(!userRepository.existsById(id)){
-            throw new ExceptionRequest("User not Exist");
+            throw new WrongDataException("User not Exist");
         }else{
         User user = userRepository.findById(id).get();
         user.getReservations().forEach(reservation -> reservationRepository.delete(reservation));
@@ -125,16 +125,16 @@ public class UserServiceImpl implements UserService {
      * Update user.
      * @param editUser new user data.
      * @return return new data on user.
-     * @throws ExceptionRequest when request data user is wrong.
+     * @throws WrongDataException when request data user is wrong.
      */
     @Override
-    public User update(EditUser editUser) throws ExceptionRequest {
+    public User update(EditUser editUser) throws WrongDataException {
         System.out.println(editUser.getId());
         if(!userRepository.existsById(editUser.getId())){
-            throw new ExceptionRequest("User not Exist");
+            throw new WrongDataException("User not Exist");
         }else {
             if(userRepository.existsByUsername(editUser.getUsername())){
-                throw new ExceptionRequest("User of Username is Exist");
+                throw new WrongDataException("User of Username is Exist");
             }
                 User user = userRepository.findById(editUser.getId()).get();
                 user.setUsername(editUser.getUsername());
@@ -180,12 +180,12 @@ public class UserServiceImpl implements UserService {
      * Find user on id.
      * @param id is user.
      * @return user data
-     * @throws ExceptionRequest when id is wrong
+     * @throws WrongDataException when id is wrong
      */
     @Override
-    public Optional<User> findById(Long id) throws ExceptionRequest {
+    public Optional<User> findById(Long id) throws WrongDataException {
         if (!userRepository.existsById(id)) {
-            throw new ExceptionRequest("User not Exist");
+            throw new WrongDataException("User not Exist");
         } else {
             return Optional.of(userRepository.findById(id).get());
         }
@@ -195,15 +195,15 @@ public class UserServiceImpl implements UserService {
      * Save new user data.
      * @param registerRequest user data.
      * @return new data user.
-     * @throws ExceptionRequest when request data user register is wrong.
+     * @throws WrongDataException when request data user register is wrong.
      */
     @Override
-    public User save(RegisterRequest registerRequest) throws ExceptionRequest {
+    public User save(RegisterRequest registerRequest) throws WrongDataException {
         //System.out.print(userRepository.existsByUsername(registerRequest.getUsername()));
         if (userRepository.existsByUsername(registerRequest.getUsername())) {
-            throw new ExceptionRequest("User Exist");
+            throw new WrongDataException("User Exist");
         } else {
-            sendMail.sendMail(registerRequest, "Thank you for register account.");
+            //sendMail.sendMail(registerRequest, "Thank you for register account.");
             List<Role> roles = new LinkedList<>();
             if (registerRequest.getRole().isEmpty()) {
                 roles.add(roleRepository.findByName(Roles.ROLE_USER).get());

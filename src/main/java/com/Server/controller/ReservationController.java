@@ -2,7 +2,7 @@ package com.Server.controller;
 
 import com.Server.dto.Request.AddReservationRequest;
 import com.Server.dto.Response.MessageResponse;
-import com.Server.exception.ExceptionRequest;
+import com.Server.exception.WrongDataException;
 import com.Server.model.Reservation;
 import com.Server.service.CarService;
 import com.Server.service.LocalizationService;
@@ -22,8 +22,8 @@ import java.util.List;
 /**
  *   ReservationController is use to supports operations about database table Reservation.
  *   @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- *   @version 1.0.
- *   @since 2020-12-29.
+ *   @version 2.0.
+ *   @since 2020-04-27.
  */
 
 @RequestMapping(value = "/reservation")
@@ -71,16 +71,16 @@ public class ReservationController {
      * This method use endpoint /reservation/delete.
      * @param id id reservation.
      * @return return id delete reservation Http.Status 200 or 400.
-     * @exception ExceptionRequest when reservation id not exist.
+     * @exception WrongDataException when reservation id not exist.
      */
     @PostMapping(value = "/delete")
     public ResponseEntity<?> deleteReservation(@RequestParam Long id){
         try {
             logger.info("------ The reservation was successfully deleted ------");
             return new ResponseEntity(reservationServiceImpl.deleteReservation(id), HttpStatus.OK);
-        } catch (ExceptionRequest exceptionRequest) {
+        } catch (WrongDataException wrongDataException) {
             logger.error("------ Reservation Id Not Exist To Delete ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -90,7 +90,7 @@ public class ReservationController {
      * This method use endpoint /reservation/get.
      * @param id id user.
      * @return list reservation Http.Status 200 or 400.
-     * @exception ExceptionRequest when reservation id not exist.
+     * @exception WrongDataException when reservation id not exist.
      */
     @ResponseBody
     @GetMapping(value = "/get")
@@ -98,9 +98,9 @@ public class ReservationController {
         try {
             logger.info("------ Reservations displayed successfully ------");
             return new ResponseEntity(userServiceImpl.getReservationUser(id), HttpStatus.OK);
-        } catch (ExceptionRequest exceptionRequest) {
+        } catch (WrongDataException wrongDataException) {
             logger.error("------ Reservation Id Not Exist To Get ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -111,7 +111,7 @@ public class ReservationController {
      * This method use endpoint /reservation/add.
      * @param addReservationRequest data new reservation.
      * @return return data new reservation Http.Status 200 or 400.
-     * @exception ExceptionRequest when reservation add error.
+     * @exception WrongDataException when reservation add error.
      */
     @ResponseBody
     @PostMapping(value = "/add")
@@ -119,9 +119,9 @@ public class ReservationController {
         try {
             logger.info("------ Reservations added successfully ------");
             return new ResponseEntity(reservationServiceImpl.save(addReservationRequest), HttpStatus.OK);
-        } catch (ExceptionRequest exceptionRequest) {
+        } catch (WrongDataException wrongDataException) {
             logger.error("------ Reservation Add Error ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -131,7 +131,7 @@ public class ReservationController {
      * This method use endpoint /reservation/get-all-user.
      * @param id id user.
      * @return list reservation Http.Status 200 or 400.
-     * @exception ExceptionRequest when user not exist.
+     * @exception WrongDataException when user not exist.
      */
     @ResponseBody
     @GetMapping(value = "/get-all-user")
@@ -139,9 +139,9 @@ public class ReservationController {
         try {
             logger.info("------ Successfully displayed user bookings ------");
             return new ResponseEntity(reservationServiceImpl.getCurrentReservation(id), HttpStatus.OK);
-        } catch (ExceptionRequest exceptionRequest) {
+        } catch (WrongDataException wrongDataException) {
             logger.error("------ User Not Exist ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 }

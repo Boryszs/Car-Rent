@@ -2,7 +2,7 @@ package com.Server.service;
 
 import com.Server.dto.Request.AddReservationRequest;
 import com.Server.dto.Response.CarReservationResponse;
-import com.Server.exception.ExceptionRequest;
+import com.Server.exception.WrongDataException;
 import com.Server.model.Reservation;
 
 import java.util.List;
@@ -10,8 +10,8 @@ import java.util.Optional;
 /**
  * Interface Service reservation to service ReservationRepository.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 public interface ReservationService {
@@ -40,17 +40,17 @@ public interface ReservationService {
      * Return Current reservation user on id user.
      * @param id id user.
      * @return List current reservation.
-     * @throws ExceptionRequest when user id not exist.
+     * @throws WrongDataException when user id not exist.
      */
-    List<Reservation> getCurrentReservation(Long id) throws ExceptionRequest;
+    List<Reservation> getCurrentReservation(Long id) throws WrongDataException;
 
     /**
      * Delete reservation
      * @param id id reservation.
      * @return int id reservation.
-     * @throws ExceptionRequest when reservation not exist.
+     * @throws WrongDataException when reservation not exist.
      */
-    Integer deleteReservation(Long id) throws ExceptionRequest ;
+    Integer deleteReservation(Long id) throws WrongDataException;
 
     /**
      * Check whether exist reservation with id car.
@@ -63,9 +63,9 @@ public interface ReservationService {
      * Save new reservation
      * @param addReservationRequest data of new reservation.
      * @return data on new reservation.
-     * @throws ExceptionRequest When data of request is wrong.
+     * @throws WrongDataException When data of request is wrong.
      */
-    CarReservationResponse save(AddReservationRequest addReservationRequest) throws ExceptionRequest;
+    CarReservationResponse save(AddReservationRequest addReservationRequest) throws WrongDataException;
 
     /**
      * Method return all reservation.

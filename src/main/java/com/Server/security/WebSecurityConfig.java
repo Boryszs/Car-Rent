@@ -1,7 +1,6 @@
 package com.Server.security;
 
 import com.Server.service.impl.UserDetailsServiceImpl;
-import io.swagger.models.HttpMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,22 +15,21 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 
 /**
  * Class security use to supervision a endpoint.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        // securedEnabled = true,
-        // jsr250Enabled = true,
+        securedEnabled = true,
+        jsr250Enabled = true,
         prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**Class to represent UserDetails*/

@@ -2,7 +2,7 @@ package com.Server.service;
 
 import com.Server.dto.Request.EditUser;
 import com.Server.dto.Request.RegisterRequest;
-import com.Server.exception.ExceptionRequest;
+import com.Server.exception.WrongDataException;
 import com.Server.model.Reservation;
 import com.Server.model.User;
 
@@ -12,8 +12,8 @@ import java.util.Optional;
 /**
  * Interface Service user to service UserRepository.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 
@@ -36,16 +36,16 @@ public interface UserService {
      * Return reservation user.
      * @param id id user.
      * @return List reservation.
-     * @throws ExceptionRequest when id user is wrong.
+     * @throws WrongDataException when id user is wrong.
      */
-    List<Reservation> getReservationUser(Long id) throws ExceptionRequest;
+    List<Reservation> getReservationUser(Long id) throws WrongDataException;
 
     /**
      * Delete user on id.
      * @param id id user.
-     * @throws ExceptionRequest when id user is wrong.
+     * @throws WrongDataException when id user is wrong.
      */
-    void deleteUser(Long id) throws ExceptionRequest;
+    void deleteUser(Long id) throws WrongDataException;
 
     /**
      * Update user.
@@ -58,9 +58,9 @@ public interface UserService {
      * Update user.
      * @param editUser new user data.
      * @return return new data on user.
-     * @throws ExceptionRequest when request data user is wrong.
+     * @throws WrongDataException when request data user is wrong.
      */
-    User update(EditUser editUser) throws ExceptionRequest;
+    User update(EditUser editUser) throws WrongDataException;
 
     /**
      * Check whether user exist on email.
@@ -80,17 +80,17 @@ public interface UserService {
      * Find user on id.
      * @param id is user.
      * @return user data
-     * @throws ExceptionRequest when id is wrong
+     * @throws WrongDataException when id is wrong
      */
-    Optional<User> findById(Long id) throws ExceptionRequest;
+    Optional<User> findById(Long id) throws WrongDataException;
 
     /**
      * Save new user data.
      * @param user user data.
      * @return new data user.
-     * @throws ExceptionRequest when request data user register is wrong.
+     * @throws WrongDataException when request data user register is wrong.
      */
-    User save(RegisterRequest user) throws ExceptionRequest;
+    User save(RegisterRequest user) throws WrongDataException;
 
     /**
      * Get all user.

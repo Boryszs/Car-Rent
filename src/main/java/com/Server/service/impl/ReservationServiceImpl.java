@@ -2,7 +2,7 @@ package com.Server.service.impl;
 
 import com.Server.dto.Request.AddReservationRequest;
 import com.Server.dto.Response.CarReservationResponse;
-import com.Server.exception.ExceptionRequest;
+import com.Server.exception.WrongDataException;
 import com.Server.model.Car;
 import com.Server.model.Reservation;
 import com.Server.model.User;
@@ -25,8 +25,8 @@ import java.util.Optional;
 /**
  * Class Service implements interface LocalizationService.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 @Service
@@ -88,12 +88,12 @@ public class ReservationServiceImpl implements ReservationService {
      * Return Current reservation user on id user.
      * @param id id user.
      * @return List current reservation.
-     * @throws ExceptionRequest when user id not exist.
+     * @throws WrongDataException when user id not exist.
      */
     @Override
-    public List<Reservation> getCurrentReservation(Long id) throws ExceptionRequest {
+    public List<Reservation> getCurrentReservation(Long id) throws WrongDataException {
         if (!userRepository.existsById(id)) {
-            throw new ExceptionRequest("User not exist !!!");
+            throw new WrongDataException("User not exist !!!");
         } else {
             User user = userRepository.findById(id).get();
             List<Reservation> reservations = user.getReservations();
@@ -112,10 +112,10 @@ public class ReservationServiceImpl implements ReservationService {
      * Delete reservation
      * @param id id reservation.
      * @return int id reservation.
-     * @throws ExceptionRequest when reservation not exist.
+     * @throws WrongDataException when reservation not exist.
      */
     @Override
-    public Integer deleteReservation(Long id) throws ExceptionRequest {
+    public Integer deleteReservation(Long id) throws WrongDataException {
         if (reservationRepository.existsByIdrent(id)) {
             User user = userRepository.findByReservations_Idrent(id);
             for (int i = 0; i < user.getReservations().size(); i++) {
@@ -126,7 +126,7 @@ public class ReservationServiceImpl implements ReservationService {
             userRepository.save(user);
             return reservationRepository.deleteByIdrent(id);
         } else {
-            throw new ExceptionRequest("Reservation not exist !!!");
+            throw new WrongDataException("Reservation not exist !!!");
         }
     }
 
@@ -144,21 +144,21 @@ public class ReservationServiceImpl implements ReservationService {
      * Save new reservation
      * @param addReservationRequest data of new reservation.
      * @return data on new reservation.
-     * @throws ExceptionRequest When data of request is wrong.
+     * @throws WrongDataException When data of request is wrong.
      */
     @Override
-    public CarReservationResponse save(AddReservationRequest addReservationRequest) throws ExceptionRequest {
+    public CarReservationResponse save(AddReservationRequest addReservationRequest) throws WrongDataException {
         if (!carRepository.existsByIdcar(addReservationRequest.getId_car())) {
-            throw new ExceptionRequest("Wrong car!!!");
+            throw new WrongDataException("Wrong car!!!");
         }
         if (!userRepository.existsById(addReservationRequest.getId_user())) {
-            throw new ExceptionRequest("User not exist!!!");
+            throw new WrongDataException("User not exist!!!");
         }
         if (!localizationRepository.existsByCity(addReservationRequest.getLocalization_start())) {
-            throw new ExceptionRequest("Localization start not exist!!!");
+            throw new WrongDataException("Localization start not exist!!!");
         }
         if (!localizationRepository.existsByCity(addReservationRequest.getLocalization_end())) {
-            throw new ExceptionRequest("Localization end not exist!!!");
+            throw new WrongDataException("Localization end not exist!!!");
         } else {
             User user = userRepository.findById(addReservationRequest.getId_user()).get();
             Car car = carRepository.findByIdcar(addReservationRequest.getId_car()).get();

@@ -1,7 +1,6 @@
 package com.Server.controller;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +10,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  *  Admin Controller used to Test whether Server is correct work.
  *  @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- *  @version  1.0.
- *  @since 2020-12-29.
+ *  @version 2.0.
+ *  @since 2020-04-27.
  */
 @RequestMapping(value = "/admin")
 @RestController

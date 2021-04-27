@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 /**
  * Entity localization to store Localizations data.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 @Data
 @Getter
@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "localization")
 public class Localization {
     @Id
@@ -29,8 +30,6 @@ public class Localization {
     @Column(name = "city")
     /**city*/
     private String city;
-
-
 
     /** Constructor Class Localization
      *

@@ -1,13 +1,12 @@
 package com.Server.service.impl;
 
-import com.Server.dto.Request.AddCarRequest;
-import com.Server.dto.Request.EditCarRequest;
-import com.Server.dto.Request.QuestionCarRequest;
-import com.Server.exception.ExceptionRequest;
+import com.Server.dto.Request.CarRequest;
+import com.Server.dto.Response.CarResponse;
+import com.Server.exception.WrongDataException;
+import com.Server.mapper.Mapper;
 import com.Server.model.Car;
 import com.Server.model.Localization;
 import com.Server.model.Reservation;
-import com.Server.model.User;
 import com.Server.repository.CarRepository;
 import com.Server.repository.LocalizationRepository;
 import com.Server.repository.ReservationRepository;
@@ -19,13 +18,13 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
 /**
  * Class Service implements interface CarService.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 @Service
 @Transactional
@@ -39,14 +38,17 @@ public class CarServiceImpl implements CarService {
     private final LocalizationRepository localizationRepository;
     /**userRepository*/
     private final UserRepository  userRepository;
+    /**CarMapper*/
+    private final Mapper<Car,CarResponse,CarRequest> carMapper;
 
     @Autowired
     /**Constructor*/
-    public CarServiceImpl(CarRepository carRepository, ReservationRepository reservationRepository, LocalizationRepository localizationRepository, UserRepository userRepository) {
+    public CarServiceImpl(CarRepository carRepository, ReservationRepository reservationRepository, LocalizationRepository localizationRepository, UserRepository userRepository, Mapper<Car,CarResponse,CarRequest> carMapper) {
         this.carRepository = carRepository;
         this.reservationRepository = reservationRepository;
         this.localizationRepository = localizationRepository;
         this.userRepository = userRepository;
+        this.carMapper = carMapper;
     }
 
     /**
@@ -54,97 +56,58 @@ public class CarServiceImpl implements CarService {
      * @return List Car.
      */
     @Override
-    public List<Car> findAll() {
-        return carRepository.findAll();
+    public List<CarResponse> findAll() {
+        return carRepository.findAll().parallelStream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
     }
 
     /**
      * Method to save new car.
-     * @param addCarRequest new data car.
+     * @param carRequest new data car.
      * @return return new added car.
-     * @throws ExceptionRequest when request has wrong localization.
+     * @throws WrongDataException when request has wrong localization.
      */
     @Override
-    public Car save(AddCarRequest addCarRequest) throws ExceptionRequest {
-        if (!localizationRepository.existsByCity(addCarRequest.getCity())) {
-            throw new ExceptionRequest("Wrong localization!!!");
+    public void save(CarRequest carRequest) throws WrongDataException {
+        if (!localizationRepository.existsByCity(carRequest.getCity())) {
+            throw new WrongDataException("Wrong localization!!!");
         }
-        Localization localization = localizationRepository.findByCity(addCarRequest.getCity()).get();
-        Car car = new Car(addCarRequest.getMark(), addCarRequest.getModel(), addCarRequest.getType(), addCarRequest.getYearProduction(), addCarRequest.getColor(), addCarRequest.getEngine(), addCarRequest.getMoney(), localization, addCarRequest.getImage());
-        return carRepository.save(car);
-
+        Localization localization = localizationRepository.findByCity(carRequest.getCity()).get();
+        Car car = carMapper.toEntity(carRequest);
+        car.setLocalization(localization);
+        carRepository.save(car);
     }
 
     /**
      * Method find car on id
      * @param id id on find car
      * @return car on id.
-     * @throws ExceptionRequest when car not exist.
+     * @throws WrongDataException when car not exist.
      */
     @Override
-    public Optional<Car> findByIdCar(int id) throws ExceptionRequest {
+    public CarResponse findByIdCar(int id) throws WrongDataException {
         if (carRepository.existsByIdcar(id)) {
-            return carRepository.findByIdcar(id);
+            return carMapper.toDto(carRepository.findByIdcar(id).get());
         } else {
-            throw new ExceptionRequest("Wrong car");
+            throw new WrongDataException("Wrong car");
         }
 
     }
 
     /**
      * Method to edit data car.
-     * @param editCar data new car.
+     * @param carRequest data new car.
      * @return new data update car.
-     * @throws ExceptionRequest where id car not exist.
+     * @throws WrongDataException where id car not exist.
      */
     @Override
-    public Car update(EditCarRequest editCar) throws ExceptionRequest {
-        if (carRepository.existsByIdcar(editCar.getIdcar())) {
-            Car car = carRepository.findByIdcar(editCar.getIdcar()).get();
-            car.setMark(editCar.getMark());
-            car.setType(editCar.getType());
-            car.setModel(editCar.getModel());
-            car.setYearProduction(editCar.getYearProduction());
-            car.setColor(editCar.getColor());
-            car.setEngineCapacity(editCar.getEngine());
-            car.setImage(editCar.getImage());
+    public Car update(int id,CarRequest carRequest) throws WrongDataException {
+        if (carRepository.existsByIdcar(id)) {
+            Car car = carRepository.findByIdcar(id).get();
+            car = carMapper.update(car,carRequest);
             car.setLocalization((localizationRepository.findByCity(car.getLocalization().getCity()).get()));
             return carRepository.save(car);
         } else {
-            throw new ExceptionRequest("Wrong car!!!");
-        }
-    }
-
-    /**
-     * Method car not order.
-     * @param questionCarRequest question on city and date reservation.
-     * @return List car not order ar.
-     * @throws ExceptionRequest when localization is wrong.
-     */
-    @Override
-    public List<Car> getCarNotOrder(QuestionCarRequest questionCarRequest) throws ExceptionRequest {
-        if(!localizationRepository.existsByCity(questionCarRequest.getCity())){
-            throw new ExceptionRequest("Wrong localization!!!");
-        }else {
-            List<Car> cars = carRepository.findByLocalizationCity(questionCarRequest.getCity());
-            List<Car> carsEmpty = carRepository.findByLocalizationCity(questionCarRequest.getCity());
-            for (Car car : cars) {
-                if (reservationRepository.existsByCar_Idcar(car.getIdcar())) {
-                    List<Reservation> reservation = reservationRepository.findByCar_Idcar(car.getIdcar());
-                    for (Reservation reser : reservation) {
-                        if (reser.getDataFrom().compareTo(new Date(questionCarRequest.getDateTo())) * new Date(questionCarRequest.getDateTo()).compareTo(reser.getDataTo()) >= 0) {
-                            carsEmpty.remove(car);
-                        }
-                        if (reser.getDataFrom().compareTo(new Date(questionCarRequest.getDateFrom())) * new Date(questionCarRequest.getDateFrom()).compareTo(reser.getDataTo()) >= 0) {
-                            carsEmpty.remove(car);
-                        }
-                        if (reser.getDataFrom().after(new Date(questionCarRequest.getDateFrom())) && reser.getDataTo().before(new Date(questionCarRequest.getDateTo()))) {
-                            carsEmpty.remove(car);
-                        }
-                    }
-                }
-            }
-            return carsEmpty;
+            throw new WrongDataException("Wrong car!!!");
         }
     }
 
@@ -152,20 +115,13 @@ public class CarServiceImpl implements CarService {
      * Delete car on id.
      * @param id id car to delete.
      * @return return id deleting car.
-     * @throws ExceptionRequest when id car is wrong.
+     * @throws WrongDataException when id car is wrong.
      */
     @Override
-    public void deleteCar(int id) throws ExceptionRequest {
+    public void deleteCar(int id) throws WrongDataException {
         if (!carRepository.existsByIdcar(id)) {
-            throw new ExceptionRequest("Wrong car");
+            throw new WrongDataException("Wrong car");
         } else {
-            List<Reservation> reservations = reservationRepository.findAll();
-            IntStream.range(0, reservations.size()).filter(i -> reservations.get(i).getCar().getIdcar() == id).forEachOrdered(i -> {
-                User user = userRepository.findByReservations_Idrent(reservations.get(i).getIdrent());
-                user.getReservations().remove(reservations.get(i));
-                userRepository.save(user);
-                reservationRepository.deleteByIdrent(reservations.get(i).getIdrent());
-            });
             carRepository.deleteByIdcar(id);
         }
     }
@@ -184,7 +140,7 @@ public class CarServiceImpl implements CarService {
      * Delete car on id.
      * @param id id car to delete.
      * @return return id deleting car.
-     * @throws ExceptionRequest when id car not exist.
+     * @throws WrongDataException when id car not exist.
      */
     @Override
     public Integer deleteByIdCar(int id) {
@@ -197,24 +153,23 @@ public class CarServiceImpl implements CarService {
      * @return return List car witch id localization.
      */
     @Override
-    public List<Car> findByLocalizationId(Long id) {
-        return carRepository.findByLocalizationId(id);
+    public List<CarResponse> findByLocalizationId(Long id) {
+        return carRepository.findByLocalizationId(id).parallelStream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
     }
 
     /**
      * Find car on localization on name city.
      * @param city name city.
      * @return return List car on localization city.
-     * @throws ExceptionRequest when city name not exist.
+     * @throws WrongDataException when city name not exist.
      */
     @Override
-    public List<Car> findByLocalizationCity(String city) throws ExceptionRequest {
+    public List<CarResponse> findByLocalizationCity(String city) throws WrongDataException {
         if (localizationRepository.existsByCity(city)) {
-            return carRepository.findByLocalizationCity(city);
+            return carRepository.findByLocalizationCity(city).parallelStream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
         } else {
-            throw new ExceptionRequest("Wrong city");
+            throw new WrongDataException("Wrong city");
         }
     }
-
 
 }

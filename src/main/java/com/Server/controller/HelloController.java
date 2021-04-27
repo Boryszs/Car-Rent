@@ -1,15 +1,13 @@
 package com.Server.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  *   HelloController is use to check whether swagger library is work.
  *   @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- *   @version 1.0.
- *   @since 2020-12-29.
+ *   @version 2.0.
+ *   @since 2020-04-27.
  */
 
 @RestController

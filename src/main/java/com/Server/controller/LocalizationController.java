@@ -1,9 +1,9 @@
 package com.Server.controller;
 
-import com.Server.dto.Request.CityRequest;
+import com.Server.dto.Request.LocalizationRequest;
+import com.Server.dto.Response.LocalizationResponse;
 import com.Server.dto.Response.MessageResponse;
-import com.Server.exception.ExceptionRequest;
-import com.Server.model.Localization;
+import com.Server.exception.WrongDataException;
 import com.Server.service.LocalizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +17,8 @@ import java.util.List;
 /**
  *   LocalizationController is use to supports operations about database table Localization.
  *   @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- *   @version 1.0.
- *   @since 2020-12-29.
+ *   @version 2.0.
+ *   @since 2020-04-27.
  */
 
 @RestController
@@ -45,7 +45,7 @@ public class LocalizationController {
      */
     @ResponseBody
     @GetMapping(value = "/show-all")
-    public List<Localization> showAll() {
+    public List<LocalizationResponse> showAll() {
         return localizationServiceImpl.findAll();
     }
 
@@ -55,17 +55,17 @@ public class LocalizationController {
      * This method get localization on id.
      * This method use endpoint /city/show-id.
      * @return data localization Http.Status 200 or 400.
-     * @exception ExceptionRequest when localization id not exist.
+     * @exception WrongDataException when localization id not exist.
      */
     @ResponseBody
     @GetMapping(value = "/show-id")
     public ResponseEntity<?> showLocalizationId(@RequestParam int id) {
         try {
             logger.info("------ Successfully returned location after id ------");
-            return new ResponseEntity<>(localizationServiceImpl.findById(id).get(), HttpStatus.OK);
-        } catch (ExceptionRequest exceptionRequest) {
-            logger.error("------ Localization Id City Not Exist To Get ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(localizationServiceImpl.findByIdLocalization(id), HttpStatus.OK);
+        } catch (WrongDataException wrongDataException) {
+            logger.error(wrongDataException.getError());
+            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -81,10 +81,10 @@ public class LocalizationController {
     public ResponseEntity<?> showLocalizationCity(@RequestParam String city) {
         try {
             logger.info("------ Location by city name was returned successfully ------");
-            return new ResponseEntity<>(localizationServiceImpl.findByCity(city).get(), HttpStatus.OK);
-        } catch (ExceptionRequest exceptionRequest) {
-            logger.error("------ Localization Name City Not Exist To Get ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(localizationServiceImpl.findByCity(city), HttpStatus.OK);
+        } catch (WrongDataException wrongDataException) {
+            logger.error(wrongDataException.getError());
+            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -92,12 +92,12 @@ public class LocalizationController {
     /**
      * This method add new localization.
      * This method use endpoint /city/add.
-     * @param cityRequest data new city.
+     * @param localizationRequest data new city.
      * @return Http.Status 200.
      */
     @PostMapping(value = "/add")
-    public ResponseEntity<?> addcity(@RequestBody CityRequest cityRequest) {
-        localizationServiceImpl.save(new Localization(cityRequest.getCity()));
+    public ResponseEntity<?> addCity(@RequestBody LocalizationRequest localizationRequest) {
+        localizationServiceImpl.save(localizationRequest);
         logger.info("------ City location added successfully ------");
         return new ResponseEntity(HttpStatus.OK);
     }

@@ -7,13 +7,14 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Entity user to store Users data.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 @Data
@@ -47,14 +48,14 @@ public class User {
     /**password*/
     private String password;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "id_users"),
             inverseJoinColumns = @JoinColumn(name = "id_roles"))
     /**roles*/
     private List<Role> roles = new LinkedList<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(name = "users_reservation",
             joinColumns = @JoinColumn(name = "id_users"),
             inverseJoinColumns = @JoinColumn(name = "id_rent"))

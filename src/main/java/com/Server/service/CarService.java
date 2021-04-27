@@ -1,18 +1,17 @@
 package com.Server.service;
 
-import com.Server.dto.Request.AddCarRequest;
-import com.Server.dto.Request.EditCarRequest;
-import com.Server.dto.Request.QuestionCarRequest;
-import com.Server.exception.ExceptionRequest;
+import com.Server.dto.Request.CarRequest;
+import com.Server.dto.Response.CarResponse;
+import com.Server.exception.WrongDataException;
 import com.Server.model.Car;
 
 import java.util.List;
-import java.util.Optional;
+
 /**
  * Interface Service car to service CarRepository.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 public interface CarService {
@@ -20,47 +19,40 @@ public interface CarService {
      * Method find all car.
      * @return List Car.
      */
-    List<Car> findAll();
+    List<CarResponse> findAll();
 
     /**
      * Method to save new car.
      * @param car new data car.
      * @return return new added car.
-     * @throws ExceptionRequest when request has wrong localization.
+     * @throws WrongDataException when request has wrong localization.
      */
-    Car save(AddCarRequest car) throws ExceptionRequest;
+    void save(CarRequest car) throws WrongDataException;
 
     /**
      * Method find car on id
      * @param id id on find car
      * @return car on id.
-     * @throws ExceptionRequest when car not exist.
+     * @throws WrongDataException when car not exist.
      */
-    Optional<Car> findByIdCar(int id) throws ExceptionRequest;
+    CarResponse findByIdCar(int id) throws WrongDataException;
 
     /**
      * Method to edit data car.
-     * @param car data new car.
+     * @param id id car
+     * @param carResponse data new car.
      * @return new data update car.
-     * @throws ExceptionRequest where id car not exist.
+     * @throws WrongDataException where id car not exist.
      */
-    Car update(EditCarRequest car) throws ExceptionRequest;
-
-    /**
-     * Method car not order.
-     * @param questionCarRequest question on city and date reservation.
-     * @return List car not order ar.
-     * @throws ExceptionRequest when localization is wrong.
-     */
-    List<Car> getCarNotOrder(QuestionCarRequest questionCarRequest) throws ExceptionRequest;
+    Car update(int id,CarRequest carResponse) throws WrongDataException;
 
     /**
      * Delete car on id.
      * @param id id car to delete.
      * @return return id deleting car.
-     * @throws ExceptionRequest when id car is wrong.
+     * @throws WrongDataException when id car is wrong.
      */
-    void deleteCar(int id) throws ExceptionRequest;
+    void deleteCar(int id) throws WrongDataException;
 
     /**
      * Method check whether exist car on id.
@@ -73,23 +65,23 @@ public interface CarService {
      * Delete car on id.
      * @param id id car to delete.
      * @return return id deleting car.
-     * @throws ExceptionRequest when id car not exist.
+     * @throws WrongDataException when id car not exist.
      */
-    Integer deleteByIdCar(int id) throws ExceptionRequest;
+    Integer deleteByIdCar(int id) throws WrongDataException;
 
     /**
      * Find car on localization.
      * @param id id localization.
      * @return return List car witch id localization.
      */
-    List<Car> findByLocalizationId(Long id);
+    List<CarResponse> findByLocalizationId(Long id);
 
     /**
      * Find car on localization on name city.
      * @param city name city.
      * @return return List car on localization city.
-     * @throws ExceptionRequest when city name not exist.
+     * @throws WrongDataException when city name not exist.
      */
-    List<Car> findByLocalizationCity(String city) throws ExceptionRequest;
+    List<CarResponse> findByLocalizationCity(String city) throws WrongDataException;
 
 }

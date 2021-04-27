@@ -1,6 +1,10 @@
 package com.Server.service.impl;
 
-import com.Server.exception.ExceptionRequest;
+import com.Server.dto.Request.LocalizationRequest;
+import com.Server.dto.Response.LocalizationResponse;
+import com.Server.exception.WrongDataException;
+import com.Server.mapper.Mapper;
+import com.Server.mapper.impl.LocalizationMapper;
 import com.Server.model.Localization;
 import com.Server.repository.LocalizationRepository;
 import com.Server.service.LocalizationService;
@@ -9,13 +13,13 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Class Service implements interface LocalizationService.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 @Service
@@ -24,25 +28,27 @@ public class LocalizationServiceImpl implements LocalizationService {
 
     /**localizationRepository*/
     private final LocalizationRepository localizationRepository;
+    private final Mapper<Localization, LocalizationResponse, LocalizationRequest> localizationMapper;
 
     @Autowired
     /**Constructor*/
-    public LocalizationServiceImpl(LocalizationRepository localizationRepository) {
+    public LocalizationServiceImpl(LocalizationRepository localizationRepository, Mapper<Localization, LocalizationResponse, LocalizationRequest> localizationMapper) {
         this.localizationRepository = localizationRepository;
+        this.localizationMapper = localizationMapper;
     }
 
     /**
      * Find car on id.
      * @param id id find car.
      * @return return data on car.
-     * @throws ExceptionRequest when id localization is wrong.
+     * @throws WrongDataException when id localization is wrong.
      */
     @Override
-    public Optional<Localization> findById(long id) throws ExceptionRequest {
+    public LocalizationResponse findByIdLocalization(long id) throws WrongDataException {
         if (!localizationRepository.existsById(id)) {
-            throw new ExceptionRequest("Bad id localization");
+            throw new WrongDataException("Bad id localization");
         } else {
-            return Optional.of(localizationRepository.findById(id).get());
+            return localizationMapper.toDto(localizationRepository.findById(id).get());
         }
     }
 
@@ -50,14 +56,14 @@ public class LocalizationServiceImpl implements LocalizationService {
      * Find city on name city
      * @param city name city.
      * @return return data city.
-     * @throws ExceptionRequest when wrong city name.
+     * @throws WrongDataException when wrong city name.
      */
     @Override
-    public Optional<Localization> findByCity(String city) throws ExceptionRequest {
+    public LocalizationResponse findByCity(String city) throws WrongDataException {
         if (!localizationRepository.existsByCity(city)) {
-            throw new ExceptionRequest("Bad city localization");
+            throw new WrongDataException("Bad city localization");
         } else {
-            return Optional.of(localizationRepository.findByCity(city).get());
+            return localizationMapper.toDto(localizationRepository.findByCity(city).get());
         }
     }
 
@@ -66,18 +72,18 @@ public class LocalizationServiceImpl implements LocalizationService {
      * @return List all Localization.
      */
     @Override
-    public List<Localization> findAll() {
-        return localizationRepository.findAll();
+    public List<LocalizationResponse> findAll() {
+        return localizationRepository.findAll().parallelStream().map(localization -> localizationMapper.toDto(localization)).collect(Collectors.toList());
     }
 
     /**
      * Save new localization.
-     * @param localization data new localization
+     * @param localizationRequest data new localization
      * @return return new localization data.
      */
     @Override
-    public Localization save(Localization localization) {
-        return localizationRepository.save(localization);
+    public void save(LocalizationRequest localizationRequest) {
+        localizationRepository.save(localizationMapper.toEntity(localizationRequest));
     }
 
     /**

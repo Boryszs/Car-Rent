@@ -3,39 +3,39 @@ package com.Server.exception;
 /**
  * Exception to wrong request.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
-public class ExceptionRequest extends Exception {
-    /**err*/
+public class WrongDataException extends java.lang.Exception {
+    /**error*/
     private String error;
 
     /**Constructor*/
-    public ExceptionRequest(String error) {
+    public WrongDataException(String error) {
         this.error = error;
     }
 
     /**Constructor*/
-    public ExceptionRequest(String s, String error) {
+    public WrongDataException(String s, String error) {
         super(s);
         this.error = error;
     }
 
     /**Constructor*/
-    public ExceptionRequest(String s, Throwable throwable, String error) {
+    public WrongDataException(String s, Throwable throwable, String error) {
         super(s, throwable);
         this.error = error;
     }
 
     /**Constructor*/
-    public ExceptionRequest(Throwable throwable, String error) {
+    public WrongDataException(Throwable throwable, String error) {
         super(throwable);
         this.error = error;
     }
 
     /**Constructor*/
-    public ExceptionRequest(String s, Throwable throwable, boolean b, boolean b1, String error) {
+    public WrongDataException(String s, Throwable throwable, boolean b, boolean b1, String error) {
         super(s, throwable, b, b1);
         this.error = error;
     }

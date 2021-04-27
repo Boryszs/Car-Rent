@@ -1,24 +1,27 @@
-package com.Server.dto.Request;
+package com.Server.dto.Response;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 /**
- * Class DTO use to edit car.
+ * Class DTO use to get car.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
  * @version 1.0
- * @since 2020-12-29.
+ * @since 2020-04-27.
  */
-@Data
-@Setter
-@Getter
-@NoArgsConstructor
+
 @AllArgsConstructor
-@ToString
-public class EditCarRequest implements Serializable {
+@NoArgsConstructor
+@Data
+@Builder
+public class CarResponse implements Serializable {
+
     /**idcar*/
-    private Integer idcar;
+    private int idcar;
     /**mark*/
     private String mark;
     /**model*/
@@ -29,12 +32,12 @@ public class EditCarRequest implements Serializable {
     private int yearProduction;
     /**color*/
     private String color;
-    /**engine*/
-    private int engine;
-    /**city*/
-    private String city;
+    /**engineCapacity*/
+    private int engineCapacity;
     /**money*/
     private float money;
     /**image*/
     private String image;
+    /**localization*/
+    private LocalizationResponse localization;
 }

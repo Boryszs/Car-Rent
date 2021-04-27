@@ -3,9 +3,9 @@ package com.Server.controller;
 import com.Server.dto.Request.LoginRequest;
 import com.Server.dto.Request.RegisterRequest;
 import com.Server.dto.Response.JwtResponse;
+import com.Server.dto.Response.LocalizationResponse;
 import com.Server.dto.Response.MessageResponse;
-import com.Server.exception.ExceptionRequest;
-import com.Server.model.Localization;
+import com.Server.exception.WrongDataException;
 import com.Server.security.JwtUtils;
 import com.Server.service.CarService;
 import com.Server.service.LocalizationService;
@@ -32,8 +32,8 @@ import java.util.stream.Collectors;
 /**
  *   AuthenticationController is use to authentication and register user.
  *   @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- *   @version 1.0.
- *   @since 2020-12-29.
+ *   @version 2.0.
+ *   @since 2020-04-27.
  */
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -94,7 +94,7 @@ public class AuthenticationController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-        List<Localization> localizations = localizationServiceImpl.findAll();
+        List<LocalizationResponse> localizations = localizationServiceImpl.findAll();
 
         logger.info("------Logowanie user:"+loginRequest.getUsername());
 
@@ -112,7 +112,7 @@ public class AuthenticationController {
      * This method use endpoint /register.
      * @param registerRequest user data.
      * @return user data  Http.Status 200 or 400.
-     * @exception  ExceptionRequest when user not exist
+     * @exception WrongDataException when user not exist
      */
     @ResponseBody
     @PostMapping("/register")
@@ -120,9 +120,9 @@ public class AuthenticationController {
         try {
             logger.info("------ User successfully registered------");
             return  new ResponseEntity<>(userServiceImpl.save(registerRequest),HttpStatus.OK);
-        } catch (ExceptionRequest exceptionRequest) {
+        } catch (WrongDataException wrongDataException) {
             logger.error("------ User Not Exist ------");
-            return new ResponseEntity(new MessageResponse(exceptionRequest.getError()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
         }
     }
 }

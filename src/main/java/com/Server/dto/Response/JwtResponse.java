@@ -1,6 +1,5 @@
 package com.Server.dto.Response;
 
-import com.Server.model.Localization;
 import lombok.*;
 
 import java.io.Serializable;
@@ -9,8 +8,8 @@ import java.util.List;
 /**
  * Class DTO get Response with token.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 @Data
@@ -32,7 +31,7 @@ public class JwtResponse implements Serializable {
     /**email*/
     private String email;
     /**List Localization */
-    private List<Localization> localizations;
+    private List<LocalizationResponse> localizations;
     /**List String */
     private List<String> roles;
 
@@ -46,7 +45,7 @@ public class JwtResponse implements Serializable {
      * @param localizations All Localizations
      * @param roles Role of User
      */
-    public JwtResponse(String token, Long id, String username, String email, List<Localization> localizations, List<String> roles) {
+    public JwtResponse(String token, Long id, String username, String email, List<LocalizationResponse> localizations, List<String> roles) {
         this.token = token;
         this.type = type;
         this.id = id;

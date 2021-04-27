@@ -11,8 +11,8 @@ import java.io.Serializable;
 /**
  * Class DTO use to add reservation.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 @Data
 @Getter
@@ -20,7 +20,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class AddReservationRequest implements Serializable {
+public class AddReservationRequest implements Serializable{
     @NotNull
     @Min(1)
     /**id user*/

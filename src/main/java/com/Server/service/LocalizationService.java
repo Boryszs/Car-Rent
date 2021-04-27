@@ -1,17 +1,17 @@
 package com.Server.service;
 
-import com.Server.exception.ExceptionRequest;
-import com.Server.model.Localization;
+import com.Server.dto.Request.LocalizationRequest;
+import com.Server.dto.Response.LocalizationResponse;
+import com.Server.exception.WrongDataException;
 
 import java.util.List;
-import java.util.Optional;
 
 
 /**
  * Interface Service localization to service LocalizationRepository.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 public interface LocalizationService {
@@ -20,30 +20,30 @@ public interface LocalizationService {
      * Find car on id.
      * @param id id find car.
      * @return return data on car.
-     * @throws ExceptionRequest when id localization is wrong.
+     * @throws WrongDataException when id localization is wrong.
      */
-    Optional<Localization> findById(long id) throws ExceptionRequest;
+    LocalizationResponse findByIdLocalization(long id) throws WrongDataException;
 
     /**
      * Find city on name city
      * @param city name city.
      * @return return data city.
-     * @throws ExceptionRequest when wrong city name.
+     * @throws WrongDataException when wrong city name.
      */
-    Optional<Localization> findByCity(String city) throws ExceptionRequest;
+    LocalizationResponse findByCity(String city) throws WrongDataException;
 
     /**
      * Find all localization.
      * @return List all Localization.
      */
-    List<Localization> findAll();
+    List<LocalizationResponse> findAll();
 
     /**
      * Save new localization.
-     * @param localization data new localization
+     * @param localizationRequest data new localization
      * @return return new localization data.
      */
-    Localization save(Localization localization);
+    void save(LocalizationRequest localizationRequest);
 
     /**
      * Check whether city exist.

@@ -1,7 +1,6 @@
 package com.Server.dto.Response;
 
 import lombok.*;
-import org.springframework.boot.convert.DataSizeUnit;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,8 +8,8 @@ import java.util.Date;
 /**
  * Class DTO get Reservation.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 @Data
 @Setter

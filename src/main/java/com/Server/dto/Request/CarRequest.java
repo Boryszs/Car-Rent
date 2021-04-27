@@ -10,8 +10,8 @@ import java.io.Serializable;
 /**
  * Class DTO use to add car.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 1.0
- * @since 2020-12-29.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 @Data
 @Getter
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AddCarRequest implements Serializable {
+public class CarRequest implements Serializable {
     @NotBlank
     /**Mark car*/
     private String mark;
@@ -50,6 +50,5 @@ public class AddCarRequest implements Serializable {
     @NotBlank
     /**Image car*/
     private String image;
-
 
 }
