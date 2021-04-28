@@ -1,7 +1,8 @@
 package com.Server.controller;
 
-import com.Server.dto.Request.AddReservationRequest;
+import com.Server.dto.Request.ReservationRequest;
 import com.Server.dto.Response.MessageResponse;
+import com.Server.dto.Response.ReservationResponse;
 import com.Server.exception.WrongDataException;
 import com.Server.model.Reservation;
 import com.Server.service.CarService;
@@ -61,7 +62,7 @@ public class ReservationController {
      */
     @ResponseBody
     @GetMapping(value = "/show")
-    public List<Reservation> getReservations() {
+    public List<ReservationResponse> getReservations() {
         return reservationServiceImpl.findAll();
     }
 
@@ -75,13 +76,14 @@ public class ReservationController {
      */
     @PostMapping(value = "/delete")
     public ResponseEntity<?> deleteReservation(@RequestParam Long id){
-        try {
+        //try {
             logger.info("------ The reservation was successfully deleted ------");
-            return new ResponseEntity(reservationServiceImpl.deleteReservation(id), HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error("------ Reservation Id Not Exist To Delete ------");
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+            reservationServiceImpl.deleteByIdRent(id);
+            return new ResponseEntity(HttpStatus.OK);
+//        } catch (WrongDataException wrongDataException) {
+//            logger.error("------ Reservation Id Not Exist To Delete ------");
+//            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
+//        }
     }
 
     //Zwracanie rezerwacji po id usera
@@ -109,16 +111,17 @@ public class ReservationController {
     /**
      * This method add new reservation user.
      * This method use endpoint /reservation/add.
-     * @param addReservationRequest data new reservation.
+     * @param reservationRequest data new reservation.
      * @return return data new reservation Http.Status 200 or 400.
      * @exception WrongDataException when reservation add error.
      */
     @ResponseBody
     @PostMapping(value = "/add")
-    public ResponseEntity<?> addReservation(@Valid @RequestBody AddReservationRequest addReservationRequest){
+    public ResponseEntity<?> addReservation(@Valid @RequestBody ReservationRequest reservationRequest){
         try {
             logger.info("------ Reservations added successfully ------");
-            return new ResponseEntity(reservationServiceImpl.save(addReservationRequest), HttpStatus.OK);
+            reservationServiceImpl.save(reservationRequest);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (WrongDataException wrongDataException) {
             logger.error("------ Reservation Add Error ------");
             return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);

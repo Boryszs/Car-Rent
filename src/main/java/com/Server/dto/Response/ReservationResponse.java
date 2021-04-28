@@ -1,6 +1,7 @@
-package com.Server.dto.Request;
+package com.Server.dto.Response;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.validation.constraints.Min;
@@ -19,24 +20,20 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ToString
-public class AddReservationRequest implements Serializable{
-    @NotNull
-    @Min(1)
-    /**id user*/
-    private Long id_user;
-    @NotNull
-    @Min(1)
-    /**id car*/
-    private int id_car;
+public class ReservationResponse implements Serializable{
+    /**id rent*/
+    private Long idRent;
+    /**car response*/
+    private CarResponse carResponse;
     /** dato to reservation*/
-    private String dateto;
+    private String dateTo;
     /** data from reservation*/
-    private String datefrom;
-    @NotBlank
+    private String dateFrom;
     /**localization end*/
-    private String localization_end;
-    @NotBlank
+    private LocalizationResponse localizationEnd;
     /**localization start*/
-    private String localization_start;
+    private LocalizationResponse localizationStart;
+    private float price;
 }

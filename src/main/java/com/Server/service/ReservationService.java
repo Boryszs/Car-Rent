@@ -1,7 +1,8 @@
 package com.Server.service;
 
-import com.Server.dto.Request.AddReservationRequest;
+import com.Server.dto.Request.ReservationRequest;
 import com.Server.dto.Response.CarReservationResponse;
+import com.Server.dto.Response.ReservationResponse;
 import com.Server.exception.WrongDataException;
 import com.Server.model.Reservation;
 
@@ -20,7 +21,7 @@ public interface ReservationService {
      * @param id id reservation.
      * @return reservation data.
      */
-    Optional<Reservation> findByIdRent(Long id);
+    ReservationResponse findByIdRent(Long id);
 
     /**
      * Check whether reservation on id exist.
@@ -34,7 +35,7 @@ public interface ReservationService {
      * @param id id reservation.
      * @return return int on id delete reservation.
      */
-    int deleteByIdRent(Long id);
+    void deleteByIdRent(Long id);
 
     /**
      * Return Current reservation user on id user.
@@ -42,7 +43,7 @@ public interface ReservationService {
      * @return List current reservation.
      * @throws WrongDataException when user id not exist.
      */
-    List<Reservation> getCurrentReservation(Long id) throws WrongDataException;
+    List<ReservationResponse> getCurrentReservation(Long id) throws WrongDataException;
 
     /**
      * Delete reservation
@@ -61,29 +62,29 @@ public interface ReservationService {
 
     /**
      * Save new reservation
-     * @param addReservationRequest data of new reservation.
+     * @param reservationRequest data of new reservation.
      * @return data on new reservation.
      * @throws WrongDataException When data of request is wrong.
      */
-    CarReservationResponse save(AddReservationRequest addReservationRequest) throws WrongDataException;
+    void save(ReservationRequest reservationRequest) throws WrongDataException;
 
     /**
      * Method return all reservation.
      * @return List all reservation.
      */
-    List<Reservation> findAll();
+    List<ReservationResponse> findAll();
 
     /**
      * find a reservation on id car
      * @param id id car
      * @return return List Reservation.
      */
-    List<Reservation> findByCarIdCar(int id);
+    List<ReservationResponse> findByCarIdCar(int id);
 
     /**
      * Find the Last reservation on car
      * @param id id car.
      * @return data reservation.
      */
-    Optional<Reservation> findFirstByCarIdCarOrderByIdRentDesc(int id);
+    ReservationResponse findFirstByCarIdCarOrderByIdRentDesc(int id);
 }

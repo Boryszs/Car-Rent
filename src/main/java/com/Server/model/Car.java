@@ -61,8 +61,9 @@ public class Car {
     private String image;
 
     /**localization*/
-    @OneToOne
-    @JoinColumn(name = "id_localization")
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_localization", nullable = false)
     private Localization localization;
 
 

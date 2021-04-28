@@ -23,7 +23,7 @@ public class LocalizationMapper implements Mapper<Localization, LocalizationResp
      */
     @Override
     public LocalizationResponse toDto(final Localization localization) {
-        return LocalizationResponse.builder()
+        return new LocalizationResponse().builder()
                 .id(localization.getId())
                 .city(localization.getCity())
                 .build();

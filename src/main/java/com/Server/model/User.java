@@ -2,16 +2,22 @@ package com.Server.model;
 
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Entity user to store Users data.
+ *
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
  * @version 2.0.
  * @since 2020-04-27.
@@ -55,21 +61,22 @@ public class User {
     /**roles*/
     private List<Role> roles = new LinkedList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinTable(name = "users_reservation",
-            joinColumns = @JoinColumn(name = "id_users"),
-            inverseJoinColumns = @JoinColumn(name = "id_rent"))
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     /**reservations*/
-    private List<Reservation> reservations = new LinkedList<>();
+    private List<Reservation> reservations = new ArrayList<>();
+
+
 
 
     /**Constructor*/
     /**
-     *
      * @param username Name of User
-     * @param email Email of User
+     * @param email    Email of User
      * @param password Password of User
-     * @param roles Role of User
+     * @param roles    Role of User
      */
     public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password, List<Role> roles) {
         this.username = username;
@@ -79,7 +86,6 @@ public class User {
     }
 
     /**
-     *
      * @param reservations setReservations
      */
     public void setReservations(Reservation reservations) {

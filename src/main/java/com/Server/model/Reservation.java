@@ -5,6 +5,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Entity reservations to store Reservation data.
@@ -18,6 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "reservation")
 public class Reservation {
 
@@ -28,7 +30,7 @@ public class Reservation {
     private Long idrent;
 
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "id_car", referencedColumnName = "id_car")
     /**car*/
     private Car car;
@@ -55,6 +57,9 @@ public class Reservation {
     /**localizationEnd*/
     private Localization localizationEnd;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
     @Column(name = "price")
     /**price*/
     private float price;
@@ -72,6 +77,7 @@ public class Reservation {
      */
     public Reservation(Car car, User user, Date dataFrom, Date dataTo, Localization localizationStart, Localization localizationEnd, float price) {
         this.car = car;
+        this.user = user;
         this.dataFrom = dataFrom;
         this.dataTo = dataTo;
         this.localizationStart = localizationStart;

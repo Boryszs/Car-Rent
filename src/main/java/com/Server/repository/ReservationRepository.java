@@ -2,6 +2,8 @@ package com.Server.repository;
 
 import com.Server.model.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -37,6 +39,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
      */
     boolean existsByIdrent(Long id);
 
+    @Query("SELECT r FROM Reservation r WHERE r.user.id =:id and r.dataFrom <= CURRENT_DATE and r.dataTo >= CURRENT_DATE")
+    List<Reservation> findCurrent(@Param("id") Long id);
     /**
      * Delete reservation on id.
      * @param id id reservation.

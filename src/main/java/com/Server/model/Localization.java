@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Entity localization to store Localizations data.
@@ -30,6 +31,10 @@ public class Localization {
     @Column(name = "city")
     /**city*/
     private String city;
+
+    @OneToMany(mappedBy = "localization", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Car> car;
 
     /** Constructor Class Localization
      *
