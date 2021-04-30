@@ -1,7 +1,7 @@
 package com.Server.service;
 
-import com.Server.dto.Request.RegisterRequest;
+import com.Server.dto.Request.UserRequest;
 
 public interface SendMail {
-    void sendMail(RegisterRequest registerRequest, String mess);
+    void sendMail(UserRequest userRequest, String mess);
 }

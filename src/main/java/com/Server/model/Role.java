@@ -3,6 +3,8 @@ package com.Server.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Entity role to store Role data.
@@ -28,5 +30,8 @@ public class Role {
     @Column(length = 20)
     /***/
     private Roles name;
+
+    @ManyToMany(mappedBy = "roles")
+    private List<User> posts = new ArrayList<>();
 
 }

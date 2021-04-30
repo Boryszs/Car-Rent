@@ -6,7 +6,6 @@ import com.Server.exception.WrongDataException;
 import com.Server.mapper.Mapper;
 import com.Server.model.Car;
 import com.Server.model.Localization;
-import com.Server.model.Reservation;
 import com.Server.repository.CarRepository;
 import com.Server.repository.LocalizationRepository;
 import com.Server.repository.ReservationRepository;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

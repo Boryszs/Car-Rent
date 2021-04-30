@@ -1,7 +1,6 @@
 package com.Server.service.impl;
 
 import com.Server.dto.Request.ReservationRequest;
-import com.Server.dto.Response.CarReservationResponse;
 import com.Server.dto.Response.ReservationResponse;
 import com.Server.exception.WrongDataException;
 import com.Server.mapper.Mapper;
@@ -20,9 +19,7 @@ import javax.transaction.Transactional;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -121,30 +118,6 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.findCurrent(id).parallelStream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
     }
 
-
-    /**
-     * Delete reservation
-     *
-     * @param id id reservation.
-     * @return int id reservation.
-     * @throws WrongDataException when reservation not exist.
-     */
-    @Override
-    public Integer deleteReservation(Long id) throws WrongDataException {
-        if (reservationRepository.existsByIdrent(id)) {
-            User user = userRepository.findByReservations_Idrent(id);
-            for (int i = 0; i < user.getReservations().size(); i++) {
-                if (user.getReservations().get(i).getIdrent() == id) {
-                    user.getReservations().remove(i);
-                }
-            }
-            userRepository.save(user);
-            return reservationRepository.deleteByIdrent(id);
-        } else {
-            throw new WrongDataException("Reservation not exist !!!");
-        }
-    }
-
     /**
      * Check whether exist reservation with id car.
      *
@@ -179,12 +152,12 @@ public class ReservationServiceImpl implements ReservationService {
         } else {
             User user = userRepository.findById(reservationRequest.getIdUser()).get();
             Car car = carRepository.findByIdcar(reservationRequest.getIdCar()).get();
-            LocalDate dateBefore = LocalDate.parse(reservationRequest.getDateFrom().toString());
-            LocalDate dateAfter = LocalDate.parse(reservationRequest.getDateTo().toString());
+            LocalDate dateBefore = LocalDate.parse(reservationRequest.getDateFrom());
+            LocalDate dateAfter = LocalDate.parse(reservationRequest.getDateTo());
             long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, dateAfter);
             Reservation reservations = new Reservation(carRepository.findByIdcar(reservationRequest.getIdCar()).get(), user, Date.valueOf(reservationRequest.getDateFrom()), Date.valueOf(reservationRequest.getDateTo()), localizationRepository.findByCity(reservationRequest.getLocalizationStart()).get(), localizationRepository.findByCity(reservationRequest.getLocalizationEnd()).get(), (noOfDaysBetween * car.getMoney()));
-            car.setLocalization(localizationRepository.findByCity(reservationRequest.getLocalizationEnd()).get());
-            carRepository.save(car);
+            //car.setLocalization(localizationRepository.findByCity(reservationRequest.getLocalizationEnd()).get()); Change localization on end = reservation
+            //carRepository.save(car);
             reservationRepository.save(reservations);
             user.setReservations(reservations);
             userRepository.save(user);

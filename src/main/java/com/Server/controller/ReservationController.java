@@ -4,7 +4,6 @@ import com.Server.dto.Request.ReservationRequest;
 import com.Server.dto.Response.MessageResponse;
 import com.Server.dto.Response.ReservationResponse;
 import com.Server.exception.WrongDataException;
-import com.Server.model.Reservation;
 import com.Server.service.CarService;
 import com.Server.service.LocalizationService;
 import com.Server.service.ReservationService;
@@ -21,30 +20,45 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- *   ReservationController is use to supports operations about database table Reservation.
- *   @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- *   @version 2.0.
- *   @since 2020-04-27.
+ * ReservationController is use to supports operations about database table Reservation.
+ *
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 @RequestMapping(value = "/reservation")
 @RestController
 @CrossOrigin
 public class ReservationController {
-    /**Logger use to logger on server.*/
+    /**
+     * Logger use to logger on server.
+     */
     private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
-    /**ReservationService operation on database table Reservation*/
+    /**
+     * ReservationService operation on database table Reservation
+     */
     private final ReservationService reservationServiceImpl;
-    /**UserService operation on database table User*/
+    /**
+     * UserService operation on database table User
+     */
     private final UserService userServiceImpl;
-    /**CarService operation on database table Car*/
+    /**
+     * CarService operation on database table Car
+     */
     private final CarService carServiceImpl;
-    /**LocationSercive operation on database table Localization*/
+    /**
+     * LocationSercive operation on database table Localization
+     */
     private final LocalizationService localizationServiceImpl;
-    /**SendMail use to send mail*/
+    /**
+     * SendMail use to send mail
+     */
     private final SendMailImpl sendMailImpl;
 
-    /**Constructor*/
+    /**
+     * Constructor
+     */
     @Autowired
     public ReservationController(ReservationService reservationServiceImpl, UserService userServiceImpl, CarService carServiceImpl, LocalizationService localizationServiceImpl, SendMailImpl sendMailImpl) {
         this.reservationServiceImpl = reservationServiceImpl;
@@ -55,9 +69,11 @@ public class ReservationController {
     }
 
     //Zwracanie rezerwacji wszystkich
+
     /**
      * This method get all reservation.
      * This method use endpoint /reservation/show.
+     *
      * @return List Reservation all.
      */
     @ResponseBody
@@ -70,29 +86,27 @@ public class ReservationController {
     /**
      * This method delete reservation.
      * This method use endpoint /reservation/delete.
+     *
      * @param id id reservation.
      * @return return id delete reservation Http.Status 200 or 400.
-     * @exception WrongDataException when reservation id not exist.
+     * @throws WrongDataException when reservation id not exist.
      */
     @PostMapping(value = "/delete")
-    public ResponseEntity<?> deleteReservation(@RequestParam Long id){
-        //try {
-            logger.info("------ The reservation was successfully deleted ------");
-            reservationServiceImpl.deleteByIdRent(id);
-            return new ResponseEntity(HttpStatus.OK);
-//        } catch (WrongDataException wrongDataException) {
-//            logger.error("------ Reservation Id Not Exist To Delete ------");
-//            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-//        }
+    public ResponseEntity<?> deleteReservation(@RequestParam Long id) {
+        logger.info("------ The reservation was successfully deleted ------");
+        reservationServiceImpl.deleteByIdRent(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     //Zwracanie rezerwacji po id usera
+
     /**
      * This method get all reservation user about id user.
      * This method use endpoint /reservation/get.
+     *
      * @param id id user.
      * @return list reservation Http.Status 200 or 400.
-     * @exception WrongDataException when reservation id not exist.
+     * @throws WrongDataException when reservation id not exist.
      */
     @ResponseBody
     @GetMapping(value = "/get")
@@ -111,13 +125,14 @@ public class ReservationController {
     /**
      * This method add new reservation user.
      * This method use endpoint /reservation/add.
+     *
      * @param reservationRequest data new reservation.
      * @return return data new reservation Http.Status 200 or 400.
-     * @exception WrongDataException when reservation add error.
+     * @throws WrongDataException when reservation add error.
      */
     @ResponseBody
     @PostMapping(value = "/add")
-    public ResponseEntity<?> addReservation(@Valid @RequestBody ReservationRequest reservationRequest){
+    public ResponseEntity<?> addReservation(@Valid @RequestBody ReservationRequest reservationRequest) {
         try {
             logger.info("------ Reservations added successfully ------");
             reservationServiceImpl.save(reservationRequest);
@@ -129,16 +144,18 @@ public class ReservationController {
     }
 
     //Zwraca aktualne rezerwacje usera po id usera
+
     /**
      * This method get all current reservation user about id user.
      * This method use endpoint /reservation/get-all-user.
+     *
      * @param id id user.
      * @return list reservation Http.Status 200 or 400.
-     * @exception WrongDataException when user not exist.
+     * @throws WrongDataException when user not exist.
      */
     @ResponseBody
     @GetMapping(value = "/get-all-user")
-    public ResponseEntity<?> getReservationById(@RequestParam Long id){
+    public ResponseEntity<?> getReservationById(@RequestParam Long id) {
         try {
             logger.info("------ Successfully displayed user bookings ------");
             return new ResponseEntity(reservationServiceImpl.getCurrentReservation(id), HttpStatus.OK);

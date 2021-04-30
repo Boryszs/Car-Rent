@@ -1,9 +1,9 @@
 package com.Server.service;
 
-import com.Server.dto.Request.EditUser;
-import com.Server.dto.Request.RegisterRequest;
+import com.Server.dto.Request.UserRequest;
+import com.Server.dto.Response.ReservationResponse;
+import com.Server.dto.Response.UserResponse;
 import com.Server.exception.WrongDataException;
-import com.Server.model.Reservation;
 import com.Server.model.User;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public interface UserService {
      * @return List reservation.
      * @throws WrongDataException when id user is wrong.
      */
-    List<Reservation> getReservationUser(Long id) throws WrongDataException;
+    List<ReservationResponse> getReservationUser(Long id) throws WrongDataException;
 
     /**
      * Delete user on id.
@@ -52,15 +52,16 @@ public interface UserService {
      * @param user new user data.
      * @return return new data on user.
      */
-    User update(User user);
+    void update(User user);
 
     /**
      * Update user.
-     * @param editUser new user data.
+     * @param userRequest new user data.
+     * @param id id user
      * @return return new data on user.
      * @throws WrongDataException when request data user is wrong.
      */
-    User update(EditUser editUser) throws WrongDataException;
+    void update(UserRequest userRequest,Long id) throws WrongDataException;
 
     /**
      * Check whether user exist on email.
@@ -74,7 +75,7 @@ public interface UserService {
      * @param email email user.
      * @return data user.
      */
-    Optional<User> findByEmail(String email);
+    UserResponse findByEmail(String email);
 
     /**
      * Find user on id.
@@ -82,7 +83,7 @@ public interface UserService {
      * @return user data
      * @throws WrongDataException when id is wrong
      */
-    Optional<User> findById(Long id) throws WrongDataException;
+    UserResponse findById(Long id) throws WrongDataException;
 
     /**
      * Save new user data.
@@ -90,20 +91,20 @@ public interface UserService {
      * @return new data user.
      * @throws WrongDataException when request data user register is wrong.
      */
-    User save(RegisterRequest user) throws WrongDataException;
+    void save(UserRequest user) throws WrongDataException;
 
     /**
      * Get all user.
      * @return List of all user.
      */
-    List<User> findAll();
+    List<UserResponse> findAll();
 
     /**
      * Find Reservation user on id.
      * @param id is reservation user.
      * @return User data with list reservation.
      */
-    User findByReservationsIdRent(Long id);
+    UserResponse findByReservationsIdRent(Long id);
 
     /**
      * Check whether user on id exist.

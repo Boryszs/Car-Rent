@@ -21,7 +21,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RegisterRequest implements Serializable {
+public class UserRequest implements Serializable {
 
     @Size(min = 3)
     /**username*/

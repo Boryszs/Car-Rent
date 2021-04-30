@@ -1,6 +1,6 @@
 package com.Server.controller;
 
-import com.Server.dto.Request.EditUser;
+import com.Server.dto.Request.UserRequest;
 import com.Server.dto.Response.MessageResponse;
 import com.Server.exception.WrongDataException;
 import com.Server.service.UserService;
@@ -47,15 +47,16 @@ public class UserController {
     /**
      * This method edit user data.
      * This method use endpoint /user/edit.
-     * @param editUser new data user.
+     * @param userRequest new data user.
      * @return new data user Http.Status 200 or 400.
      * @exception WrongDataException when server catch Error.
      */
     @PostMapping("/edit")
-    public ResponseEntity<?> editUser(@Valid @RequestBody EditUser editUser) {
+    public ResponseEntity<?> editUser(@RequestParam Long id,@Valid @RequestBody UserRequest userRequest) {
         try {
             logger.info("------ User edited successfully ------");
-            return new ResponseEntity<>(userService.update(editUser), HttpStatus.OK);
+            userService.update(userRequest,id);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (WrongDataException wrongDataException) {
             logger.error("------ Error " + wrongDataException.getError() + "------");
             return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);

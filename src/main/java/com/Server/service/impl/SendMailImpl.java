@@ -1,6 +1,6 @@
 package com.Server.service.impl;
 
-import com.Server.dto.Request.RegisterRequest;
+import com.Server.dto.Request.UserRequest;
 import com.Server.service.SendMail;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +27,12 @@ public class SendMailImpl implements SendMail {
 
     /**
      * Method send mail.
-     * @param registerRequest username.
+     * @param userRequest username.
      * @param mess mesage to send.
      */
-    public void sendMail(RegisterRequest registerRequest, String mess) {
+    public void sendMail(UserRequest userRequest, String mess) {
         String from = "pizza.projekt06@gmail.com";
-        String to = registerRequest.getEmail();
+        String to = userRequest.getEmail();
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -61,7 +61,7 @@ public class SendMailImpl implements SendMail {
                     "<img src=\"https://i.wpimg.pl/730x0/m.autokult.pl/55937440-616487475464085-b315b3f.jpg\" width=\"270\" + height=\"180\"/>\n" +
                     "\n" +
                     "\n<p><b>" + "Car-Sharing" + "</b></p>\n" +
-                    "<h4>Username:" + registerRequest.getUsername() + "</h4>\n" +
+                    "<h4>Username:" + userRequest.getUsername() + "</h4>\n" +
                     "<p>" + mess + "</p>" +
                     "\n" +
                     "</body>";

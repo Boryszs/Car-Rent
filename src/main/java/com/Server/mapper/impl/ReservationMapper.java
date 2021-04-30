@@ -8,8 +8,23 @@ import com.Server.mapper.Mapper;
 import com.Server.model.Reservation;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
+/**
+ * Class Mapper use to mapping reservation.
+ *
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 1.0
+ * @since 2020-04-27
+ */
+
 @Component
 public class ReservationMapper implements Mapper<Reservation, ReservationResponse, ReservationRequest> {
+
+    /**
+     * @param reservation param mapped to dto
+     * @return dto object
+     */
     @Override
     public ReservationResponse toDto(Reservation reservation) {
         return new ReservationResponse().builder()
@@ -42,18 +57,25 @@ public class ReservationMapper implements Mapper<Reservation, ReservationRespons
                 .build();
     }
 
+    /**
+     * @param reservationRequest param mapped to entity
+     * @return entity object
+     */
     @Override
     public Reservation toEntity(ReservationRequest reservationRequest) {
-//        return new Reservation().builder()
-//                .dataFrom(reservationRequest.getDateFrom())
-//                .dataTo(reservationRequest.getDateTo())
-//                .localizationStart(reservationRequest.getLocalizationStart())
-//                .localizationEnd(reservationRequest.getLocalizationEnd())
-//                .price()
-//                .build();
-        return null;
+        return new Reservation().builder()
+                .dataFrom(new Date(reservationRequest.getDateFrom()))
+                .dataTo(new Date(reservationRequest.getDateTo()))
+                .build();
     }
 
+    /**
+     * Method not implement !!!
+     * @param reservation        old param
+     * @param reservationRequest new param
+     * @return new localization object.
+     */
+    //No implement
     @Override
     public Reservation update(Reservation reservation, ReservationRequest reservationRequest) {
         return null;

@@ -1,7 +1,7 @@
 package com.Server.controller;
 
 import com.Server.dto.Request.LoginRequest;
-import com.Server.dto.Request.RegisterRequest;
+import com.Server.dto.Request.UserRequest;
 import com.Server.dto.Response.JwtResponse;
 import com.Server.dto.Response.LocalizationResponse;
 import com.Server.dto.Response.MessageResponse;
@@ -110,16 +110,17 @@ public class AuthenticationController {
     /**
      * This method is use to register user.
      * This method use endpoint /register.
-     * @param registerRequest user data.
+     * @param userRequest user data.
      * @return user data  Http.Status 200 or 400.
      * @exception WrongDataException when user not exist
      */
     @ResponseBody
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<?> registerUser(@RequestBody UserRequest userRequest) {
         try {
             logger.info("------ User successfully registered------");
-            return  new ResponseEntity<>(userServiceImpl.save(registerRequest),HttpStatus.OK);
+            userServiceImpl.save(userRequest);
+            return  new ResponseEntity<>(HttpStatus.OK);
         } catch (WrongDataException wrongDataException) {
             logger.error("------ User Not Exist ------");
             return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);

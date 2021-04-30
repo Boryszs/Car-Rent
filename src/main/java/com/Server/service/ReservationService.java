@@ -1,13 +1,10 @@
 package com.Server.service;
 
 import com.Server.dto.Request.ReservationRequest;
-import com.Server.dto.Response.CarReservationResponse;
 import com.Server.dto.Response.ReservationResponse;
 import com.Server.exception.WrongDataException;
-import com.Server.model.Reservation;
 
 import java.util.List;
-import java.util.Optional;
 /**
  * Interface Service reservation to service ReservationRepository.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
@@ -45,13 +42,6 @@ public interface ReservationService {
      */
     List<ReservationResponse> getCurrentReservation(Long id) throws WrongDataException;
 
-    /**
-     * Delete reservation
-     * @param id id reservation.
-     * @return int id reservation.
-     * @throws WrongDataException when reservation not exist.
-     */
-    Integer deleteReservation(Long id) throws WrongDataException;
 
     /**
      * Check whether exist reservation with id car.

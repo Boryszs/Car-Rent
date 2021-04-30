@@ -5,7 +5,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Entity reservations to store Reservation data.
@@ -29,8 +28,7 @@ public class Reservation {
     /**idrent*/
     private Long idrent;
 
-
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "id_car", referencedColumnName = "id_car")
     /**car*/
     private Car car;

@@ -1,9 +1,11 @@
 package com.Server.service.impl;
 
-import com.Server.dto.Request.EditUser;
-import com.Server.dto.Request.RegisterRequest;
+import com.Server.dto.Request.UserRequest;
+import com.Server.dto.Response.ReservationResponse;
+import com.Server.dto.Response.UserResponse;
 import com.Server.exception.WrongDataException;
-import com.Server.model.Reservation;
+import com.Server.mapper.impl.ReservationMapper;
+import com.Server.mapper.impl.UserMapper;
 import com.Server.model.Role;
 import com.Server.model.Roles;
 import com.Server.model.User;
@@ -20,9 +22,11 @@ import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Class Service implements interface RoleService.
+ *
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
  * @version 2.0.
  * @since 2020-04-27.
@@ -31,29 +35,50 @@ import java.util.Optional;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-    /**userRepository*/
-    private UserRepository userRepository;
-    /**reservationRepository*/
-    private ReservationRepository reservationRepository;
-    /**roleRepository*/
-    private RoleRepository roleRepository;
-    /**encoder*/
-    private PasswordEncoder encoder;
-    /**sendMail*/
-    private SendMail sendMail;
+    /**
+     * userRepository
+     */
+    private final UserRepository userRepository;
+    /**
+     * reservationRepository
+     */
+    private final ReservationRepository reservationRepository;
+    /**
+     * roleRepository
+     */
+    private final RoleRepository roleRepository;
+    /**
+     * encoder
+     */
+    private final PasswordEncoder encoder;
+    /**
+     * sendMail
+     */
+    private final SendMail sendMail;
+    /**
+     * reservation mapper
+     */
+    private final ReservationMapper reservationMapper;
+    /**
+     * user mapper
+     */
+    private final UserMapper userMapper;
 
     @Autowired
     /**Constructor*/
-    public UserServiceImpl(UserRepository userRepository, ReservationRepository reservationRepository, RoleRepository roleRepository, PasswordEncoder encoder, SendMail sendMail) {
+    public UserServiceImpl(UserRepository userRepository, ReservationRepository reservationRepository, RoleRepository roleRepository, PasswordEncoder encoder, SendMail sendMail, ReservationMapper reservationMapper, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.reservationRepository = reservationRepository;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
         this.sendMail = sendMail;
+        this.reservationMapper = reservationMapper;
+        this.userMapper = userMapper;
     }
 
     /**
      * Find the user on username.
+     *
      * @param username username on user.
      * @return data on user.
      */
@@ -64,6 +89,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Check whether user exist on username.
+     *
      * @param username username on user.
      * @return true or false.
      */
@@ -74,20 +100,20 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Return reservation user.
+     *
      * @param id id user.
      * @return List reservation.
      * @throws WrongDataException when id user is wrong.
      */
     @Override
-    public List<Reservation> getReservationUser(Long id) throws WrongDataException {
+    public List<ReservationResponse> getReservationUser(Long id) throws WrongDataException {
         if (!reservationRepository.existsByIdrent(id)) {
             throw new WrongDataException("Reservation not exist!!!");
         } else {
             if (!userRepository.existsById(id)) {
                 throw new WrongDataException("User not Exist");
             } else {
-                User user = userRepository.findById(id).get();
-                List<Reservation> reservations = user.getReservations();
+                List<ReservationResponse> reservations = userRepository.getReservationUser(id).parallelStream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
                 return reservations;
             }
         }
@@ -95,69 +121,66 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Delete user on id.
+     *
      * @param id id user.
      * @throws WrongDataException when id user is wrong.
      */
     @Override
     public void deleteUser(Long id) throws WrongDataException {
-        if(!userRepository.existsById(id)){
+        if (!userRepository.existsById(id)) {
             throw new WrongDataException("User not Exist");
-        }else{
-        User user = userRepository.findById(id).get();
-        user.getReservations().forEach(reservation -> reservationRepository.delete(reservation));
-        user.getReservations().removeAll(user.getReservations());
-        userRepository.save(user);
-        userRepository.deleteById(id);
+        } else {
+            userRepository.deleteById(id);
         }
     }
 
     /**
      * Update user.
+     *
      * @param user new user data.
      * @return return new data on user.
      */
     @Override
-    public User update(User user) {
-        return userRepository.save(user);
+    public void update(User user) {
+        userRepository.save(user);
     }
 
     /**
      * Update user.
-     * @param editUser new user data.
+     *
+     * @param userRequest new user data.
      * @return return new data on user.
      * @throws WrongDataException when request data user is wrong.
      */
     @Override
-    public User update(EditUser editUser) throws WrongDataException {
-        System.out.println(editUser.getId());
-        if(!userRepository.existsById(editUser.getId())){
+    public void update(UserRequest userRequest,Long id) throws WrongDataException {
+        if (!userRepository.existsById(id)) {
             throw new WrongDataException("User not Exist");
-        }else {
-            if(userRepository.existsByUsername(editUser.getUsername())){
+        } else {
+            if (userRepository.existsByUsername(userRequest.getUsername())) {
                 throw new WrongDataException("User of Username is Exist");
             }
-                User user = userRepository.findById(editUser.getId()).get();
-                user.setUsername(editUser.getUsername());
-                user.setEmail(editUser.getEmail());
-                user.setPassword(encoder.encode(editUser.getPassword()));
-                List<Role> roles = new LinkedList<>();
-                if (editUser.getRole().isEmpty()) {
+            User user = userRepository.findById(id).get();
+            user = userMapper.update(user,userRequest);
+            List<Role> roles = new LinkedList<>();
+            if (userRequest.getRole().isEmpty()) {
+                roles.add(roleRepository.findByName(Roles.ROLE_USER).get());
+            }
+            for (String rol : userRequest.getRole()) {
+                if (rol.equals("user")) {
                     roles.add(roleRepository.findByName(Roles.ROLE_USER).get());
+                } else if (rol.equals("admin")) {
+                    roles.add(roleRepository.findByName(Roles.ROLE_ADMIN).get());
                 }
-                for (String rol : editUser.getRole()) {
-                    if (rol.equals("user")) {
-                        roles.add(roleRepository.findByName(Roles.ROLE_USER).get());
-                    } else if (rol.equals("admin")) {
-                        roles.add(roleRepository.findByName(Roles.ROLE_ADMIN).get());
-                    }
-                }
-                user.setRoles(roles);
-                return userRepository.save(user);
+            }
+            user.setRoles(roles);
+            userRepository.save(user);
         }
     }
 
     /**
      * Check whether user exist on email.
+     *
      * @param email email on user.
      * @return true or false.
      */
@@ -168,78 +191,85 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Find user on email.
+     *
      * @param email email user.
      * @return data user.
      */
     @Override
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public UserResponse findByEmail(String email) {
+        return userMapper.toDto(userRepository.findByEmail(email).get());
     }
 
     /**
      * Find user on id.
+     *
      * @param id is user.
      * @return user data
      * @throws WrongDataException when id is wrong
      */
     @Override
-    public Optional<User> findById(Long id) throws WrongDataException {
+    public UserResponse findById(Long id) throws WrongDataException {
         if (!userRepository.existsById(id)) {
             throw new WrongDataException("User not Exist");
         } else {
-            return Optional.of(userRepository.findById(id).get());
+            return userMapper.toDto(userRepository.findById(id).get());
         }
     }
 
     /**
      * Save new user data.
-     * @param registerRequest user data.
+     *
+     * @param userRequest user data.
      * @return new data user.
      * @throws WrongDataException when request data user register is wrong.
      */
     @Override
-    public User save(RegisterRequest registerRequest) throws WrongDataException {
-        //System.out.print(userRepository.existsByUsername(registerRequest.getUsername()));
-        if (userRepository.existsByUsername(registerRequest.getUsername())) {
+    public void save(UserRequest userRequest) throws WrongDataException {
+        if (userRepository.existsByUsername(userRequest.getUsername())) {
             throw new WrongDataException("User Exist");
         } else {
             //sendMail.sendMail(registerRequest, "Thank you for register account.");
             List<Role> roles = new LinkedList<>();
-            if (registerRequest.getRole().isEmpty()) {
+            if (userRequest.getRole().isEmpty()) {
                 roles.add(roleRepository.findByName(Roles.ROLE_USER).get());
             }
-            for (String rol : registerRequest.getRole()) {
+            for (String rol : userRequest.getRole()) {
                 if (rol.equals("user")) {
                     roles.add(roleRepository.findByName(Roles.ROLE_USER).get());
                 } else if (rol.equals("admin")) {
                     roles.add(roleRepository.findByName(Roles.ROLE_ADMIN).get());
                 }
             }
-            return userRepository.save(new User(registerRequest.getUsername(), registerRequest.getEmail(), encoder.encode(registerRequest.getPassword()), roles));
+            User user = userMapper.toEntity(userRequest);
+            user.setRoles(roles);
+            userRepository.save(user);
         }
     }
 
     /**
      * Get all user.
+     *
      * @return List of all user.
      */
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserResponse> findAll() {
+        return userRepository.findAll().parallelStream().map(user -> userMapper.toDto(user)).collect(Collectors.toList());
     }
 
     /**
      * Find Reservation user on id.
+     *
      * @param id is reservation user.
      * @return User data with list reservation.
      */
     @Override
-    public User findByReservationsIdRent(Long id) {
-        return userRepository.findByReservations_Idrent(id);
+    public UserResponse findByReservationsIdRent(Long id) {
+        return userMapper.toDto(userRepository.findByReservations_Idrent(id));
     }
 
     /**
      * Check whether user on id exist.
+     *
      * @param id id user.
      * @return true or false.
      */
