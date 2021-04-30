@@ -28,7 +28,7 @@ public class Reservation {
     /**idrent*/
     private Long idrent;
 
-    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "id_car", referencedColumnName = "id_car")
     /**car*/
     private Car car;

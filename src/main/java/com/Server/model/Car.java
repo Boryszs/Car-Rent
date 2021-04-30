@@ -60,10 +60,6 @@ public class Car {
     /**image*/
     private String image;
 
-    @OneToOne(fetch = FetchType.LAZY,orphanRemoval = true)
-    @JoinColumn(name = "id_rent")
-    Reservation reservation;
-
     /**localization*/
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "id_localization", nullable = false)

@@ -33,7 +33,7 @@ public class Localization {
     private String city;
 
     @OneToMany(mappedBy = "localization", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Car> car;
 
     /** Constructor Class Localization
