@@ -203,7 +203,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByUsername(registerRequest.getUsername())) {
             throw new ExceptionRequest("User Exist");
         } else {
-            sendMail.sendMail(registerRequest, "Thank you for register account.");
+            //sendMail.sendMail(registerRequest, "Thank you for register account.");
             List<Role> roles = new LinkedList<>();
             if (registerRequest.getRole().isEmpty()) {
                 roles.add(roleRepository.findByName(Roles.ROLE_USER).get());
