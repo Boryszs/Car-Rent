@@ -31,7 +31,7 @@ import java.util.List;
 
 @RequestMapping(value = "/car")
 @RestController
-@CrossOrigin
+@CrossOrigin("http://localhost:4200")
 public class CarController {
 
     /**Logger use to logger on server.*/
