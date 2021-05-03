@@ -74,9 +74,9 @@ public class CarController {
      * @return List all Car Http.Status 200 or 400.
      */
     @GetMapping(value = "/show-car-all")
-    public List<CarResponse> showCarAll() {
+    public ResponseEntity<List<CarResponse>> showCarAll() {
         logger.info("---- GET ALL CAR ----");
-        return carServiceImpl.findAll();
+        return new ResponseEntity<>(carServiceImpl.findAll(),HttpStatus.OK);
     }
 
     //Zwraca samochody w zaleznosci od lokazlizacji

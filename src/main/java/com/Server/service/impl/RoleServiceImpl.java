@@ -7,6 +7,7 @@ import com.Server.entiy.Role;
 import com.Server.entiy.Roles;
 import com.Server.repository.RoleRepository;
 import com.Server.service.RoleService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
+@Slf4j
 @Transactional
 public class RoleServiceImpl implements RoleService {
 
@@ -50,6 +52,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public RoleResponse findByName(Roles name) {
+        log.info("---- FIND ROLE NAME "+name+" ----");
         return roleMapper.toDto(roleRepository.findByName(name).get());
     }
 
@@ -61,6 +64,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public RoleResponse findById(int id) {
+        log.info("---- FIND ROLE ID "+id+" ----");
         return roleMapper.toDto(roleRepository.findById(id).get());
     }
 
@@ -72,6 +76,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public void save(RoleRequest roleRequest) {
+        log.info("---- SAVE ROLE ----");
          roleRepository.save(roleMapper.toEntity(roleRequest));
     }
 
@@ -82,6 +87,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public List<RoleResponse> findAll() {
+        log.info("---- FIND ALL ROLE ----");
         return roleRepository.findAll().stream().map(role -> roleMapper.toDto(role)).collect(Collectors.toList());
     }
 }

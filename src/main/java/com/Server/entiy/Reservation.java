@@ -46,12 +46,12 @@ public class Reservation {
     /**dataTo*/
     private Date dataTo;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn(name = "localization_start", referencedColumnName = "id_localization")
     /**localizationStart*/
     private Localization localizationStart;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn(name = "localization_end", referencedColumnName = "id_localization")
     /**localizationEnd*/
     private Localization localizationEnd;

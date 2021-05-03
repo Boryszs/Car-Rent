@@ -12,13 +12,11 @@ import java.util.List;
  * @version 1.0
  * @since 2020-12-29.
  */
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode
 @Builder
 @Table(name = "roles")
 public class Role {
@@ -33,7 +31,14 @@ public class Role {
     /***/
     private Roles name;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles",fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 }

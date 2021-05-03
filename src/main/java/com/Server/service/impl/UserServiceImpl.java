@@ -14,6 +14,7 @@ import com.Server.repository.RoleRepository;
 import com.Server.repository.UserRepository;
 import com.Server.service.SendMail;
 import com.Server.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
+@Slf4j
 @Transactional
 public class UserServiceImpl implements UserService {
     /**
@@ -84,6 +86,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Optional<User> findByUsername(String username) {
+        log.info("---- FIND USER ON USERNAME "+username+" ----");
         return userRepository.findByUsername(username);
     }
 
@@ -95,6 +98,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Boolean existsByUsername(String username) {
+        log.info("---- EXIST USER ON USERNAME "+username+" ----");
         return userRepository.existsByUsername(username);
     }
 
@@ -108,11 +112,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<ReservationResponse> getReservationUser(Long id) throws WrongDataException {
         if (!reservationRepository.existsByIdrent(id)) {
+            log.error("---- NOT EXIST RESERVATION ----");
             throw new WrongDataException("Reservation not exist!!!");
         } else {
             if (!userRepository.existsById(id)) {
+                log.error("---- NOT EXIST USER ----");
                 throw new WrongDataException("User not Exist");
             } else {
+                log.info("---- GET USER RESERVATION ON ID "+id+" ----");
                 List<ReservationResponse> reservations = userRepository.getReservationUser(id).stream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
                 return reservations;
             }
@@ -128,8 +135,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) throws WrongDataException {
         if (!userRepository.existsById(id)) {
+            log.error("---- NOT EXIST USER "+id+" ----");
             throw new WrongDataException("User not Exist");
         } else {
+            log.info("---- DELETE USER ID "+id+"----");
             userRepository.deleteById(id);
         }
     }
@@ -142,6 +151,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void update(User user) {
+        log.info("---- USER UPDATE ----");
         userRepository.save(user);
     }
 
@@ -155,11 +165,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(UserRequest userRequest,Long id) throws WrongDataException {
         if (!userRepository.existsById(id)) {
+            log.error("---- USER NOT EXIST ----");
             throw new WrongDataException("User not Exist");
         } else {
-            if (userRepository.existsByUsername(userRequest.getUsername())) {
-                throw new WrongDataException("User of Username is Exist");
-            }
             User user = userRepository.findById(id).get();
             user = userMapper.update(user,userRequest);
             List<Role> roles = new LinkedList<>();
@@ -175,6 +183,7 @@ public class UserServiceImpl implements UserService {
             }
             user.setRoles(roles);
             userRepository.save(user);
+            log.info("---- USER UPDATE ----");
         }
     }
 
@@ -186,6 +195,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Boolean existsByEmail(String email) {
+        log.info("---- USER EXIST ON EMAIL "+email+" ----");
         return userRepository.existsByEmail(email);
     }
 
@@ -197,6 +207,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserResponse findByEmail(String email) {
+        log.info("---- FIND USER ON EMAIL "+email+" ----");
         return userMapper.toDto(userRepository.findByEmail(email).get());
     }
 
@@ -210,8 +221,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse findById(Long id) throws WrongDataException {
         if (!userRepository.existsById(id)) {
+            log.error("---- USER NOT EXIST ----");
             throw new WrongDataException("User not Exist");
         } else {
+            log.info("---- USER ON ID "+id+" ----");
             return userMapper.toDto(userRepository.findById(id).get());
         }
     }
@@ -226,6 +239,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(UserRequest userRequest) throws WrongDataException {
         if (userRepository.existsByUsername(userRequest.getUsername())) {
+            log.error("---- USER EXIST ----");
             throw new WrongDataException("User Exist");
         } else {
             //sendMail.sendMail(registerRequest, "Thank you for register account.");
@@ -243,6 +257,7 @@ public class UserServiceImpl implements UserService {
             User user = userMapper.toEntity(userRequest);
             user.setRoles(roles);
             userRepository.save(user);
+            log.info("---- SAVE USER ----");
         }
     }
 
@@ -253,6 +268,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<UserResponse> findAll() {
+        log.info("---- FIND ALL USER ----");
         return userRepository.findAll().parallelStream().map(user -> userMapper.toDto(user)).collect(Collectors.toList());
     }
 
@@ -264,6 +280,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserResponse findByReservationsIdRent(Long id) {
+        log.info("---- FIND RESERVATION ON ID USER "+id+" ----");
         return userMapper.toDto(userRepository.findByReservations_Idrent(id));
     }
 
@@ -275,6 +292,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Boolean existsById(long id) {
+        log.info("---- USER EXIST ON ID "+id+" ----");
         return userRepository.existsById(id);
     }
 }

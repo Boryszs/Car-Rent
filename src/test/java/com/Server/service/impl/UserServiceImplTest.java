@@ -1,7 +1,11 @@
 package com.Server.service.impl;
 
+import com.Server.dto.Response.UserResponse;
+import com.Server.entiy.User;
 import com.Server.exception.WrongDataException;
+import com.Server.repository.UserRepository;
 import com.Server.service.UserService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
@@ -18,11 +22,13 @@ class UserServiceImplTest {
 
     @Autowired
     UserService userService;
+    @Autowired
+    UserRepository userRepository;
 
     @Test
     @DisplayName("---- FIND BY USERNAME ----")
     void findByUsername() {
-        userService.findAll().forEach(userResponse -> assertEquals(userService.findByUsername(userResponse.getUsername()).hashCode(), userResponse.hashCode()));
+        userRepository.findAll().stream().map(user -> user.compareTo(userService.findByUsername(user.getUsername()).get())).forEach(Assertions::assertTrue);
     }
 
     @Test
@@ -34,7 +40,9 @@ class UserServiceImplTest {
     @Test
     @DisplayName("---- EXIST BY EMAIL USERNAME ----")
     void existsByEmail() {
-        userService.findAll().forEach(userResponse -> assertTrue(userService.existsByEmail(userResponse.getUsername())));
+        for (UserResponse userResponse : userService.findAll()) {
+            assertTrue(userService.existsByEmail(userResponse.getEmail()));
+        }
     }
 
     @Test

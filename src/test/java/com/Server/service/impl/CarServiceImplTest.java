@@ -1,6 +1,7 @@
 package com.Server.service.impl;
 
 import com.Server.dto.Response.CarResponse;
+import com.Server.entiy.Localization;
 import com.Server.exception.WrongDataException;
 import com.Server.repository.LocalizationRepository;
 import com.Server.service.CarService;
@@ -55,13 +56,13 @@ class CarServiceImplTest {
     @Test
     @DisplayName("---- FIND ON LOCALIZATION CITY NAME ----")
     void findByLocalizationCity() {
-        localizationRepository.findAll().forEach(localization -> {
+        for (Localization localization : localizationRepository.findAll()) {
             try {
-                assertNotEquals(carService.findByLocalizationCity(localization.getCity()), 0);
+                assertNotEquals(carService.findByLocalizationCity(localization.getCity()).size(), 0);
             } catch (WrongDataException wrongDataException) {
                 wrongDataException.printStackTrace();
             }
-        });
+        }
 
         assertThrows(WrongDataException.class, () -> carService.findByLocalizationCity("Hamburg"));
     }

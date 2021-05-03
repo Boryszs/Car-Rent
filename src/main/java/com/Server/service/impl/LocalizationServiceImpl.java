@@ -7,6 +7,7 @@ import com.Server.mapper.Mapper;
 import com.Server.entiy.Localization;
 import com.Server.repository.LocalizationRepository;
 import com.Server.service.LocalizationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
  */
 
 @Service
+@Slf4j
+@Transactional
 public class LocalizationServiceImpl implements LocalizationService {
 
     /**localizationRepository*/
@@ -44,8 +47,10 @@ public class LocalizationServiceImpl implements LocalizationService {
     @Override
     public LocalizationResponse findByIdLocalization(long id) throws WrongDataException {
         if (!localizationRepository.existsById(id)) {
+            log.error("---- BAD ID LOCALIZATION ----");
             throw new WrongDataException("Bad id localization");
         } else {
+            log.info("---- GET LOCALIZATION ID "+id+" ----");
             return localizationMapper.toDto(localizationRepository.findById(id).get());
         }
     }
@@ -59,8 +64,10 @@ public class LocalizationServiceImpl implements LocalizationService {
     @Override
     public LocalizationResponse findByCity(String city) throws WrongDataException {
         if (!localizationRepository.existsByCity(city)) {
+            log.error("---- BAD ID LOCALIZATION ----");
             throw new WrongDataException("Bad city localization");
         } else {
+            log.info("---- GET LOCALIZATION NAME "+city+" ----");
             return localizationMapper.toDto(localizationRepository.findByCity(city).get());
         }
     }
@@ -71,6 +78,7 @@ public class LocalizationServiceImpl implements LocalizationService {
      */
     @Override
     public List<LocalizationResponse> findAll() {
+        log.info("---- GET ALL LOCALIZATION ----");
         return localizationRepository.findAll().stream().map(localization -> localizationMapper.toDto(localization)).collect(Collectors.toList());
     }
 
@@ -81,6 +89,7 @@ public class LocalizationServiceImpl implements LocalizationService {
      */
     @Override
     public void save(LocalizationRequest localizationRequest) {
+        log.info("---- SAVE LOCALIZATION ----");
         localizationRepository.save(localizationMapper.toEntity(localizationRequest));
     }
 
@@ -91,6 +100,7 @@ public class LocalizationServiceImpl implements LocalizationService {
      */
     @Override
     public boolean existsByCity(String city) {
+        log.info("---- EXIST LOCALIZATION NAME "+city+" ----");
         return localizationRepository.existsByCity(city);
     }
 
@@ -101,6 +111,7 @@ public class LocalizationServiceImpl implements LocalizationService {
      */
     @Override
     public boolean existsById(long id) {
+        log.info("---- GET LOCALIZATION ID "+id+" ----");
         return localizationRepository.existsById(id);
     }
 
@@ -110,6 +121,7 @@ public class LocalizationServiceImpl implements LocalizationService {
      */
     @Override
     public void deleteByCity(String city) {
+        log.info("---- DELETE LOCALIZATION NAME "+city+" ----");
         localizationRepository.deleteByCity(city);
     }
 }

@@ -19,12 +19,12 @@ import java.util.List;
  * @since 2020-04-27.
  */
 
-@Data
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 @EqualsAndHashCode
 @Builder
 @Table(name = "users")
@@ -52,7 +52,7 @@ public class User {
     /**password*/
     private String password;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "id_users"),
             inverseJoinColumns = @JoinColumn(name = "id_roles"))
@@ -62,14 +62,12 @@ public class User {
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY,
             orphanRemoval = true)
     /**reservations*/
     private List<Reservation> reservations = new ArrayList<>();
 
-
-
-
-    /**Constructor*/
+/**Constructor*/
     /**
      * @param username Name of User
      * @param email    Email of User
@@ -90,4 +88,17 @@ public class User {
         this.reservations.add(reservations);
     }
 
+    /**
+     * compatre Object User
+     */
+
+    public boolean compareTo(Object obj) {
+        if (obj instanceof User) {
+            User user = (User) obj;
+            return id.equals(user.id) && username.equals(user.username)
+                    && email.equals(user.email) && password.equals(user.password)
+                    && (roles.stream().mapToInt(i -> i.hashCode()).sum()) == (user.roles.stream().mapToInt(i -> i.hashCode()).sum());
+        }
+        return false;
+    }
 }

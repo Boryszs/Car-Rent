@@ -12,6 +12,7 @@ import com.Server.repository.LocalizationRepository;
 import com.Server.repository.ReservationRepository;
 import com.Server.repository.UserRepository;
 import com.Server.service.ReservationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
+@Slf4j
 @Transactional
 public class ReservationServiceImpl implements ReservationService {
 
@@ -78,6 +80,7 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public ReservationResponse findByIdRent(Long id) {
+        log.info("---- FIND RENT ID "+id+" ----");
         return reservationMapper.toDto(reservationRepository.findByIdrent(id).get());
     }
 
@@ -89,6 +92,7 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public boolean existsByIdRent(Long id) {
+        log.info("---- EXIST RENT ID "+id+" ----");
         return reservationRepository.existsByIdrent(id);
     }
 
@@ -100,6 +104,7 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public void deleteByIdRent(Long id) {
+        log.info("---- DELETE RENT ID "+id+" ----");
         reservationRepository.deleteByIdrent(id);
     }
 
@@ -113,8 +118,10 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<ReservationResponse> getCurrentReservation(Long id) throws WrongDataException {
         if (!userRepository.existsById(id)) {
+            log.error("---- USER NOT EXIST ----");
             throw new WrongDataException("User not exist !!!");
         }
+        log.info("---- FIND CURRENT RENT USER ID "+id+" ----");
         return reservationRepository.findCurrent(id).stream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
     }
 
@@ -126,6 +133,7 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public boolean existsByCarIdCar(int id) {
+        log.info("---- EXIST RENT ON ID CAR "+id+" ----");
         return reservationRepository.existsByCar_Idcar(id);
     }
 
@@ -139,15 +147,19 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void save(ReservationRequest reservationRequest) throws WrongDataException {
         if (!carRepository.existsByIdcar(reservationRequest.getIdCar())) {
+            log.error("---- WRONG CITY ----");
             throw new WrongDataException("Wrong car!!!");
         }
         if (!userRepository.existsById(reservationRequest.getIdUser())) {
+            log.error("---- USER NOT EXIST ----");
             throw new WrongDataException("User not exist!!!");
         }
         if (!localizationRepository.existsByCity(reservationRequest.getLocalizationStart())) {
+            log.error("---- LOCALIZATION NOT EXIST ----");
             throw new WrongDataException("Localization start not exist!!!");
         }
         if (!localizationRepository.existsByCity(reservationRequest.getLocalizationEnd())) {
+            log.error("---- LOCALIZATION NOT EXIST ----");
             throw new WrongDataException("Localization end not exist!!!");
         } else {
             User user = userRepository.findById(reservationRequest.getIdUser()).get();
@@ -161,6 +173,7 @@ public class ReservationServiceImpl implements ReservationService {
             reservationRepository.save(reservations);
             user.setReservations(reservations);
             userRepository.save(user);
+            log.info("---- SAVE RENT ID ----");
             //sendMail.sendMail(user.getUsername(), "Thank you for order car:" + car.getMark() + " " + car.getModel() + " for " + noOfDaysBetween + " days in localization " + car.getLocalization().getCity() + " for prices: " + (noOfDaysBetween * car.getMoney()));
         }
 
@@ -174,6 +187,7 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public List<ReservationResponse> findAll() {
+        log.info("---- FIND ALL RESERVATION ----");
         return reservationRepository.findAll().stream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
     }
 
@@ -186,6 +200,7 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public List<ReservationResponse> findByCarIdCar(int id) {
+        log.info("---- FIND RESERVATION ON ID CAR ----");
         return reservationRepository.findByCar_Idcar(id).stream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
     }
 
@@ -197,6 +212,7 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public ReservationResponse findFirstByCarIdCarOrderByIdRentDesc(int id) {
+        log.info("---- FIND LAST RESERVATION ON CAR ----");
         return reservationMapper.toDto(reservationRepository.findFirstByCarIdcarOrderByIdrentDesc(id).get());
     }
 }

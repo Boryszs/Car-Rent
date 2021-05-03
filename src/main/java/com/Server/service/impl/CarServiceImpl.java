@@ -11,6 +11,9 @@ import com.Server.repository.LocalizationRepository;
 import com.Server.repository.ReservationRepository;
 import com.Server.repository.UserRepository;
 import com.Server.service.CarService;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,8 @@ import java.util.stream.Collectors;
  * @since 2020-04-27.
  */
 @Service
+@Slf4j
+@Transactional
 public class CarServiceImpl implements CarService {
 
     /**carRepository*/
@@ -54,6 +59,7 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public List<CarResponse> findAll() {
+        log.info("---- GET ALL CAR ----");
         return carRepository.findAll().stream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
     }
 
@@ -66,12 +72,14 @@ public class CarServiceImpl implements CarService {
     @Override
     public void save(CarRequest carRequest) throws WrongDataException {
         if (!localizationRepository.existsByCity(carRequest.getCity())) {
+            log.error("---- WRONG LOCALIZATION ----");
             throw new WrongDataException("Wrong localization!!!");
         }
         Localization localization = localizationRepository.findByCity(carRequest.getCity()).get();
         Car car = carMapper.toEntity(carRequest);
         car.setLocalization(localization);
         carRepository.save(car);
+        log.info("---- SAVE CAR ----");
     }
 
     /**
@@ -83,8 +91,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public CarResponse findByIdCar(int id) throws WrongDataException {
         if (carRepository.existsByIdcar(id)) {
+            log.info("---- GET CAR ID "+id+" ----");
             return carMapper.toDto(carRepository.findByIdcar(id).get());
         } else {
+            log.error("---- WRONG CAR ----");
             throw new WrongDataException("Wrong car");
         }
 
@@ -102,8 +112,10 @@ public class CarServiceImpl implements CarService {
             Car car = carRepository.findByIdcar(id).get();
             car = carMapper.update(car,carRequest);
             car.setLocalization((localizationRepository.findByCity(car.getLocalization().getCity()).get()));
+            log.info("---- EDIT CAR ID "+id+" ----");
             return carRepository.save(car);
         } else {
+            log.error("---- WRONG CAR ----");
             throw new WrongDataException("Wrong car!!!");
         }
     }
@@ -117,9 +129,11 @@ public class CarServiceImpl implements CarService {
     @Override
     public void deleteCar(int id) throws WrongDataException {
         if (!carRepository.existsByIdcar(id)) {
+            log.error("---- WRONG CAR ----");
             throw new WrongDataException("Wrong car");
         } else {
             carRepository.deleteByIdcar(id);
+            log.info("---- DELETE CAR "+id+" ----");
         }
     }
 
@@ -130,6 +144,7 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public boolean existsByIdCar(int id) {
+        log.info("---- EXIST CAR "+id+" ----");
         return carRepository.existsByIdcar(id);
     }
 
@@ -141,6 +156,7 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public Integer deleteByIdCar(int id) {
+        log.info("---- DELETE ID CAR "+id+" ----");
         return carRepository.deleteByIdcar(id);
     }
 
@@ -151,6 +167,7 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public List<CarResponse> findByLocalizationId(Long id) {
+        log.info("---- FIND ALL CAR ON LOCALIZATION ID "+id+" ----");
         return carRepository.findByLocalizationId(id).parallelStream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
     }
 
@@ -163,8 +180,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarResponse> findByLocalizationCity(String city) throws WrongDataException {
         if (localizationRepository.existsByCity(city)) {
+            log.info("---- FIND ALL CAR ON LOCALIZATION NAME "+city+" ----");
             return carRepository.findByLocalizationCity(city).parallelStream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
         } else {
+            log.error("---- WRONG CITY ----");
             throw new WrongDataException("Wrong city");
         }
     }

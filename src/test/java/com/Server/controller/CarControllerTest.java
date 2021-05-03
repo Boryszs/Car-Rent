@@ -62,9 +62,9 @@ class CarControllerTest {
         int status = mvcResult.getResponse().getStatus();
         assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
-        ResponseEntity<List<CarResponse>> response = objectMapper.readValue(content, new TypeReference<ResponseEntity<List<CarResponse>>>() {
+        List<CarResponse> response = objectMapper.readValue(content, new TypeReference<List<CarResponse>>() {
         });
-        assertNotEquals(response.getBody().size(), 0);
+        assertNotEquals(response.size(), 0);
     }
 
     @Test
