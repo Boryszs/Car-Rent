@@ -47,19 +47,4 @@ class LocalizationServiceImplTest {
         assertNotEquals(localizationService.findAll().size(),0);
     }
 
-    @Test
-    @DisplayName("---- EXIST CITY NAME LOCALIZATION ----")
-    void existsByCity() {
-        List<LocalizationResponse> localizationResponses= localizationService.findAll();
-        localizationResponses.forEach(localizationResponse -> assertTrue(localizationService.existsByCity(localizationResponse.getCity())));
-        assertFalse(localizationService.existsByCity("Hamburg"));
-    }
-
-    @Test
-    @DisplayName("---- EXIST ID LOCALIZATION ----")
-    void existsById() {
-        List<LocalizationResponse> localizationResponses= localizationService.findAll();
-        localizationResponses.forEach(localizationResponse -> assertTrue(localizationService.existsById(localizationResponse.getId())));
-        assertFalse(localizationService.existsById(10000));
-    }
 }

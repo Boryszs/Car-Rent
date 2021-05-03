@@ -55,13 +55,6 @@ public interface CarService {
     void deleteCar(int id) throws WrongDataException;
 
     /**
-     * Method check whether exist car on id.
-     * @param id id car to check.
-     * @return true or false.
-     */
-    boolean existsByIdCar(int id);
-
-    /**
      * Delete car on id.
      * @param id id car to delete.
      * @return return id deleting car.

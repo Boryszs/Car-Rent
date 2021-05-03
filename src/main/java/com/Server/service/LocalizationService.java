@@ -46,20 +46,6 @@ public interface LocalizationService {
     void save(LocalizationRequest localizationRequest);
 
     /**
-     * Check whether city exist.
-     * @param city city name.
-     * @return return true or false.
-     */
-    boolean existsByCity(String city);
-
-    /**
-     * Check whether city id exist.
-     * @param city city id.
-     * @return return true or false.
-     */
-    boolean existsById(long city);
-
-    /**
      * Delete city on name city.
      * @param city city name.
      */

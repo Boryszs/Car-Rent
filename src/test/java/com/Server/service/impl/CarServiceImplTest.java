@@ -41,13 +41,6 @@ class CarServiceImplTest {
     }
 
     @Test
-    @DisplayName("---- EXIST CAR ----")
-    void existsByIdCar() {
-        assertFalse(carService.existsByIdCar(1000));
-        assertTrue(carService.existsByIdCar(10));
-    }
-
-    @Test
     @DisplayName("---- FIND ON LOCALIZATION ID ----")
     void findByLocalizationId() {
         localizationRepository.findAll().forEach(localization -> assertNotEquals(carService.findByLocalizationId(localization.getId()).size(), 0));

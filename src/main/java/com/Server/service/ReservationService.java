@@ -21,13 +21,6 @@ public interface ReservationService {
     ReservationResponse findByIdRent(Long id);
 
     /**
-     * Check whether reservation on id exist.
-     * @param id id reservation.
-     * @return true or false.
-     */
-    boolean existsByIdRent(Long id);
-
-    /**
      * Delete reservation on id.
      * @param id id reservation.
      * @return return int on id delete reservation.
@@ -42,13 +35,6 @@ public interface ReservationService {
      */
     List<ReservationResponse> getCurrentReservation(Long id) throws WrongDataException;
 
-
-    /**
-     * Check whether exist reservation with id car.
-     * @param id id car.
-     * @return true or false.
-     */
-    boolean existsByCarIdCar(int id);
 
     /**
      * Save new reservation

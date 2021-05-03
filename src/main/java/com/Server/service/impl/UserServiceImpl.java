@@ -91,18 +91,6 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Check whether user exist on username.
-     *
-     * @param username username on user.
-     * @return true or false.
-     */
-    @Override
-    public Boolean existsByUsername(String username) {
-        log.info("---- EXIST USER ON USERNAME "+username+" ----");
-        return userRepository.existsByUsername(username);
-    }
-
-    /**
      * Return reservation user.
      *
      * @param id id user.
@@ -188,18 +176,6 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Check whether user exist on email.
-     *
-     * @param email email on user.
-     * @return true or false.
-     */
-    @Override
-    public Boolean existsByEmail(String email) {
-        log.info("---- USER EXIST ON EMAIL "+email+" ----");
-        return userRepository.existsByEmail(email);
-    }
-
-    /**
      * Find user on email.
      *
      * @param email email user.
@@ -269,7 +245,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserResponse> findAll() {
         log.info("---- FIND ALL USER ----");
-        return userRepository.findAll().parallelStream().map(user -> userMapper.toDto(user)).collect(Collectors.toList());
+        return userRepository.findAll().stream().map(user -> userMapper.toDto(user)).collect(Collectors.toList());
     }
 
     /**
@@ -284,15 +260,4 @@ public class UserServiceImpl implements UserService {
         return userMapper.toDto(userRepository.findByReservations_Idrent(id));
     }
 
-    /**
-     * Check whether user on id exist.
-     *
-     * @param id id user.
-     * @return true or false.
-     */
-    @Override
-    public Boolean existsById(long id) {
-        log.info("---- USER EXIST ON ID "+id+" ----");
-        return userRepository.existsById(id);
-    }
 }

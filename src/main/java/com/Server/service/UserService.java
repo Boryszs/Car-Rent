@@ -26,13 +26,6 @@ public interface UserService {
     Optional<User> findByUsername(String username);
 
     /**
-     * Check whether user exist on username.
-     * @param username username on user.
-     * @return true or false.
-     */
-    Boolean existsByUsername(String username);
-
-    /**
      * Return reservation user.
      * @param id id user.
      * @return List reservation.
@@ -62,13 +55,6 @@ public interface UserService {
      * @throws WrongDataException when request data user is wrong.
      */
     void update(UserRequest userRequest,Long id) throws WrongDataException;
-
-    /**
-     * Check whether user exist on email.
-     * @param email email on user.
-     * @return true or false.
-     */
-    Boolean existsByEmail(String email);
 
     /**
      * Find user on email.
@@ -106,10 +92,4 @@ public interface UserService {
      */
     UserResponse findByReservationsIdRent(Long id);
 
-    /**
-     * Check whether user on id exist.
-     * @param id id user.
-     * @return true or false.
-     */
-    Boolean existsById(long id);
 }

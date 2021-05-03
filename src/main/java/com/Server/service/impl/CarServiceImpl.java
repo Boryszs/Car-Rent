@@ -138,17 +138,6 @@ public class CarServiceImpl implements CarService {
     }
 
     /**
-     * Method check whether exist car on id.
-     * @param id id car to check.
-     * @return true or false.
-     */
-    @Override
-    public boolean existsByIdCar(int id) {
-        log.info("---- EXIST CAR "+id+" ----");
-        return carRepository.existsByIdcar(id);
-    }
-
-    /**
      * Delete car on id.
      * @param id id car to delete.
      * @return return id deleting car.
@@ -168,7 +157,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarResponse> findByLocalizationId(Long id) {
         log.info("---- FIND ALL CAR ON LOCALIZATION ID "+id+" ----");
-        return carRepository.findByLocalizationId(id).parallelStream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
+        return carRepository.findByLocalizationId(id).stream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
     }
 
     /**
@@ -181,7 +170,7 @@ public class CarServiceImpl implements CarService {
     public List<CarResponse> findByLocalizationCity(String city) throws WrongDataException {
         if (localizationRepository.existsByCity(city)) {
             log.info("---- FIND ALL CAR ON LOCALIZATION NAME "+city+" ----");
-            return carRepository.findByLocalizationCity(city).parallelStream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
+            return carRepository.findByLocalizationCity(city).stream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
         } else {
             log.error("---- WRONG CITY ----");
             throw new WrongDataException("Wrong city");

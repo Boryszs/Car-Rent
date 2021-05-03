@@ -32,20 +32,6 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("---- EXIST BY USERNAME ----")
-    void existsByUsername() {
-        userService.findAll().forEach(userResponse -> assertTrue(userService.existsByUsername(userResponse.getUsername())));
-    }
-
-    @Test
-    @DisplayName("---- EXIST BY EMAIL USERNAME ----")
-    void existsByEmail() {
-        for (UserResponse userResponse : userService.findAll()) {
-            assertTrue(userService.existsByEmail(userResponse.getEmail()));
-        }
-    }
-
-    @Test
     @DisplayName("---- FIND BY EMAIL USERNAME ----")
     void findByEmail() {
         userService.findAll().forEach(userResponse -> assertEquals(userService.findByEmail(userResponse.getEmail()).hashCode(),userResponse.hashCode()));
@@ -70,12 +56,5 @@ class UserServiceImplTest {
     @Timeout(value = 1,unit = SECONDS)
     void findAll() {
         userService.findAll();
-    }
-
-    @Test
-    @DisplayName("---- EXIST BY ID USERNAME ----")
-    void existsById() {
-        userService.findAll().forEach(userResponse -> assertTrue(userService.existsById(userResponse.getId())));
-
     }
 }

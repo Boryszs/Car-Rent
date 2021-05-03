@@ -94,28 +94,6 @@ public class LocalizationServiceImpl implements LocalizationService {
     }
 
     /**
-     * Check whether city exist.
-     * @param city city name.
-     * @return return true or false.
-     */
-    @Override
-    public boolean existsByCity(String city) {
-        log.info("---- EXIST LOCALIZATION NAME "+city+" ----");
-        return localizationRepository.existsByCity(city);
-    }
-
-    /**
-     * Check whether city id exist.
-     * @param id city id.
-     * @return return true or false.
-     */
-    @Override
-    public boolean existsById(long id) {
-        log.info("---- GET LOCALIZATION ID "+id+" ----");
-        return localizationRepository.existsById(id);
-    }
-
-    /**
      * Delete city on name city.
      * @param city city name.
      */

@@ -84,17 +84,6 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationMapper.toDto(reservationRepository.findByIdrent(id).get());
     }
 
-    /**
-     * Check whether reservation on id exist.
-     *
-     * @param id id reservation.
-     * @return true or false.
-     */
-    @Override
-    public boolean existsByIdRent(Long id) {
-        log.info("---- EXIST RENT ID "+id+" ----");
-        return reservationRepository.existsByIdrent(id);
-    }
 
     /**
      * Delete reservation on id.
@@ -125,17 +114,6 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.findCurrent(id).stream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
     }
 
-    /**
-     * Check whether exist reservation with id car.
-     *
-     * @param id id car.
-     * @return true or false.
-     */
-    @Override
-    public boolean existsByCarIdCar(int id) {
-        log.info("---- EXIST RENT ON ID CAR "+id+" ----");
-        return reservationRepository.existsByCar_Idcar(id);
-    }
 
     /**
      * Save new reservation
