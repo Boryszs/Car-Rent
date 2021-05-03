@@ -1,6 +1,6 @@
 package com.Server.repository;
 
-import com.Server.model.Car;
+import com.Server.entiy.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

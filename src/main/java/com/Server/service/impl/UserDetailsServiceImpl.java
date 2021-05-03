@@ -1,6 +1,6 @@
 package com.Server.service.impl;
 
-import com.Server.model.User;
+import com.Server.entiy.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

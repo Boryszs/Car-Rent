@@ -17,6 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class CarReservationResponse implements Serializable {
     /**mark*/
     private String mark;

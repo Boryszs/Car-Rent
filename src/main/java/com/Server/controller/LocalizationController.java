@@ -45,8 +45,8 @@ public class LocalizationController {
      */
     @ResponseBody
     @GetMapping(value = "/show-all")
-    public List<LocalizationResponse> showAll() {
-        return localizationServiceImpl.findAll();
+    public ResponseEntity<List<LocalizationResponse>> showAll() {
+        return new ResponseEntity<>(localizationServiceImpl.findAll(),HttpStatus.OK);
     }
 
 

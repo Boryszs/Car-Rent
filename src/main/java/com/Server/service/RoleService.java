@@ -1,10 +1,10 @@
 package com.Server.service;
 
-import com.Server.model.Role;
-import com.Server.model.Roles;
+import com.Server.dto.Request.RoleRequest;
+import com.Server.dto.Response.RoleResponse;
+import com.Server.entiy.Roles;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Interface Service role to service RoleRepository.
@@ -20,25 +20,25 @@ public interface RoleService {
      * @param name name of role.
      * @return role data.
      */
-    Optional<Role> findByName(Roles name);
+    RoleResponse findByName(Roles name);
 
     /**
      * Find role on id.
      * @param id id role.
      * @return role data.
      */
-    Optional<Role> findById(long id);
+    RoleResponse findById(int id);
 
     /**
      * Method save new role.
-     * @param role data of new role.
+     * @param roleRequest data of new role.
      * @return data new role.
      */
-    Role save(Role role);
+    void save(RoleRequest roleRequest);
 
     /**
      * Method return List of all role.
      * @return List role.
      */
-    List<Role> findAll();
+    List<RoleResponse> findAll();
 }

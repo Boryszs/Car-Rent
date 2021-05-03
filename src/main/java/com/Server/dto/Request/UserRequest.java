@@ -19,6 +19,7 @@ import java.util.Set;
 @Setter
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode
 @AllArgsConstructor
 @ToString
 public class UserRequest implements Serializable {

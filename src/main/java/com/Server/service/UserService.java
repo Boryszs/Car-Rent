@@ -4,7 +4,7 @@ import com.Server.dto.Request.UserRequest;
 import com.Server.dto.Response.ReservationResponse;
 import com.Server.dto.Response.UserResponse;
 import com.Server.exception.WrongDataException;
-import com.Server.model.User;
+import com.Server.entiy.User;
 
 import java.util.List;
 import java.util.Optional;

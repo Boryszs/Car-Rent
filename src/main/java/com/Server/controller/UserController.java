@@ -2,6 +2,7 @@ package com.Server.controller;
 
 import com.Server.dto.Request.UserRequest;
 import com.Server.dto.Response.MessageResponse;
+import com.Server.dto.Response.UserResponse;
 import com.Server.exception.WrongDataException;
 import com.Server.service.UserService;
 import org.slf4j.Logger;
@@ -51,7 +52,7 @@ public class UserController {
      * @return new data user Http.Status 200 or 400.
      * @exception WrongDataException when server catch Error.
      */
-    @PostMapping("/edit")
+    @PutMapping("/edit")
     public ResponseEntity<?> editUser(@RequestParam Long id,@Valid @RequestBody UserRequest userRequest) {
         try {
             logger.info("------ User edited successfully ------");
@@ -71,12 +72,23 @@ public class UserController {
      * @return Http.Status 200.
      * @exception WrongDataException when user not exist.
      */
-    @PostMapping("/delete")
-    public ResponseEntity<?> deleteUser(@Valid @RequestParam Long id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(@RequestParam Long id) {
         try {
             userService.deleteUser(id);
             logger.info("------ User deleted successfully ------");
             return new ResponseEntity<>(HttpStatus.OK);
+        } catch (WrongDataException wrongDataException) {
+            logger.error("------ Error User Not Exist ------");
+            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<UserResponse> getUser(@RequestParam Long id) {
+        try {
+            logger.info("------ User get successfully ------");
+            return new ResponseEntity<>(userService.findById(id),HttpStatus.OK);
         } catch (WrongDataException wrongDataException) {
             logger.error("------ Error User Not Exist ------");
             return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);

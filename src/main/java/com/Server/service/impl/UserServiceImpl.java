@@ -4,11 +4,11 @@ import com.Server.dto.Request.UserRequest;
 import com.Server.dto.Response.ReservationResponse;
 import com.Server.dto.Response.UserResponse;
 import com.Server.exception.WrongDataException;
+import com.Server.mapper.Mapper;
 import com.Server.mapper.impl.ReservationMapper;
-import com.Server.mapper.impl.UserMapper;
-import com.Server.model.Role;
-import com.Server.model.Roles;
-import com.Server.model.User;
+import com.Server.entiy.Role;
+import com.Server.entiy.Roles;
+import com.Server.entiy.User;
 import com.Server.repository.ReservationRepository;
 import com.Server.repository.RoleRepository;
 import com.Server.repository.UserRepository;
@@ -62,11 +62,11 @@ public class UserServiceImpl implements UserService {
     /**
      * user mapper
      */
-    private final UserMapper userMapper;
+    private final Mapper<User, UserResponse, UserRequest> userMapper;
 
     @Autowired
     /**Constructor*/
-    public UserServiceImpl(UserRepository userRepository, ReservationRepository reservationRepository, RoleRepository roleRepository, PasswordEncoder encoder, SendMail sendMail, ReservationMapper reservationMapper, UserMapper userMapper) {
+    public UserServiceImpl(UserRepository userRepository, ReservationRepository reservationRepository, RoleRepository roleRepository, PasswordEncoder encoder, SendMail sendMail, ReservationMapper reservationMapper, Mapper<User, UserResponse, UserRequest>  userMapper) {
         this.userRepository = userRepository;
         this.reservationRepository = reservationRepository;
         this.roleRepository = roleRepository;

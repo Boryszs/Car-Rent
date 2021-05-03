@@ -1,12 +1,15 @@
 package com.Server.mapper.impl;
 
 import com.Server.dto.Request.UserRequest;
+import com.Server.dto.Response.RoleResponse;
 import com.Server.dto.Response.UserResponse;
 import com.Server.mapper.Mapper;
-import com.Server.model.User;
+import com.Server.entiy.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 /**
  * Class Mapper use to mapping user.
@@ -29,7 +32,7 @@ public class UserMapper implements Mapper<User, UserResponse, UserRequest> {
                 .id(user.getId())
                 .username(user.getUsername())
                 .email(user.getEmail())
-                .roles(user.getRoles())
+                .roles(user.getRoles().parallelStream().map(role -> new RoleResponse().builder().id(role.getId()).name(role.getName().toString()).build()).collect(Collectors.toList()))
                 .build();
 
     }

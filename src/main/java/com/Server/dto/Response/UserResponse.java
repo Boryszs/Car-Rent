@@ -1,6 +1,6 @@
 package com.Server.dto.Response;
 
-import com.Server.model.Role;
+import com.Server.entiy.Role;
 import lombok.*;
 
 import java.io.Serializable;
@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode
 @ToString
 public class UserResponse implements Serializable {
 
@@ -25,5 +26,5 @@ public class UserResponse implements Serializable {
     private String email;
 
     /**roles*/
-    private List<Role> roles;
+    private List<RoleResponse> roles;
 }

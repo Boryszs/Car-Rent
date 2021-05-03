@@ -1,4 +1,4 @@
-package com.Server.model;
+package com.Server.entiy;
 
 import lombok.*;
 import org.hibernate.annotations.Type;
@@ -18,6 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode
 @Builder
 @Table(name = "reservation")
 public class Reservation {
@@ -28,8 +29,7 @@ public class Reservation {
     /**idrent*/
     private Long idrent;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name = "id_car", referencedColumnName = "id_car")
+    @ManyToOne
     /**car*/
     private Car car;
 
@@ -45,12 +45,12 @@ public class Reservation {
     /**dataTo*/
     private Date dataTo;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "localization_start", referencedColumnName = "id_localization")
     /**localizationStart*/
     private Localization localizationStart;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "localization_end", referencedColumnName = "id_localization")
     /**localizationEnd*/
     private Localization localizationEnd;

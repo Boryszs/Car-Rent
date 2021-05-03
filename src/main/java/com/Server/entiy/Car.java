@@ -1,9 +1,10 @@
-package com.Server.model;
+package com.Server.entiy;
 
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Entity car to store Users data.
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Entity
+@EqualsAndHashCode
 @Builder
 @Table(name = "car")
 public class Car {
@@ -59,10 +61,11 @@ public class Car {
     @Column(name = "image")
     /**image*/
     private String image;
-
+    @OneToMany(cascade = CascadeType.PERSIST,orphanRemoval = true)
+    private List<Reservation> reservation;
     /**localization*/
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_localization", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_localization")
     private Localization localization;
 
 

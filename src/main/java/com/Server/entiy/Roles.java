@@ -1,4 +1,4 @@
-package com.Server.model;
+package com.Server.entiy;
 
 /**
  * Enum to represent value role.

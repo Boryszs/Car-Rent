@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -77,9 +78,10 @@ public class ReservationController {
      * @return List Reservation all.
      */
     @ResponseBody
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/show")
-    public List<ReservationResponse> getReservations() {
-        return reservationServiceImpl.findAll();
+    public ResponseEntity<List<ReservationResponse>> getReservations() {
+        return new ResponseEntity<>(reservationServiceImpl.findAll(),HttpStatus.OK);
     }
 
 
@@ -91,7 +93,8 @@ public class ReservationController {
      * @return return id delete reservation Http.Status 200 or 400.
      * @throws WrongDataException when reservation id not exist.
      */
-    @PostMapping(value = "/delete")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping(value = "/delete")
     public ResponseEntity<?> deleteReservation(@RequestParam Long id) {
         logger.info("------ The reservation was successfully deleted ------");
         reservationServiceImpl.deleteByIdRent(id);

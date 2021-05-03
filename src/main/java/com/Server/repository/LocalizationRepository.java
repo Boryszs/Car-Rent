@@ -1,6 +1,6 @@
 package com.Server.repository;
 
-import com.Server.model.Localization;
+import com.Server.entiy.Localization;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

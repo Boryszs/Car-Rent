@@ -1,9 +1,6 @@
 package com.Server.dto.Response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -18,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @Builder
+@EqualsAndHashCode
 public class CarResponse implements Serializable {
 
     /**idcar*/

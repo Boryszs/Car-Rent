@@ -5,23 +5,23 @@ import lombok.*;
 import java.io.Serializable;
 
 /**
- * Class DTO use to city request.
+ * Class DTO role users.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- * @version 2.0.
- * @since 2020-04-27.
+ * @version 1.0
+ * @since 2020-05-03.
  */
 
 @Data
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode
-@Builder
+@AllArgsConstructor
 @ToString
-public class LocalizationRequest implements Serializable {
-
-    /**City*/
-    private String city;
+public class RoleRequest implements Serializable {
+    /**
+     * name role
+     */
+    private String name;
 
 }

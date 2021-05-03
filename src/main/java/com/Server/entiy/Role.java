@@ -1,4 +1,4 @@
-package com.Server.model;
+package com.Server.entiy;
 
 import lombok.*;
 
@@ -18,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode
+@Builder
 @Table(name = "roles")
 public class Role {
     @Id
@@ -32,6 +34,6 @@ public class Role {
     private Roles name;
 
     @ManyToMany(mappedBy = "roles")
-    private List<User> posts = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
 }

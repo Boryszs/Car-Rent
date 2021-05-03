@@ -1,4 +1,4 @@
-package com.Server.model;
+package com.Server.entiy;
 
 
 import lombok.*;
@@ -25,6 +25,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode
 @Builder
 @Table(name = "users")
 public class User {
@@ -51,7 +52,7 @@ public class User {
     /**password*/
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "id_users"),
             inverseJoinColumns = @JoinColumn(name = "id_roles"))
@@ -60,7 +61,7 @@ public class User {
 
     @OneToMany(
             mappedBy = "user",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             orphanRemoval = true)
     /**reservations*/
     private List<Reservation> reservations = new ArrayList<>();

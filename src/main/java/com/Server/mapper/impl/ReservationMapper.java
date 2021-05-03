@@ -5,7 +5,7 @@ import com.Server.dto.Response.CarResponse;
 import com.Server.dto.Response.LocalizationResponse;
 import com.Server.dto.Response.ReservationResponse;
 import com.Server.mapper.Mapper;
-import com.Server.model.Reservation;
+import com.Server.entiy.Reservation;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

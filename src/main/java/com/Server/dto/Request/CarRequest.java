@@ -18,6 +18,8 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@Builder
 @ToString
 public class CarRequest implements Serializable {
     @NotBlank

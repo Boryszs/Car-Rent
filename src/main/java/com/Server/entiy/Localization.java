@@ -1,4 +1,4 @@
-package com.Server.model;
+package com.Server.entiy;
 
 import lombok.*;
 
@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode
 @Builder
 @Table(name = "localization")
 public class Localization {
@@ -33,7 +34,7 @@ public class Localization {
     private String city;
 
     @OneToMany(mappedBy = "localization", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,orphanRemoval = true)
+            cascade = CascadeType.PERSIST,orphanRemoval = true)
     private List<Car> car;
 
     /** Constructor Class Localization

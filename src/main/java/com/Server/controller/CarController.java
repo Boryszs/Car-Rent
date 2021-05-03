@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -74,8 +75,8 @@ public class CarController {
      */
     @ResponseBody
     @GetMapping(value = "/show-car-all")
-    public List<CarResponse> showCarAll() {
-        return carServiceImpl.findAll();
+    public ResponseEntity<List<CarResponse>> showCarAll() {
+        return new ResponseEntity<>(carServiceImpl.findAll(),HttpStatus.OK);
     }
 
     //Zwraca samochody w zaleznosci od lokazlizacji
@@ -105,6 +106,7 @@ public class CarController {
      * @param id id car on delete
      * @return Http.Status 200 or 400.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete-car")
     public ResponseEntity<?> deleteCar(@RequestParam int id) {
         try {
@@ -129,7 +131,7 @@ public class CarController {
     @GetMapping("/get-car")
     public ResponseEntity<?> getCar(@RequestParam int id) {
         try {
-            logger.info("------ Cars displayed successfully ------");
+            logger.info("------ Cars displayed successfully ------",id);
             return new ResponseEntity(carServiceImpl.findByIdCar(id), HttpStatus.OK);
         } catch (WrongDataException wrongDataException) {
             logger.error(wrongDataException.getError());
@@ -145,11 +147,13 @@ public class CarController {
      * @return Http.Status 200 or 400..
      * @exception WrongDataException when localization not exist
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit-car")
     public ResponseEntity<?> editCar(@RequestParam int id,@RequestBody CarRequest carRequest) {
         try {
             logger.info("------ The car was successfully edited ------");
-            return new ResponseEntity<>(carServiceImpl.update(id,carRequest), HttpStatus.OK);
+            carServiceImpl.update(id,carRequest);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (WrongDataException wrongDataException) {
             logger.error(wrongDataException.getError());
             return new ResponseEntity<>(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);

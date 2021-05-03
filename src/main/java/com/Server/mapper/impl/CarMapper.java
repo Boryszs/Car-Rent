@@ -4,7 +4,7 @@ import com.Server.dto.Request.CarRequest;
 import com.Server.dto.Response.CarResponse;
 import com.Server.dto.Response.LocalizationResponse;
 import com.Server.mapper.Mapper;
-import com.Server.model.Car;
+import com.Server.entiy.Car;
 import org.springframework.stereotype.Component;
 
 /**

@@ -1,7 +1,7 @@
 package com.Server.repository;
 
-import com.Server.model.Role;
-import com.Server.model.Roles;
+import com.Server.entiy.Role;
+import com.Server.entiy.Roles;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
  */
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Integer> {
     /**
      * Find role on name.
      * @param name name of role.
@@ -28,5 +28,5 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
      * @param id id role.
      * @return role data.
      */
-    Optional<Role> findById(long id);
+    Optional<Role> findById(int id);
 }

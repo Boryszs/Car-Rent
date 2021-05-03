@@ -1,6 +1,6 @@
 package com.Server.service.impl;
 
-import com.Server.model.User;
+import com.Server.entiy.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
