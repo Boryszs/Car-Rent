@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
  */
 
 @Service
-@Transactional
 public class LocalizationServiceImpl implements LocalizationService {
 
     /**localizationRepository*/
@@ -72,7 +71,7 @@ public class LocalizationServiceImpl implements LocalizationService {
      */
     @Override
     public List<LocalizationResponse> findAll() {
-        return localizationRepository.findAll().parallelStream().map(localization -> localizationMapper.toDto(localization)).collect(Collectors.toList());
+        return localizationRepository.findAll().stream().map(localization -> localizationMapper.toDto(localization)).collect(Collectors.toList());
     }
 
     /**

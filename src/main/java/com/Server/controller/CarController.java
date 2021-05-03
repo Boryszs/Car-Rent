@@ -73,10 +73,10 @@ public class CarController {
      * This method use endpoint /car/show-car-all.
      * @return List all Car Http.Status 200 or 400.
      */
-    @ResponseBody
     @GetMapping(value = "/show-car-all")
-    public ResponseEntity<List<CarResponse>> showCarAll() {
-        return new ResponseEntity<>(carServiceImpl.findAll(),HttpStatus.OK);
+    public List<CarResponse> showCarAll() {
+        logger.info("---- GET ALL CAR ----");
+        return carServiceImpl.findAll();
     }
 
     //Zwraca samochody w zaleznosci od lokazlizacji

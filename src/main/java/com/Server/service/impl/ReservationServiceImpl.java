@@ -115,7 +115,7 @@ public class ReservationServiceImpl implements ReservationService {
         if (!userRepository.existsById(id)) {
             throw new WrongDataException("User not exist !!!");
         }
-        return reservationRepository.findCurrent(id).parallelStream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
+        return reservationRepository.findCurrent(id).stream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
     }
 
     /**
@@ -174,7 +174,7 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public List<ReservationResponse> findAll() {
-        return reservationRepository.findAll().parallelStream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
+        return reservationRepository.findAll().stream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
     }
 
 
@@ -186,7 +186,7 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public List<ReservationResponse> findByCarIdCar(int id) {
-        return reservationRepository.findByCar_Idcar(id).parallelStream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
+        return reservationRepository.findByCar_Idcar(id).stream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
     }
 
     /**

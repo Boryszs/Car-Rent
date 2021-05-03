@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
  * @since 2020-04-27.
  */
 @Service
-@Transactional
 public class CarServiceImpl implements CarService {
 
     /**carRepository*/
@@ -55,7 +54,7 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public List<CarResponse> findAll() {
-        return carRepository.findAll().parallelStream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
+        return carRepository.findAll().stream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
     }
 
     /**

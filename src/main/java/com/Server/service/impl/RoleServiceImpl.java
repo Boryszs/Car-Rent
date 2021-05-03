@@ -82,6 +82,6 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public List<RoleResponse> findAll() {
-        return roleRepository.findAll().parallelStream().map(role -> roleMapper.toDto(role)).collect(Collectors.toList());
+        return roleRepository.findAll().stream().map(role -> roleMapper.toDto(role)).collect(Collectors.toList());
     }
 }

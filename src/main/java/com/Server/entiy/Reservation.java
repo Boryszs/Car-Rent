@@ -29,7 +29,8 @@ public class Reservation {
     /**idrent*/
     private Long idrent;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_car", nullable = false)
     /**car*/
     private Car car;
 

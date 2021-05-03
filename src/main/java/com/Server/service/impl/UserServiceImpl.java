@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
             if (!userRepository.existsById(id)) {
                 throw new WrongDataException("User not Exist");
             } else {
-                List<ReservationResponse> reservations = userRepository.getReservationUser(id).parallelStream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
+                List<ReservationResponse> reservations = userRepository.getReservationUser(id).stream().map(reservation -> reservationMapper.toDto(reservation)).collect(Collectors.toList());
                 return reservations;
             }
         }

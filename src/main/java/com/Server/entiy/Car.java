@@ -61,7 +61,7 @@ public class Car {
     @Column(name = "image")
     /**image*/
     private String image;
-    @OneToMany(cascade = CascadeType.PERSIST,orphanRemoval = true)
+    @OneToMany(mappedBy = "car",fetch = FetchType.LAZY,cascade = CascadeType.PERSIST,orphanRemoval = true)
     private List<Reservation> reservation;
     /**localization*/
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
