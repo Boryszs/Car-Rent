@@ -41,13 +41,13 @@ public class RoleMapper implements Mapper<Role, RoleResponse, RoleRequest> {
     }
 
     /**
-     * NOT IMPLEMENT !!!!
      * @param role        old param
      * @param roleRequest new param
      * @return new localization object.
      */
     @Override
     public Role update(Role role, RoleRequest roleRequest) {
-        return null;
+         role.setName(Roles.valueOf(roleRequest.getName()));
+         return role;
     }
 }
