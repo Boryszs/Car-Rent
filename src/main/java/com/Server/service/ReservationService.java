@@ -2,6 +2,7 @@ package com.Server.service;
 
 import com.Server.dto.Request.ReservationRequest;
 import com.Server.dto.Response.ReservationResponse;
+import com.Server.entiy.Reservation;
 import com.Server.exception.WrongDataException;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public interface ReservationService {
      * @return data on new reservation.
      * @throws WrongDataException When data of request is wrong.
      */
-    void save(ReservationRequest reservationRequest) throws WrongDataException;
+    Reservation save(ReservationRequest reservationRequest) throws WrongDataException;
 
     /**
      * Method return all reservation.

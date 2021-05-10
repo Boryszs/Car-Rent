@@ -2,8 +2,8 @@ package com.Server.mapper.impl;
 
 import com.Server.dto.Request.LocalizationRequest;
 import com.Server.dto.Response.LocalizationResponse;
-import com.Server.mapper.Mapper;
 import com.Server.entiy.Localization;
+import com.Server.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
 /**

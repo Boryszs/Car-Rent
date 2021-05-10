@@ -1,225 +1,48 @@
-2021-05-07T16:13:42.618+0200 INFO Starting UserServiceImplTest on DESKTOP-JKIVC41 with PID 16252 (started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-07T16:13:42.619+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-07T16:13:49.556+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 16516 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-07T16:13:49.557+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-07T16:13:49.557+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-07T16:15:42.112+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 1748 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-07T16:15:42.137+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-07T16:15:42.141+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-07T16:16:07.235+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 20884 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-07T16:16:07.238+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-07T16:16:07.239+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-07T16:16:37.513+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 21380 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-07T16:16:37.514+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-07T16:16:37.516+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-07T16:17:08.863+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 4908 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-07T16:17:08.877+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-07T16:17:08.901+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-07T16:17:57.948+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 3260 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-07T16:17:57.949+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-07T16:17:57.950+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-07T16:18:03.673+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-07T16:18:06.858+0200 INFO Started ServerApplication in 9.437 seconds (JVM running for 10.744)
-2021-05-07T16:18:15.022+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-05T16:36:09Z. Current time: 2021-05-07T16:18:15Z, a difference of 171726021 milliseconds.  Allowed clock skew: 0 milliseconds.
-2021-05-07T16:18:15.078+0200 ERROR Unauthorized error Full authentication is required to access this resource
-2021-05-07T16:18:21.251+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-05T16:36:09Z. Current time: 2021-05-07T16:18:21Z, a difference of 171732251 milliseconds.  Allowed clock skew: 0 milliseconds.
-2021-05-07T16:18:21.256+0200 ERROR Unauthorized error Full authentication is required to access this resource
-2021-05-07T16:19:53.646+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-05T16:36:09Z. Current time: 2021-05-07T16:19:53Z, a difference of 171824645 milliseconds.  Allowed clock skew: 0 milliseconds.
-2021-05-07T16:19:53.658+0200 ERROR Unauthorized error Full authentication is required to access this resource
-2021-05-07T16:21:10.027+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-05T16:36:09Z. Current time: 2021-05-07T16:21:10Z, a difference of 171901026 milliseconds.  Allowed clock skew: 0 milliseconds.
-2021-05-07T16:21:10.055+0200 ERROR Unauthorized error Full authentication is required to access this resource
-2021-05-07T20:29:12.742+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 15572 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-07T20:29:12.743+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-07T20:29:12.744+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-07T20:29:16.706+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-07T20:29:18.185+0200 INFO Started ServerApplication in 6.032 seconds (JVM running for 7.021)
-2021-05-07T20:29:21.885+0200 ERROR Token is expired: JWT strings must contain exactly 2 period characters. Found: 0
-2021-05-07T20:29:21.896+0200 ERROR Unauthorized error Full authentication is required to access this resource
-2021-05-07T20:29:25.759+0200 INFO ---- GET ALL CAR ----
-2021-05-07T20:29:25.776+0200 INFO ---- GET ALL CAR ----
-2021-05-07T20:30:16.767+0200 INFO ---- GET ALL CAR ----
-2021-05-07T20:30:16.769+0200 INFO ---- GET ALL CAR ----
-2021-05-07T20:32:40.647+0200 INFO ---- GET ALL CAR ----
-2021-05-07T20:32:40.650+0200 INFO ---- GET ALL CAR ----
-2021-05-08T01:26:58.842+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 8196 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T01:26:58.844+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T01:26:58.845+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T01:27:18.265+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 3692 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T01:27:18.266+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T01:27:18.267+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T01:27:22.808+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T01:27:24.678+0200 INFO Started ServerApplication in 7.18 seconds (JVM running for 8.765)
-2021-05-08T01:27:33.676+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:27:33.970+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:27:33.989+0200 INFO ------Logowanie user:user
-2021-05-08T01:28:32.301+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:28:32.402+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:28:32.408+0200 INFO ------Logowanie user:user
-2021-05-08T01:29:52.360+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:29:52.464+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:29:52.466+0200 INFO ------Logowanie user:user
-2021-05-08T01:30:51.607+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:30:51.700+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:30:51.704+0200 INFO ------Logowanie user:user
-2021-05-08T01:32:02.983+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:32:03.146+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:32:03.150+0200 INFO ------Logowanie user:user
-2021-05-08T01:33:01.819+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:33:01.917+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:33:01.921+0200 INFO ------Logowanie user:user
-2021-05-08T01:33:06.470+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:33:06.564+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:33:06.568+0200 INFO ------Logowanie user:user
-2021-05-08T01:35:06.941+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:35:07.046+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:35:07.050+0200 INFO ------Logowanie user:user
-2021-05-08T01:38:14.638+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:38:14.741+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:38:14.744+0200 INFO ------Logowanie user:user
-2021-05-08T01:38:23.239+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:38:23.356+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:38:23.361+0200 INFO ------Logowanie user:user
-2021-05-08T01:41:46.640+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:41:46.744+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:41:46.749+0200 INFO ------Logowanie user:user
-2021-05-08T01:41:50.610+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:41:50.726+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:41:50.729+0200 INFO ------Logowanie user:user
-2021-05-08T01:41:52.281+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T01:41:52.396+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T01:41:52.399+0200 INFO ------Logowanie user:user
-2021-05-08T01:59:22.683+0200 INFO ---- FIND USER ON USERNAME asd ----
-2021-05-08T01:59:23.028+0200 ERROR Unauthorized error Bad credentials
-2021-05-08T02:00:04.269+0200 INFO ---- FIND USER ON USERNAME sdf ----
-2021-05-08T02:00:04.374+0200 ERROR Unauthorized error Bad credentials
-2021-05-08T14:44:35.675+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 16904 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T14:44:35.676+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T14:44:35.676+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T14:44:40.226+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T14:44:41.603+0200 INFO Started ServerApplication in 6.54 seconds (JVM running for 7.965)
-2021-05-08T14:45:18.609+0200 INFO ---- GET ALL CAR ----
-2021-05-08T14:45:18.623+0200 INFO ---- GET ALL CAR ----
-2021-05-08T14:45:26.598+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T14:45:26.650+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T14:45:26.667+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T14:55:04.729+0200 INFO ---- GET ALL CAR ----
-2021-05-08T14:55:04.733+0200 INFO ---- GET ALL CAR ----
-2021-05-08T14:56:06.579+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T14:56:06.612+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T14:56:06.628+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:16:33.598+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 5716 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:16:33.600+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:16:33.600+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:16:39.144+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:16:40.980+0200 INFO Started ServerApplication in 7.91 seconds (JVM running for 11.595)
-2021-05-08T18:16:51.090+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-05T16:36:09Z. Current time: 2021-05-08T18:16:51Z, a difference of 265242089 milliseconds.  Allowed clock skew: 0 milliseconds.
-2021-05-08T18:16:51.159+0200 ERROR Unauthorized error Full authentication is required to access this resource
-2021-05-08T18:16:56.896+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:16:57.175+0200 INFO ---- GET ALL LOCALIZATION ----
-2021-05-08T18:16:57.202+0200 INFO ------Logowanie user:user
-2021-05-08T18:17:20.627+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:17:20.645+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:17:20.668+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:21:16.796+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 23348 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:21:16.799+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:21:16.800+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:21:21.880+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:21:24.476+0200 INFO Started ServerApplication in 8.681 seconds (JVM running for 10.617)
-2021-05-08T18:21:27.220+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:21:27.374+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:21:27.397+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:21:48.355+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 13052 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:21:48.356+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:21:48.357+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:21:52.093+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:21:53.719+0200 INFO Started ServerApplication in 5.794 seconds (JVM running for 6.49)
-2021-05-08T18:21:57.404+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:21:57.530+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:21:57.547+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:26:30.821+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 12456 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:26:30.822+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:26:30.823+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:26:33.933+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:26:35.600+0200 INFO Started ServerApplication in 5.161 seconds (JVM running for 6.178)
-2021-05-08T18:27:01.828+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 21444 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:27:01.829+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:27:01.831+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:27:05.245+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:27:06.873+0200 INFO Started ServerApplication in 5.518 seconds (JVM running for 6.506)
-2021-05-08T18:27:10.998+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:27:11.162+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:27:11.188+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:28:01.664+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 21884 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:28:01.665+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:28:01.666+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:28:04.670+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:28:06.041+0200 INFO Started ServerApplication in 4.786 seconds (JVM running for 5.99)
-2021-05-08T18:28:09.761+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:28:09.854+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:28:09.868+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:31:37.610+0200 ERROR Invalid JWT signature: JWT expired at 2021-04-29T21:25:25Z. Current time: 2021-05-08T18:31:37Z, a difference of 767172608 milliseconds.  Allowed clock skew: 0 milliseconds.
-2021-05-08T18:31:37.625+0200 ERROR Unauthorized error Full authentication is required to access this resource
-2021-05-08T18:31:54.423+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:31:54.476+0200 INFO ------ Reservations added successfully ------
-2021-05-08T18:31:54.554+0200 INFO ---- SAVE RENT ID ----
-2021-05-08T18:39:17.622+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:39:17.635+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:39:17.639+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:43:39.708+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 22988 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:43:39.709+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:43:39.711+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:43:43.505+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:43:45.037+0200 INFO Started ServerApplication in 5.664 seconds (JVM running for 7.663)
-2021-05-08T18:43:48.782+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:43:48.926+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:43:48.944+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:44:36.294+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 18696 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:44:36.295+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:44:36.296+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:44:40.857+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:44:43.184+0200 INFO Started ServerApplication in 7.495 seconds (JVM running for 8.712)
-2021-05-08T18:44:47.908+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:44:48.007+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:44:48.025+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:47:11.316+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 15744 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:47:11.317+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:47:11.318+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:47:14.453+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:47:15.900+0200 INFO Started ServerApplication in 5.099 seconds (JVM running for 6.403)
-2021-05-08T18:47:24.694+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:47:24.793+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:47:24.815+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:48:26.756+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 21724 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:48:26.757+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:48:26.758+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:48:31.813+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:48:33.331+0200 INFO Started ServerApplication in 6.969 seconds (JVM running for 7.849)
-2021-05-08T18:48:38.647+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:48:38.739+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:48:38.763+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:51:55.068+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 6112 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:51:55.070+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:51:55.071+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:51:59.942+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:52:02.192+0200 INFO Started ServerApplication in 7.567 seconds (JVM running for 8.624)
-2021-05-08T18:52:05.522+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:52:05.663+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:52:05.681+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T18:54:04.868+0200 ERROR Unauthorized error Full authentication is required to access this resource
-2021-05-08T18:54:05.209+0200 ERROR Unauthorized error Full authentication is required to access this resource
-2021-05-08T18:59:11.627+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 19132 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T18:59:11.629+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T18:59:11.631+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T18:59:17.175+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T18:59:18.542+0200 INFO Started ServerApplication in 7.608 seconds (JVM running for 8.827)
-2021-05-08T18:59:23.165+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T18:59:23.262+0200 INFO ------ Reservations displayed successfully ------
-2021-05-08T18:59:23.304+0200 INFO ---- GET USER RESERVATION ON ID 1 ----
-2021-05-08T19:00:33.835+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 16880 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
-2021-05-08T19:00:33.838+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
-2021-05-08T19:00:33.865+0200 INFO No active profile set, falling back to default profiles: default
-2021-05-08T19:00:38.353+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
-2021-05-08T19:00:39.811+0200 INFO Started ServerApplication in 6.56 seconds (JVM running for 7.752)
-2021-05-08T19:01:41.485+0200 INFO ---- FIND USER ON USERNAME user ----
-2021-05-08T19:01:41.595+0200 INFO ------ Successfully displayed user bookings ------
-2021-05-08T19:01:41.611+0200 INFO ---- FIND CURRENT RENT USER ID 1 ----
+2021-05-10T02:16:20.219+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 9036 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
+2021-05-10T02:16:20.220+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2021-05-10T02:16:20.221+0200 INFO No active profile set, falling back to default profiles: default
+2021-05-10T02:16:26.920+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
+2021-05-10T02:16:29.887+0200 INFO Started ServerApplication in 10.544 seconds (JVM running for 12.513)
+2021-05-10T02:20:23.347+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:20:23.511+0200 INFO ---- GET ALL CAR ----
+2021-05-10T02:20:23.514+0200 INFO ---- GET ALL CAR ----
+2021-05-10T02:21:14.515+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:21:14.557+0200 INFO ---- GET ALL CAR ----
+2021-05-10T02:21:14.559+0200 INFO ---- GET ALL CAR ----
+2021-05-10T02:21:39.979+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:21:40.004+0200 INFO ---- GET ALL LOCALIZATION ----
+2021-05-10T02:21:40.010+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:21:40.054+0200 INFO ------ Cars displayed successfully ------
+2021-05-10T02:21:40.092+0200 INFO ---- GET CAR ID 17 ----
+2021-05-10T02:21:57.901+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:21:57.902+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:21:58.070+0200 INFO ------ Cars displayed successfully ------
+2021-05-10T02:21:58.071+0200 INFO ------ User get successfully ------
+2021-05-10T02:21:58.075+0200 INFO ---- GET CAR ID 17 ----
+2021-05-10T02:21:58.079+0200 INFO ---- USER ON ID 1 ----
+2021-05-10T02:22:11.914+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:22:11.920+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:22:11.971+0200 INFO ------ Reservations added successfully ------
+2021-05-10T02:22:12.077+0200 INFO ---- SAVE RENT ID ----
+2021-05-10T02:23:41.615+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:23:41.626+0200 INFO ---- GET ALL CAR ----
+2021-05-10T02:23:41.629+0200 INFO ---- GET ALL CAR ----
+2021-05-10T02:23:46.553+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:23:46.556+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:23:46.572+0200 INFO ------ Cars displayed successfully ------
+2021-05-10T02:23:46.577+0200 INFO ---- GET ALL LOCALIZATION ----
+2021-05-10T02:23:46.582+0200 INFO ---- GET CAR ID 17 ----
+2021-05-10T02:23:51.830+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:23:51.870+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:23:51.883+0200 INFO ------ Cars displayed successfully ------
+2021-05-10T02:23:51.885+0200 INFO ---- GET ALL LOCALIZATION ----
+2021-05-10T02:23:51.886+0200 INFO ---- GET CAR ID 17 ----
+2021-05-10T02:23:58.180+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:23:58.180+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:23:58.217+0200 INFO ------ Cars displayed successfully ------
+2021-05-10T02:23:58.222+0200 INFO ------ User get successfully ------
+2021-05-10T02:23:58.222+0200 INFO ---- GET CAR ID 17 ----
+2021-05-10T02:23:58.227+0200 INFO ---- USER ON ID 1 ----
+2021-05-10T02:24:07.942+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-10T02:24:07.951+0200 INFO ---- GET ALL CAR ----
+2021-05-10T02:24:07.954+0200 INFO ---- GET ALL CAR ----

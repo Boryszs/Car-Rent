@@ -1,6 +1,5 @@
 package com.Server.dto.Response;
 
-import com.Server.entiy.Role;
 import lombok.*;
 
 import java.io.Serializable;

@@ -3,12 +3,11 @@ package com.Server.controller;
 import com.Server.dto.Request.ReservationRequest;
 import com.Server.dto.Response.MessageResponse;
 import com.Server.dto.Response.ReservationResponse;
+import com.Server.entiy.Reservation;
 import com.Server.exception.WrongDataException;
-import com.Server.service.CarService;
-import com.Server.service.LocalizationService;
-import com.Server.service.ReservationService;
-import com.Server.service.UserService;
+import com.Server.service.*;
 import com.Server.service.impl.SendMailImpl;
+import com.itextpdf.text.DocumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +41,10 @@ public class ReservationController {
      * Logger use to logger on server.
      */
     private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
+    /**
+     * Pdf generated
+     */
+    private final PdfResume pdfResume;
     /**
      * ReservationService operation on database table Reservation
      */
@@ -61,7 +70,8 @@ public class ReservationController {
      * Constructor
      */
     @Autowired
-    public ReservationController(ReservationService reservationServiceImpl, UserService userServiceImpl, CarService carServiceImpl, LocalizationService localizationServiceImpl, SendMailImpl sendMailImpl) {
+    public ReservationController(PdfResume pdfResume, ReservationService reservationServiceImpl, UserService userServiceImpl, CarService carServiceImpl, LocalizationService localizationServiceImpl, SendMailImpl sendMailImpl) {
+        this.pdfResume = pdfResume;
         this.reservationServiceImpl = reservationServiceImpl;
         this.userServiceImpl = userServiceImpl;
         this.carServiceImpl = carServiceImpl;
@@ -81,7 +91,7 @@ public class ReservationController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/show")
     public ResponseEntity<List<ReservationResponse>> getReservations() {
-        return new ResponseEntity<>(reservationServiceImpl.findAll(),HttpStatus.OK);
+        return new ResponseEntity<>(reservationServiceImpl.findAll(), HttpStatus.OK);
     }
 
 
@@ -123,6 +133,30 @@ public class ReservationController {
         }
     }
 
+    //Generowanie PDf
+
+    /**
+     * This method gnerate resume on reservation
+     * This method use endpoint /reservation/pdf.
+     * @param reservationRequest data to create resume
+     *
+     */
+    @PostMapping(value = "/pdf")
+    public StreamingResponseBody getSteamingFile(HttpServletResponse response,@Valid @RequestBody ReservationRequest reservationRequest) throws IOException, DocumentException {
+        String filname = new SimpleDateFormat("dd-M-yyyy hh:mm:ss").format(new Date()).toString();
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename="+filname+".pdf");
+        response.setHeader("filename",filname+".pdf");
+        InputStream inputStream = pdfResume.generatePdf(reservationRequest);
+        return outputStream -> {
+            int nRead;
+            byte[] data = new byte[1024];
+            while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+                outputStream.write(data, 0, nRead);
+            }
+        };
+    }
+
     //Dodawanie rezerwacji
 
     /**
@@ -133,12 +167,13 @@ public class ReservationController {
      * @return return data new reservation Http.Status 200 or 400.
      * @throws WrongDataException when reservation add error.
      */
+
     @ResponseBody
     @PostMapping(value = "/add")
     public ResponseEntity<?> addReservation(@Valid @RequestBody ReservationRequest reservationRequest) {
         try {
             logger.info("------ Reservations added successfully ------");
-            reservationServiceImpl.save(reservationRequest);
+            Reservation reservation = reservationServiceImpl.save(reservationRequest);
             return new ResponseEntity(HttpStatus.OK);
         } catch (WrongDataException wrongDataException) {
             logger.error("------ Reservation Add Error ------");

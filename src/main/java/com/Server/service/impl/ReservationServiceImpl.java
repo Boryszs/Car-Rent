@@ -2,11 +2,11 @@ package com.Server.service.impl;
 
 import com.Server.dto.Request.ReservationRequest;
 import com.Server.dto.Response.ReservationResponse;
-import com.Server.exception.WrongDataException;
-import com.Server.mapper.Mapper;
 import com.Server.entiy.Car;
 import com.Server.entiy.Reservation;
 import com.Server.entiy.User;
+import com.Server.exception.WrongDataException;
+import com.Server.mapper.Mapper;
 import com.Server.repository.CarRepository;
 import com.Server.repository.LocalizationRepository;
 import com.Server.repository.ReservationRepository;
@@ -123,7 +123,7 @@ public class ReservationServiceImpl implements ReservationService {
      * @throws WrongDataException When data of request is wrong.
      */
     @Override
-    public void save(ReservationRequest reservationRequest) throws WrongDataException {
+    public Reservation save(ReservationRequest reservationRequest) throws WrongDataException {
         if (!carRepository.existsByIdcar(reservationRequest.getIdCar())) {
             log.error("---- WRONG CITY ----");
             throw new WrongDataException("Wrong car!!!");
@@ -152,6 +152,7 @@ public class ReservationServiceImpl implements ReservationService {
             user.setReservations(reservations);
             userRepository.save(user);
             log.info("---- SAVE RENT ID ----");
+            return reservations;
             //sendMail.sendMail(user.getUsername(), "Thank you for order car:" + car.getMark() + " " + car.getModel() + " for " + noOfDaysBetween + " days in localization " + car.getLocalization().getCity() + " for prices: " + (noOfDaysBetween * car.getMoney()));
         }
 

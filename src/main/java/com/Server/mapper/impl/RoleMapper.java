@@ -2,9 +2,9 @@ package com.Server.mapper.impl;
 
 import com.Server.dto.Request.RoleRequest;
 import com.Server.dto.Response.RoleResponse;
-import com.Server.mapper.Mapper;
 import com.Server.entiy.Role;
 import com.Server.entiy.Roles;
+import com.Server.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
 /**

@@ -2,9 +2,9 @@ package com.Server.service.impl;
 
 import com.Server.dto.Request.LocalizationRequest;
 import com.Server.dto.Response.LocalizationResponse;
+import com.Server.entiy.Localization;
 import com.Server.exception.WrongDataException;
 import com.Server.mapper.Mapper;
-import com.Server.entiy.Localization;
 import com.Server.repository.LocalizationRepository;
 import com.Server.service.LocalizationService;
 import lombok.extern.slf4j.Slf4j;

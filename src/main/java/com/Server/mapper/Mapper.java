@@ -1,7 +1,5 @@
 package com.Server.mapper;
 
-import org.springframework.web.bind.annotation.Mapping;
-
 /**
  * Interface generic use for mapper class.
  *

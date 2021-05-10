@@ -1,7 +1,5 @@
 package com.Server.service.impl;
 
-import com.Server.dto.Response.UserResponse;
-import com.Server.entiy.User;
 import com.Server.exception.WrongDataException;
 import com.Server.repository.UserRepository;
 import com.Server.service.UserService;
@@ -13,7 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  *  User service test
  */
