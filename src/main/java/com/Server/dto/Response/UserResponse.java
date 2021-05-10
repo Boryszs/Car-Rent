@@ -13,6 +13,14 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 @ToString
+
+/**
+ * Class DTO user.
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 1.0
+ * @since 2020-05-03.
+ */
+
 public class UserResponse implements Serializable {
 
     /**id*/
