@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['randmonster_123',['randMonster',['../class_arena___window.html#a08414acd4bfbd6ee4b202ccbdb2a5bf1',1,'Arena_Window']]],
+  ['randomchampion_124',['randomChampion',['../class_d_bcontroler.html#a592532eb375c58953354688aed806190',1,'DBcontroler']]],
+  ['rectangle_5fadd_125',['rectangle_add',['../class_add_heroe___window.html#a5faac6549cb850b09c83afa44c09b4b8',1,'AddHeroe_Window']]],
+  ['rectangle_5fchoose_126',['rectangle_choose',['../class_add_heroe___window.html#abee95b1e21d005b8f730af26a85030c3',1,'AddHeroe_Window::rectangle_choose()'],['../class_menu.html#a8b15982b6de0357aa57b45206dc31866',1,'Menu::rectangle_choose()'],['../class_restaurant___window.html#a3fe2878a86fa8a59150b410a13e677c1',1,'Restaurant_Window::rectangle_choose()']]],
+  ['rectangle_5fcreate_127',['rectangle_create',['../class_create___window.html#a47c1c65f89430ba29109a3daa3a4688d',1,'Create_Window::rectangle_create()'],['../class_login___window.html#a14218917fb8e6e1a99df5cb7d56fa7cd',1,'Login_Window::rectangle_create()']]],
+  ['rectangle_5flog_128',['rectangle_log',['../class_login___window.html#a3e0efa8194db2caaa09f2d4dc2d3aac8',1,'Login_Window']]],
+  ['rectangle_5fname_129',['rectangle_name',['../class_add_heroe___window.html#a78e2fa6494360519a94b9427d7b5ba2e',1,'AddHeroe_Window']]],
+  ['rectangle_5fpass_130',['rectangle_pass',['../class_create___window.html#acf65efaf54d2b5e16998af9b810ec3ce',1,'Create_Window::rectangle_pass()'],['../class_login___window.html#aeefe21bd0e0779d84efceefd354bd694',1,'Login_Window::rectangle_pass()']]],
+  ['rectangle_5fuser_131',['rectangle_user',['../class_create___window.html#a910fa71613d4fd244be36569adb99606',1,'Create_Window::rectangle_user()'],['../class_login___window.html#a4582b03725d3ca195441f218e9b2a406',1,'Login_Window::rectangle_user()']]],
+  ['rectsourcesprite_132',['rectSourceSprite',['../class_map___windows.html#aacb9513750715c524941ab82a8cdcb4d',1,'Map_Windows']]],
+  ['res_133',['res',['../class_menu.html#a6a741a6867991754e3cc531443f4f11e',1,'Menu::res()'],['../class_restaurant___window.html#a466d0e622fb40d5971765797403d7ac1',1,'Restaurant_Window::res()']]],
+  ['restaurant_5fwindow_134',['Restaurant_Window',['../class_restaurant___window.html',1,'Restaurant_Window'],['../class_restaurant___window.html#aef2b83d70631d584fb4f3a36a1ea4844',1,'Restaurant_Window::Restaurant_Window()']]],
+  ['restaurant_5fwindow_2ecpp_135',['Restaurant_Window.cpp',['../_restaurant___window_8cpp.html',1,'']]],
+  ['restaurant_5fwindow_2eh_136',['Restaurant_Window.h',['../_restaurant___window_8h.html',1,'']]],
+  ['restaurantfight_5fwindow_137',['RestaurantFight_Window',['../class_restaurant_fight___window.html',1,'RestaurantFight_Window'],['../class_restaurant_fight___window.html#a21b3148762e29654ff724ac8e19d4e83',1,'RestaurantFight_Window::RestaurantFight_Window()']]],
+  ['restaurantfight_5fwindow_2eh_138',['RestaurantFight_Window.h',['../_restaurant_fight___window_8h.html',1,'']]],
+  ['resteurantfight_5fwindow_2ecpp_139',['ResteurantFight_Window.cpp',['../_resteurant_fight___window_8cpp.html',1,'']]],
+  ['row_140',['row',['../class_menu.html#aae24fb1cb3584ef79f8a7e743b3b69ec',1,'Menu::row()'],['../class_restaurant___window.html#a8ff52b00e46253f463beb0707ab3fef6',1,'Restaurant_Window::row()']]]
+];

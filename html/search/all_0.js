@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['add_5fb_0',['add_b',['../class_menu.html#ab5c73bcb030338a7cd02e6dc4a876d41',1,'Menu']]],
+  ['addchampion_1',['addChampion',['../class_d_bcontroler.html#a97466ddc137930dcc8222d333ecf2b79',1,'DBcontroler']]],
+  ['adddefence_2',['addDefence',['../class_champion.html#ae19833b2f0a56637535d6600782a4628',1,'Champion']]],
+  ['adddexterity_3',['addDexterity',['../class_champion.html#ae816f1b4f758c1d5cbcc3eef2100aea0',1,'Champion']]],
+  ['addexperience_4',['addExperience',['../class_champion.html#af335d5681662fba5b614c8235dcd9e7d',1,'Champion']]],
+  ['addhealth_5',['addHealth',['../class_champion.html#aead60a2a83dfaa618aa6c4c278f334ac',1,'Champion']]],
+  ['addheroe_5fwindow_6',['AddHeroe_Window',['../class_add_heroe___window.html',1,'AddHeroe_Window'],['../class_add_heroe___window.html#ac48278a8e2489af71e43715ad6c007b4',1,'AddHeroe_Window::AddHeroe_Window()']]],
+  ['addheroe_5fwindow_2ecpp_7',['AddHeroe_Window.cpp',['../_add_heroe___window_8cpp.html',1,'']]],
+  ['addheroe_5fwindow_2eh_8',['AddHeroe_Window.h',['../_add_heroe___window_8h.html',1,'']]],
+  ['addheroes_9',['addHeroes',['../class_d_bcontroler.html#afc1d9e45091727c83d1d39577faa490b',1,'DBcontroler']]],
+  ['addluck_10',['addLuck',['../class_champion.html#a45907aff8aa85847b260664ba6d7a6fa',1,'Champion']]],
+  ['addmagic_11',['addMagic',['../class_champion.html#a75419c82067eb22d8e5cc7ca300c0cb2',1,'Champion']]],
+  ['addmoney_12',['addMoney',['../class_champion.html#a7eb73eb0e098c029aa2dd30ba6135782',1,'Champion']]],
+  ['addstrength_13',['addStrength',['../class_champion.html#a319152dc4df06f4ab0234d9f39db4c1b',1,'Champion']]],
+  ['adduser_14',['addUser',['../class_d_bcontroler.html#ab9148256e5bf31541b172102d9bf8ff6',1,'DBcontroler']]],
+  ['archer_15',['Archer',['../class_archer.html',1,'Archer'],['../class_archer.html#a89ec3a12b42af76d16f3aa7927677b0f',1,'Archer::Archer()']]],
+  ['archer_2ecpp_16',['Archer.cpp',['../_archer_8cpp.html',1,'']]],
+  ['archer_2eh_17',['Archer.h',['../_archer_8h.html',1,'']]],
+  ['arena_5fwindow_18',['Arena_Window',['../class_arena___window.html',1,'Arena_Window'],['../class_arena___window.html#ae27e2bc2116acacd9cfaca30705305ff',1,'Arena_Window::Arena_Window()']]],
+  ['arena_5fwindow_2ecpp_19',['Arena_Window.cpp',['../_arena___window_8cpp.html',1,'']]],
+  ['arena_5fwindow_2eh_20',['Arena_Window.h',['../_arena___window_8h.html',1,'']]],
+  ['arial_21',['arial',['../class_add_heroe___window.html#a48082b1106d5e088b9703174f85b4fd0',1,'AddHeroe_Window::arial()'],['../class_create___window.html#a19aa8175d29bed77605168dd49e0c4c7',1,'Create_Window::arial()'],['../class_login___window.html#adbb5ad82d2c1f9eabdde1c0d0adc323d',1,'Login_Window::arial()'],['../class_menu.html#a01f87502a82e3b7d2cc83da3a5ad3e36',1,'Menu::arial()'],['../class_restaurant___window.html#a14ad9daf5d9401f122bb3d6a019adc0a',1,'Restaurant_Window::arial()']]],
+  ['attack_22',['attack',['../class_archer.html#a777e4784aa9c068c34d16b123b414b83',1,'Archer::attack()'],['../class_champion.html#a8c18031647767c21f9404fb2b9a4f50a',1,'Champion::attack()'],['../class_monster.html#a87e946cfb93e47dda6bcc146912c3a08',1,'Monster::attack()'],['../class_warrior.html#a9e0dc01602c5a7e39917fde6dc193c53',1,'Warrior::attack()'],['../class_wizzard.html#a39ed40468d31771f13aac8e4ef6b2175',1,'Wizzard::attack()']]]
+];

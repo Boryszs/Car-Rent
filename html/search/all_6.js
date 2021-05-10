@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['getbutton_70',['getButton',['../class_button.html#aed004bec2b5adbba13716314285680aa',1,'Button']]],
+  ['getchamp1_71',['getChamp1',['../class_fight.html#afc9978fcbe5e110939c832447ad9b243',1,'Fight']]],
+  ['getchamp2_72',['getChamp2',['../class_fight.html#ac2a51a89f449ca5d5cd89f8215edf22f',1,'Fight']]],
+  ['getchampion_73',['getChampion',['../class_d_bcontroler.html#aecfb61aaf602460bb913301a4a6581b6',1,'DBcontroler']]],
+  ['getchampions_74',['getChampions',['../class_d_bcontroler.html#a8d7ed997757a706e884b08f4418e195f',1,'DBcontroler']]],
+  ['getclickheal_75',['getClickHeal',['../class_arena___window.html#af4df8e951ab0aceb07068c77802687f9',1,'Arena_Window']]],
+  ['getdefence_76',['getDefence',['../class_champion.html#a370b33d596753b90e90e6447c58d6315',1,'Champion']]],
+  ['getdexterity_77',['getDexterity',['../class_champion.html#a61ba242e7cb4b5219a1b0882e7375d76',1,'Champion']]],
+  ['getexperince_78',['getExperince',['../class_champion.html#ac3c7444217336b74ad1d2065891ef351',1,'Champion']]],
+  ['gethealth_79',['getHealth',['../class_champion.html#a5e3071553df800dc73f6e262193195e3',1,'Champion']]],
+  ['getid_80',['getId',['../class_champion.html#a08af66438808b888a6a18ac0479bf8ec',1,'Champion']]],
+  ['getimage_81',['getImage',['../class_view___item.html#a6f9427870afe757468c961786d9184d4',1,'View_Item']]],
+  ['getlevel_82',['getLevel',['../class_champion.html#a6eed27c071f2c9fe70400130edf5b3e0',1,'Champion']]],
+  ['getluck_83',['getLuck',['../class_champion.html#a46d1a89c85c1e4175281439578074114',1,'Champion']]],
+  ['getmagic_84',['getMagic',['../class_champion.html#a5e11f4f474b06f84f169c45bf1693e68',1,'Champion']]],
+  ['getmoney_85',['getMoney',['../class_champion.html#acccf4aba5efbc03f901a94796d271099',1,'Champion']]],
+  ['getname_86',['getName',['../class_champion.html#accb883fff204ef01c93e256d1e2c995b',1,'Champion']]],
+  ['getprof_87',['getProf',['../class_d_bcontroler.html#a26c7c98a58b9ae51f29be1ba3f5b0bdd',1,'DBcontroler']]],
+  ['getstrength_88',['getStrength',['../class_champion.html#a3e937474a6bcc2d38e3cab44a761b2ea',1,'Champion']]],
+  ['gettext_89',['getText',['../class_button.html#a3d5866487d8f0dd7a5e6cc0ee5836b61',1,'Button']]],
+  ['getuser_90',['getUser',['../class_d_bcontroler.html#a114daa19a6b6a61a2c707611ec15bc7a',1,'DBcontroler']]],
+  ['getwindows_91',['getWindows',['../class_window___base.html#a777a7670f8f053a4d410969c75e6a769',1,'Window_Base']]]
+];
