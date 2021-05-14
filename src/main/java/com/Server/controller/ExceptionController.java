@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.text.ParseException;
 
+/**
+ * Exception Handle controller
+ *
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 1.0
+ * @since 2020-05-14.
+ */
 @ControllerAdvice
 @Slf4j
 public class ExceptionController {
