@@ -30,37 +30,58 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *   AuthenticationController is use to authentication and register user.
- *   @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- *   @version 2.0.
- *   @since 2020-04-27.
+ * AuthenticationController is use to authentication and register user.
+ *
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class AuthenticationController {
 
-    /**Logger use to logger on server.*/
+    /**
+     * Logger use to logger on server.
+     */
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
-    /**AuthenticationManager us to authentication*/
+    /**
+     * AuthenticationManager us to authentication
+     */
     private final AuthenticationManager authenticationManager;
-    /**JwtUtils generate token*/
+    /**
+     * JwtUtils generate token
+     */
     private final JwtUtils jwtUtils;
-    /**UserService operation on database table User*/
+    /**
+     * UserService operation on database table User
+     */
     private final UserService userServiceImpl;
-    /**LocationSercive operation on database table Localization*/
+    /**
+     * LocationSercive operation on database table Localization
+     */
     private final LocalizationService localizationServiceImpl;
-    /**RoleService operation on database table Role*/
+    /**
+     * RoleService operation on database table Role
+     */
     private final RoleService roleServiceImpl;
-    /**PasswordEncoder encoder password*/
+    /**
+     * PasswordEncoder encoder password
+     */
     private final PasswordEncoder encoder;
-    /**CarService operation on database table Car*/
+    /**
+     * CarService operation on database table Car
+     */
     private final CarService carServiceImpl;
-    /**SendMail use to send mail*/
+    /**
+     * SendMail use to send mail
+     */
     private final SendMailImpl sendMailImpl;
 
 
-    /**Constructor*/
+    /**
+     * Constructor
+     */
     @Autowired
     public AuthenticationController(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserService userServiceImpl, LocalizationService localizationServiceImpl, RoleService roleServiceImpl, PasswordEncoder encoder, CarService carServiceImpl, SendMailImpl sendMailImpl) {
         this.authenticationManager = authenticationManager;
@@ -74,9 +95,11 @@ public class AuthenticationController {
     }
 
     //Logowanie
+
     /**
      * This method is use to login / authentication user.
      * This method use endpoint /authentication.
+     *
      * @param loginRequest Data witch login user (username,password).
      * @return JwtResponse witch token number and user data  Http.Status 200.
      */
@@ -96,7 +119,7 @@ public class AuthenticationController {
                 .collect(Collectors.toList());
         List<LocalizationResponse> localizations = localizationServiceImpl.findAll();
 
-        logger.info("------Logowanie user:"+loginRequest.getUsername());
+        logger.info("------Logowanie user:" + loginRequest.getUsername());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
@@ -107,23 +130,20 @@ public class AuthenticationController {
     }
 
     //Rejestracja.
+
     /**
      * This method is use to register user.
      * This method use endpoint /register.
+     *
      * @param userRequest user data.
      * @return user data  Http.Status 200 or 400.
-     * @exception WrongDataException when user not exist
+     * @throws WrongDataException when user not exist
      */
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserRequest userRequest) {
-        try {
-            logger.info("------ User successfully registered------");
-            userServiceImpl.save(userRequest);
-            return  new ResponseEntity<>(HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error("------ User Not Exist ------");
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+        logger.info("------ User successfully registered------");
+        userServiceImpl.save(userRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

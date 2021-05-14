@@ -7,36 +7,52 @@ package com.Server.exception;
  * @since 2020-04-27.
  */
 
-public class WrongDataException extends java.lang.Exception {
+public class WrongDataException extends RuntimeException {
     /**error*/
     private String error;
 
-    /**Constructor*/
+    /**
+     * Constructor
+     * @param error
+     */
     public WrongDataException(String error) {
+        super(error);
         this.error = error;
     }
 
-    /**Constructor*/
-    public WrongDataException(String s, String error) {
-        super(s);
+    /**
+     * Constructor
+     * @param error
+     */
+    public WrongDataException(String message, String error) {
+        super(message);
         this.error = error;
     }
 
-    /**Constructor*/
-    public WrongDataException(String s, Throwable throwable, String error) {
-        super(s, throwable);
+    /**
+     * Constructor
+     * @param error
+     */
+    public WrongDataException(String message, Throwable cause, String error) {
+        super(message, cause);
         this.error = error;
     }
 
-    /**Constructor*/
-    public WrongDataException(Throwable throwable, String error) {
-        super(throwable);
+    /**
+     * Constructor
+     * @param error
+     */
+    public WrongDataException(Throwable cause, String error) {
+        super(cause);
         this.error = error;
     }
 
-    /**Constructor*/
-    public WrongDataException(String s, Throwable throwable, boolean b, boolean b1, String error) {
-        super(s, throwable, b, b1);
+    /**
+     * Constructor
+     * @param error
+     */
+    public WrongDataException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace, String error) {
+        super(message, cause, enableSuppression, writableStackTrace);
         this.error = error;
     }
 

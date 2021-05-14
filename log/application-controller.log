@@ -15,3 +15,17 @@
 2021-05-10T14:51:05.016+0200 INFO ------ Cars displayed successfully ------
 2021-05-10T14:51:05.024+0200 INFO ------ User get successfully ------
 2021-05-10T14:51:16.733+0200 INFO ------ Reservations added successfully ------
+2021-05-14T22:38:04.964+0200 INFO ------Logowanie user:user
+2021-05-14T22:38:37.925+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:41:19.530+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:43:42.143+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:44:04.935+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:44:38.558+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:45:20.279+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:45:25.736+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:50:33.268+0200 INFO ------Logowanie user:user
+2021-05-14T22:50:44.093+0200 INFO ------ Car locations displayed successfully ------
+2021-05-14T22:50:50.120+0200 INFO ------ Car locations displayed successfully ------
+2021-05-14T22:51:41.637+0200 INFO ------ Car locations displayed successfully ------
+2021-05-14T22:51:44.932+0200 INFO ------ Car locations displayed successfully ------
+2021-05-14T22:51:44.936+0200 ERROR Wrong city

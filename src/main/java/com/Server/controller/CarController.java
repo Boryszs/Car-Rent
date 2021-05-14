@@ -19,10 +19,11 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- *   CarController is use to supports operations about database table Car.
- *   @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- *   @version 2.0.
- *   @since 2020-04-27.
+ * CarController is use to supports operations about database table Car.
+ *
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 @RequestMapping(value = "/car")
@@ -30,16 +31,26 @@ import java.util.List;
 @CrossOrigin
 public class CarController {
 
-    /**Logger use to logger on server.*/
+    /**
+     * Logger use to logger on server.
+     */
     private static final Logger logger = LoggerFactory.getLogger(CarController.class);
-    /**carService operation on database table Car*/
+    /**
+     * carService operation on database table Car
+     */
     private final CarService carServiceImpl;
-    /**ReservationService operation on database table reservation*/
+    /**
+     * ReservationService operation on database table reservation
+     */
     private final ReservationService reservationServiceImpl;
-    /**LocationService operation on database table Localization*/
+    /**
+     * LocationService operation on database table Localization
+     */
     private final LocalizationService localizationServiceImpl;
 
-    /**Constructor*/
+    /**
+     * Constructor
+     */
     @Autowired
     public CarController(CarService carServiceImpl, ReservationService reservationServiceImpl, LocalizationService localizationServiceImpl) {
         this.carServiceImpl = carServiceImpl;
@@ -48,41 +59,43 @@ public class CarController {
     }
 
     //Dodawanie samochodu
+
     /**
      * This method add car.
      * This method use endpoint /car/addcar.
+     *
      * @param carRequest data new car.
      * @return Data added new car Http.Status 200 or 400.
      * @throws WrongDataException when localization not exist
      */
     @PostMapping("/add-car")
-    public ResponseEntity<?> addCar(@Valid @RequestBody CarRequest carRequest) {
+    public ResponseEntity<?> addCar(@Valid @RequestBody CarRequest carRequest) throws WrongDataException {
         logger.info("------ Car added successfully ------");
-        try {
-            carServiceImpl.save(carRequest);
-            return new ResponseEntity<>(true, HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error(wrongDataException.getError());
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+        carServiceImpl.save(carRequest);
+        return new ResponseEntity<>(true, HttpStatus.OK);
+
     }
 
     //Zwraca wszystkie samochody.
+
     /**
      * This method get all car.
      * This method use endpoint /car/show-car-all.
+     *
      * @return List all Car Http.Status 200 or 400.
      */
     @GetMapping(value = "/show-car-all")
     public ResponseEntity<List<CarResponse>> showCarAll() {
         logger.info("---- GET ALL CAR ----");
-        return new ResponseEntity<>(carServiceImpl.findAll(),HttpStatus.OK);
+        return new ResponseEntity<>(carServiceImpl.findAll(), HttpStatus.OK);
     }
 
     //Zwraca samochody w zaleznosci od lokazlizacji
+
     /**
      * This method get car about localization
      * This method use endpoint /car/get-car-localization.
+     *
      * @param city name city.
      * @return List all Car Http.Status 200 or 400.
      * @throws WrongDataException when localization not exist
@@ -90,73 +103,59 @@ public class CarController {
     @ResponseBody
     @GetMapping(value = "/get-car-localization")
     public ResponseEntity<?> showCarLocalization(@RequestParam String city) {
-        try {
-            logger.info("------ Car locations displayed successfully ------");
-            return new ResponseEntity<>(carServiceImpl.findByLocalizationCity(city), HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error(wrongDataException.getError());
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+        logger.info("------ Car locations displayed successfully ------");
+        return new ResponseEntity<>(carServiceImpl.findByLocalizationCity(city), HttpStatus.OK);
     }
 
     //Usuwa samochody
+
     /**
      * This method delete car.
      * This method use endpoint /car/delete-car.
+     *
      * @param id id car on delete
      * @return Http.Status 200 or 400.
      */
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete-car")
     public ResponseEntity<?> deleteCar(@RequestParam int id) {
-        try {
-            carServiceImpl.deleteCar(id);
-            logger.info("------ The car was successfully deleted ------");
-            return new ResponseEntity(HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error(wrongDataException.getError());
-            return new ResponseEntity<>(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+        carServiceImpl.deleteCar(id);
+        logger.info("------ The car was successfully deleted ------");
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     //Zwracanie samochody po id
+
     /**
      * This method get car about id.
      * This method use endpoint /car/get-car.
+     *
      * @param id id car.
      * @return data car Http.Status 200 or 400..
-     * @exception WrongDataException when localization not exist
+     * @throws WrongDataException when localization not exist
      */
     @ResponseBody
     @GetMapping("/get-car")
-    public ResponseEntity<?> getCar(@RequestParam int id) {
-        try {
-            logger.info("------ Cars displayed successfully ------",id);
-            return new ResponseEntity(carServiceImpl.findByIdCar(id), HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error(wrongDataException.getError());
-            return new ResponseEntity<>(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> getCar(@RequestParam int id) throws WrongDataException {
+        logger.info("------ Cars displayed successfully ------", id);
+        return new ResponseEntity(carServiceImpl.findByIdCar(id), HttpStatus.OK);
     }
 
     //Edytowanie danych samochodu
+
     /**
      * This method edit car.
      * This method use endpoint /car/edit-car.
+     *
      * @param carRequest new data car.
      * @return Http.Status 200 or 400..
-     * @exception WrongDataException when localization not exist
+     * @throws WrongDataException when localization not exist
      */
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit-car")
-    public ResponseEntity<?> editCar(@RequestParam int id,@RequestBody CarRequest carRequest) {
-        try {
-            logger.info("------ The car was successfully edited ------");
-            carServiceImpl.update(id,carRequest);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error(wrongDataException.getError());
-            return new ResponseEntity<>(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> editCar(@RequestParam int id, @RequestBody CarRequest carRequest) {
+        logger.info("------ The car was successfully edited ------");
+        carServiceImpl.update(id, carRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

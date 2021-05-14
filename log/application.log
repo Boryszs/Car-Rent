@@ -69,3 +69,82 @@
 2021-05-10T14:51:16.688+0200 INFO ---- FIND USER ON USERNAME user ----
 2021-05-10T14:51:16.733+0200 INFO ------ Reservations added successfully ------
 2021-05-10T14:51:16.794+0200 INFO ---- SAVE RENT ID ----
+2021-05-14T22:37:44.357+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 18708 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
+2021-05-14T22:37:44.357+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2021-05-14T22:37:44.362+0200 INFO No active profile set, falling back to default profiles: default
+2021-05-14T22:37:50.012+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
+2021-05-14T22:37:51.717+0200 INFO Started ServerApplication in 7.978 seconds (JVM running for 10.146)
+2021-05-14T22:38:04.475+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-14T22:38:04.944+0200 INFO ---- GET ALL LOCALIZATION ----
+2021-05-14T22:38:04.964+0200 INFO ------Logowanie user:user
+2021-05-14T22:38:37.916+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-04T15:48:23Z. Current time: 2021-05-14T22:38:37Z, a difference of 888614916 milliseconds.  Allowed clock skew: 0 milliseconds.
+2021-05-14T22:38:37.925+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:38:37.940+0200 ERROR ---- WRONG CAR ----
+2021-05-14T22:41:07.030+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 18472 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
+2021-05-14T22:41:07.030+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2021-05-14T22:41:07.032+0200 INFO No active profile set, falling back to default profiles: default
+2021-05-14T22:41:10.622+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
+2021-05-14T22:41:12.202+0200 INFO Started ServerApplication in 5.656 seconds (JVM running for 6.758)
+2021-05-14T22:41:19.495+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-04T15:48:23Z. Current time: 2021-05-14T22:41:19Z, a difference of 888776494 milliseconds.  Allowed clock skew: 0 milliseconds.
+2021-05-14T22:41:19.530+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:41:19.582+0200 ERROR ---- WRONG CAR ----
+2021-05-14T22:43:30.706+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 24360 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
+2021-05-14T22:43:30.707+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2021-05-14T22:43:30.707+0200 INFO No active profile set, falling back to default profiles: default
+2021-05-14T22:43:35.495+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
+2021-05-14T22:43:37.682+0200 INFO Started ServerApplication in 7.483 seconds (JVM running for 8.62)
+2021-05-14T22:43:42.112+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-04T15:48:23Z. Current time: 2021-05-14T22:43:42Z, a difference of 888919111 milliseconds.  Allowed clock skew: 0 milliseconds.
+2021-05-14T22:43:42.143+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:43:42.198+0200 ERROR ---- WRONG CAR ----
+2021-05-14T22:44:04.933+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-04T15:48:23Z. Current time: 2021-05-14T22:44:04Z, a difference of 888941933 milliseconds.  Allowed clock skew: 0 milliseconds.
+2021-05-14T22:44:04.935+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:44:04.938+0200 ERROR ---- WRONG CAR ----
+2021-05-14T22:44:28.756+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 15376 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
+2021-05-14T22:44:28.758+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2021-05-14T22:44:28.758+0200 INFO No active profile set, falling back to default profiles: default
+2021-05-14T22:44:32.462+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
+2021-05-14T22:44:34.032+0200 INFO Started ServerApplication in 5.868 seconds (JVM running for 7.012)
+2021-05-14T22:44:38.528+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-04T15:48:23Z. Current time: 2021-05-14T22:44:38Z, a difference of 888975528 milliseconds.  Allowed clock skew: 0 milliseconds.
+2021-05-14T22:44:38.558+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:44:38.610+0200 ERROR ---- WRONG CAR ----
+2021-05-14T22:45:12.093+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 19368 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
+2021-05-14T22:45:12.093+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2021-05-14T22:45:12.093+0200 INFO No active profile set, falling back to default profiles: default
+2021-05-14T22:45:15.652+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
+2021-05-14T22:45:17.127+0200 INFO Started ServerApplication in 5.492 seconds (JVM running for 6.594)
+2021-05-14T22:45:20.249+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-04T15:48:23Z. Current time: 2021-05-14T22:45:20Z, a difference of 889017248 milliseconds.  Allowed clock skew: 0 milliseconds.
+2021-05-14T22:45:20.279+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:45:20.325+0200 ERROR ---- WRONG CAR ----
+2021-05-14T22:45:25.735+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-04T15:48:23Z. Current time: 2021-05-14T22:45:25Z, a difference of 889022735 milliseconds.  Allowed clock skew: 0 milliseconds.
+2021-05-14T22:45:25.736+0200 INFO ------ Cars displayed successfully ------
+2021-05-14T22:45:25.742+0200 INFO ---- GET CAR ID 1 ----
+2021-05-14T22:49:50.165+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 13664 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
+2021-05-14T22:49:50.165+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2021-05-14T22:49:50.172+0200 INFO No active profile set, falling back to default profiles: default
+2021-05-14T22:49:54.112+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
+2021-05-14T22:49:56.064+0200 INFO Started ServerApplication in 6.378 seconds (JVM running for 7.733)
+2021-05-14T22:50:04.192+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-04T15:48:23Z. Current time: 2021-05-14T22:50:04Z, a difference of 889301191 milliseconds.  Allowed clock skew: 0 milliseconds.
+2021-05-14T22:50:04.203+0200 ERROR Unauthorized error Full authentication is required to access this resource
+2021-05-14T22:50:29.193+0200 ERROR Invalid JWT signature: JWT expired at 2021-05-04T15:48:23Z. Current time: 2021-05-14T22:50:29Z, a difference of 889326192 milliseconds.  Allowed clock skew: 0 milliseconds.
+2021-05-14T22:50:29.196+0200 ERROR Unauthorized error Full authentication is required to access this resource
+2021-05-14T22:50:33.064+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-14T22:50:33.254+0200 INFO ---- GET ALL LOCALIZATION ----
+2021-05-14T22:50:33.268+0200 INFO ------Logowanie user:user
+2021-05-14T22:50:44.074+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-14T22:50:44.093+0200 INFO ------ Car locations displayed successfully ------
+2021-05-14T22:50:44.103+0200 ERROR ---- WRONG CITY ----
+2021-05-14T22:50:50.114+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-14T22:50:50.120+0200 INFO ------ Car locations displayed successfully ------
+2021-05-14T22:50:50.123+0200 INFO ---- FIND ALL CAR ON LOCALIZATION NAME Tarnow ----
+2021-05-14T22:51:30.642+0200 INFO Starting ServerApplication on DESKTOP-JKIVC41 with PID 1272 (C:\Users\ideapad\Desktop\Angular_Car\Car-Rent\target\classes started by ideapad in C:\Users\ideapad\Desktop\Angular_Car\Car-Rent)
+2021-05-14T22:51:30.647+0200 DEBUG Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2021-05-14T22:51:30.648+0200 INFO No active profile set, falling back to default profiles: default
+2021-05-14T22:51:36.862+0200 DEBUG Filter 'authenticationTokenFilter' configured for use
+2021-05-14T22:51:39.168+0200 INFO Started ServerApplication in 9.34 seconds (JVM running for 11.503)
+2021-05-14T22:51:41.537+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-14T22:51:41.637+0200 INFO ------ Car locations displayed successfully ------
+2021-05-14T22:51:41.649+0200 INFO ---- FIND ALL CAR ON LOCALIZATION NAME Tarnow ----
+2021-05-14T22:51:44.926+0200 INFO ---- FIND USER ON USERNAME user ----
+2021-05-14T22:51:44.932+0200 INFO ------ Car locations displayed successfully ------
+2021-05-14T22:51:44.934+0200 ERROR ---- WRONG CITY ----
+2021-05-14T22:51:44.936+0200 ERROR Wrong city
