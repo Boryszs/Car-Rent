@@ -11,6 +11,7 @@ import com.itextpdf.text.DocumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -124,13 +125,8 @@ public class ReservationController {
     @ResponseBody
     @GetMapping(value = "/get")
     public ResponseEntity<?> getReservation(@RequestParam Long id) {
-        try {
-            logger.info("------ Reservations displayed successfully ------");
-            return new ResponseEntity(userServiceImpl.getReservationUser(id), HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error("------ Reservation Id Not Exist To Get ------");
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+        logger.info("------ Reservations displayed successfully ------");
+        return new ResponseEntity(userServiceImpl.getReservationUser(id), HttpStatus.OK);
     }
 
     //Generowanie PDf
@@ -138,23 +134,20 @@ public class ReservationController {
     /**
      * This method gnerate resume on reservation
      * This method use endpoint /reservation/pdf.
-     * @param reservationRequest data to create resume
      *
+     * @param reservationRequest data to create resume
      */
-    @PostMapping(value = "/pdf")
-    public StreamingResponseBody getSteamingFile(HttpServletResponse response,@Valid @RequestBody ReservationRequest reservationRequest) throws IOException, DocumentException {
-        String filname = new SimpleDateFormat("dd-M-yyyy hh:mm:ss").format(new Date()).toString();
+    @PostMapping(value = "/add-pdf")
+    public ResponseEntity<?> addReservationGenerateFile(HttpServletResponse response, @Valid @RequestBody ReservationRequest reservationRequest) throws IOException, DocumentException {
+        logger.info("------ Reservations added generate pdf successfully ------");
+        Reservation reservation = reservationServiceImpl.save(reservationRequest);
+        String filename = new SimpleDateFormat("dd-M-yyyy hh:mm:ss").format(new Date()).toString();
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename="+filname+".pdf");
-        response.setHeader("filename",filname+".pdf");
-        InputStream inputStream = pdfResume.generatePdf(reservationRequest);
-        return outputStream -> {
-            int nRead;
-            byte[] data = new byte[1024];
-            while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-                outputStream.write(data, 0, nRead);
-            }
-        };
+        response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".pdf");
+        response.setHeader("filename", filename + ".pdf");
+        InputStream inputStream = pdfResume.generatePdf(reservation.getIdrent());
+        ByteArrayResource resource = new ByteArrayResource(inputStream.readAllBytes());
+        return new ResponseEntity<>(resource, HttpStatus.OK);
     }
 
     //Dodawanie rezerwacji
@@ -170,15 +163,10 @@ public class ReservationController {
 
     @ResponseBody
     @PostMapping(value = "/add")
-    public ResponseEntity<?> addReservation(@Valid @RequestBody ReservationRequest reservationRequest) {
-        try {
-            logger.info("------ Reservations added successfully ------");
-            Reservation reservation = reservationServiceImpl.save(reservationRequest);
-            return new ResponseEntity(HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error("------ Reservation Add Error ------");
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> addReservation(HttpServletResponse response, @Valid @RequestBody ReservationRequest reservationRequest) throws IOException, DocumentException {
+        logger.info("------ Reservations added successfully ------");
+        reservationServiceImpl.save(reservationRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //Zwraca aktualne rezerwacje usera po id usera
@@ -194,12 +182,7 @@ public class ReservationController {
     @ResponseBody
     @GetMapping(value = "/get-all-user")
     public ResponseEntity<?> getReservationById(@RequestParam Long id) {
-        try {
-            logger.info("------ Successfully displayed user bookings ------");
-            return new ResponseEntity(reservationServiceImpl.getCurrentReservation(id), HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error("------ User Not Exist ------");
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+        logger.info("------ Successfully displayed user bookings ------");
+        return new ResponseEntity(reservationServiceImpl.getCurrentReservation(id), HttpStatus.OK);
     }
 }

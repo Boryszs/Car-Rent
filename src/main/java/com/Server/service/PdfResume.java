@@ -20,5 +20,5 @@ public interface PdfResume {
      * @throws IOException
      * @throws DocumentException
      */
-    InputStream generatePdf(ReservationRequest reservation) throws IOException, DocumentException;
+    InputStream generatePdf(Long id) throws IOException, DocumentException;
 }

@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- *   LocalizationController is use to supports operations about database table Localization.
- *   @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
- *   @version 2.0.
- *   @since 2020-04-27.
+ * LocalizationController is use to supports operations about database table Localization.
+ *
+ * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
+ * @version 2.0.
+ * @since 2020-04-27.
  */
 
 @RestController
@@ -26,72 +27,76 @@ import java.util.List;
 @CrossOrigin
 public class LocalizationController {
 
-    /**Logger use to logger on server.*/
+    /**
+     * Logger use to logger on server.
+     */
     private static final Logger logger = LoggerFactory.getLogger(LocalizationController.class);
-    /**LocationSercive operation on database table Localization*/
+    /**
+     * LocationSercive operation on database table Localization
+     */
     private LocalizationService localizationServiceImpl;
 
-    /**Constructor*/
+    /**
+     * Constructor
+     */
     @Autowired
     public LocalizationController(LocalizationService localizationServiceImpl) {
         this.localizationServiceImpl = localizationServiceImpl;
     }
 
     //Zwraca wszystkie lokalizacje
+
     /**
      * This method get all localization.
      * This method use endpoint /city/show-all.
+     *
      * @return List<Localization> lita all localization.
      */
     @ResponseBody
     @GetMapping(value = "/show-all")
     public ResponseEntity<List<LocalizationResponse>> showAll() {
-        return new ResponseEntity<>(localizationServiceImpl.findAll(),HttpStatus.OK);
+        return new ResponseEntity<>(localizationServiceImpl.findAll(), HttpStatus.OK);
     }
 
 
     //Zwraca lokazlizacje po id
+
     /**
      * This method get localization on id.
      * This method use endpoint /city/show-id.
+     *
      * @return data localization Http.Status 200 or 400.
-     * @exception WrongDataException when localization id not exist.
+     * @throws WrongDataException when localization id not exist.
      */
     @ResponseBody
     @GetMapping(value = "/show-id")
     public ResponseEntity<?> showLocalizationId(@RequestParam int id) {
-        try {
-            logger.info("------ Successfully returned location after id ------");
-            return new ResponseEntity<>(localizationServiceImpl.findByIdLocalization(id), HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error(wrongDataException.getError());
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+        logger.info("------ Successfully returned location after id ------");
+        return new ResponseEntity<>(localizationServiceImpl.findByIdLocalization(id), HttpStatus.OK);
     }
 
     //Zwraca lokazlizacje po nazwie miasta
+
     /**
      * This method get localization on name city.
      * This method use endpoint /city/show-city.
+     *
      * @param city data about city.
      * @return city data Http.Status 200 or 400.
      */
     @ResponseBody
     @GetMapping(value = "/show-city")
     public ResponseEntity<?> showLocalizationCity(@RequestParam String city) {
-        try {
-            logger.info("------ Location by city name was returned successfully ------");
-            return new ResponseEntity<>(localizationServiceImpl.findByCity(city), HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error(wrongDataException.getError());
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+        logger.info("------ Location by city name was returned successfully ------");
+        return new ResponseEntity<>(localizationServiceImpl.findByCity(city), HttpStatus.OK);
     }
 
     //Dodaje nowa lokalizacje
+
     /**
      * This method add new localization.
      * This method use endpoint /city/add.
+     *
      * @param localizationRequest data new city.
      * @return Http.Status 200.
      */

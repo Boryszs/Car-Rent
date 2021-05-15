@@ -2,7 +2,9 @@ package com.Server.service.impl;
 
 import com.Server.dto.Request.ReservationRequest;
 import com.Server.entiy.Car;
+import com.Server.entiy.Reservation;
 import com.Server.repository.CarRepository;
+import com.Server.repository.ReservationRepository;
 import com.Server.service.PdfResume;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -37,23 +39,25 @@ public class PdfResumeImpl implements PdfResume {
     private PdfPTable table;
     private Document document;
     private ByteArrayOutputStream out;
-    private ReservationRequest reservation;
+    private Reservation reservation;
     private final CarRepository carRepository;
+    private final ReservationRepository reservationRepository;
 
     @Autowired
-    public PdfResumeImpl(CarRepository carRepository) {
+    public PdfResumeImpl(CarRepository carRepository, ReservationRepository reservationRepository) {
         this.carRepository = carRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     /**
      * Method creaete pdf file
-     * @param reservation data on reservation
+     * @param id id reservation
      * @return pdf file on InputStream class
      * @throws IOException
      * @throws DocumentException
      */
     @Override
-    public InputStream generatePdf(ReservationRequest reservation) throws IOException, DocumentException {
+    public InputStream generatePdf(Long id) throws IOException, DocumentException {
         table = new PdfPTable(4);
         table.setWidthPercentage(100);
         document = new Document();
@@ -62,7 +66,7 @@ public class PdfResumeImpl implements PdfResume {
         PdfWriter.getInstance(document, out);
         document.open();
         addTitlePage(document);
-        this.reservation = reservation;
+        this.reservation = reservationRepository.findByIdrent(id).get();
         return createTable(document);
     }
 
@@ -133,13 +137,13 @@ public class PdfResumeImpl implements PdfResume {
         pdfPCell.setPhrase(new Phrase("Wynajem samochodu", TIMES_ROMAN_8));
         table.addCell(pdfPCell);
 
-        LocalDate dateBefore = LocalDate.parse(reservation.getDateFrom());
-        LocalDate dateAfter = LocalDate.parse(reservation.getDateTo());
+        LocalDate dateBefore = LocalDate.parse(reservation.getDataFrom().toString());
+        LocalDate dateAfter = LocalDate.parse(reservation.getDataTo().toString());
         long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, dateAfter);
 
         pdfPCell.setPhrase(new Phrase(Long.toString(noOfDaysBetween), TIMES_ROMAN_8));
         table.addCell(pdfPCell);
-        Car car = carRepository.findByIdcar(reservation.getIdCar()).get();
+        Car car = carRepository.findByIdcar(reservation.getCar().getIdcar()).get();
         pdfPCell.setPhrase(new Phrase(car.getMark() +" "+car.getModel(), TIMES_ROMAN_8));
         table.addCell(pdfPCell);
 

@@ -16,6 +16,7 @@ import javax.validation.Valid;
 
 /**
  * UserController is use to supports operations about database table User.
+ *
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
  * @version 2.0.
  * @since 2020-04-27.
@@ -45,53 +46,42 @@ public class UserController {
     }
 
     //Zmiana danych użytkownika
+
     /**
      * This method edit user data.
      * This method use endpoint /user/edit.
+     *
      * @param userRequest new data user.
      * @return new data user Http.Status 200 or 400.
-     * @exception WrongDataException when server catch Error.
+     * @throws WrongDataException when server catch Error.
      */
     @PutMapping("/edit")
-    public ResponseEntity<?> editUser(@RequestParam Long id,@Valid @RequestBody UserRequest userRequest) {
-        try {
-            logger.info("------ User edited successfully ------");
-            userService.update(userRequest,id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error("------ Error " + wrongDataException.getError() + "------");
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> editUser(@RequestParam Long id, @Valid @RequestBody UserRequest userRequest) {
+        logger.info("------ User edited successfully ------");
+        userService.update(userRequest, id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //Usuwa User.
+
     /**
      * This method delete user on id.
      * This method use endpoint /user/delete.
+     *
      * @param id id user delete.
      * @return Http.Status 200.
-     * @exception WrongDataException when user not exist.
+     * @throws WrongDataException when user not exist.
      */
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@RequestParam Long id) {
-        try {
-            userService.deleteUser(id);
-            logger.info("------ User deleted successfully ------");
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error("------ Error User Not Exist ------");
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+        userService.deleteUser(id);
+        logger.info("------ User deleted successfully ------");
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/get")
     public ResponseEntity<UserResponse> getUser(@RequestParam Long id) {
-        try {
-            logger.info("------ User get successfully ------");
-            return new ResponseEntity<>(userService.findById(id),HttpStatus.OK);
-        } catch (WrongDataException wrongDataException) {
-            logger.error("------ Error User Not Exist ------");
-            return new ResponseEntity(new MessageResponse(wrongDataException.getError()), HttpStatus.BAD_REQUEST);
-        }
+        logger.info("------ User get successfully ------");
+        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
     }
 }

@@ -75,6 +75,6 @@ public interface CarService {
      * @return return List car on localization city.
      * @throws WrongDataException when city name not exist.
      */
-    List<CarResponse> findByLocalizationCity(String city) throws WrongDataException;
+    List<CarResponse> findByLocalizationCity(String city);
 
 }

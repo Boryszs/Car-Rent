@@ -165,7 +165,7 @@ public class CarServiceImpl implements CarService {
      * @throws WrongDataException when city name not exist.
      */
     @Override
-    public List<CarResponse> findByLocalizationCity(String city) throws WrongDataException {
+    public List<CarResponse> findByLocalizationCity(String city){
         if (localizationRepository.existsByCity(city)) {
             log.info("---- FIND ALL CAR ON LOCALIZATION NAME "+city+" ----");
             return carRepository.findByLocalizationCity(city).stream().map(car -> carMapper.toDto(car)).collect(Collectors.toList());
