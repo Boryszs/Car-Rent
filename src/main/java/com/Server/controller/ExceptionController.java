@@ -25,6 +25,6 @@ public class ExceptionController {
     @ExceptionHandler(value = {ParseException.class , DataAccessException.class , IllegalArgumentException.class, WrongDataException.class})
     public ResponseEntity<MessageResponse> exception(RuntimeException exception) {
         log.error(exception.getMessage());
-        return new ResponseEntity<>(new MessageResponse(exception.getMessage()), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new MessageResponse(exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }

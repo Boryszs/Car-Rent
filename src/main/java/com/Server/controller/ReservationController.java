@@ -11,6 +11,7 @@ import com.itextpdf.text.DocumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -136,20 +137,17 @@ public class ReservationController {
      *
      * @param reservationRequest data to create resume
      */
-    @PostMapping(value = "/pdf")
-    public StreamingResponseBody getSteamingFile(HttpServletResponse response, @Valid @RequestBody ReservationRequest reservationRequest) throws IOException, DocumentException {
-        String filname = new SimpleDateFormat("dd-M-yyyy hh:mm:ss").format(new Date()).toString();
+    @PostMapping(value = "/add-pdf")
+    public ResponseEntity<?> addReservationGenerateFile(HttpServletResponse response, @Valid @RequestBody ReservationRequest reservationRequest) throws IOException, DocumentException {
+        logger.info("------ Reservations added generate pdf successfully ------");
+        Reservation reservation = reservationServiceImpl.save(reservationRequest);
+        String filename = new SimpleDateFormat("dd-M-yyyy hh:mm:ss").format(new Date()).toString();
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=" + filname + ".pdf");
-        response.setHeader("filename", filname + ".pdf");
-        InputStream inputStream = pdfResume.generatePdf(reservationRequest);
-        return outputStream -> {
-            int nRead;
-            byte[] data = new byte[1024];
-            while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-                outputStream.write(data, 0, nRead);
-            }
-        };
+        response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".pdf");
+        response.setHeader("filename", filename + ".pdf");
+        InputStream inputStream = pdfResume.generatePdf(reservation.getIdrent());
+        ByteArrayResource resource = new ByteArrayResource(inputStream.readAllBytes());
+        return new ResponseEntity<>(resource, HttpStatus.OK);
     }
 
     //Dodawanie rezerwacji
@@ -165,10 +163,10 @@ public class ReservationController {
 
     @ResponseBody
     @PostMapping(value = "/add")
-    public ResponseEntity<?> addReservation(@Valid @RequestBody ReservationRequest reservationRequest) {
+    public ResponseEntity<?> addReservation(HttpServletResponse response, @Valid @RequestBody ReservationRequest reservationRequest) throws IOException, DocumentException {
         logger.info("------ Reservations added successfully ------");
-        Reservation reservation = reservationServiceImpl.save(reservationRequest);
-        return new ResponseEntity(HttpStatus.OK);
+        reservationServiceImpl.save(reservationRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //Zwraca aktualne rezerwacje usera po id usera
