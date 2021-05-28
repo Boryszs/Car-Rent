@@ -33,7 +33,7 @@ public class ReservationMapper implements Mapper<Reservation, ReservationRespons
                         .idcar(reservation.getCar().getIdcar())
                         .mark(reservation.getCar().getMark())
                         .model(reservation.getCar().getModel())
-                        .type(reservation.getCar().getType())
+                        .type(reservation.getCar().getType().toString())
                         .yearProduction(reservation.getCar().getYearProduction())
                         .color(reservation.getCar().getColor())
                         .engineCapacity(reservation.getCar().getEngineCapacity())

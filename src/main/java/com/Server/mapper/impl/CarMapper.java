@@ -4,6 +4,7 @@ import com.Server.dto.Request.CarRequest;
 import com.Server.dto.Response.CarResponse;
 import com.Server.dto.Response.LocalizationResponse;
 import com.Server.entiy.Car;
+import com.Server.entiy.enums.TypeCar;
 import com.Server.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +30,7 @@ public class CarMapper implements Mapper<Car,CarResponse,CarRequest>{
                 .idcar(car.getIdcar())
                 .mark(car.getMark())
                 .model(car.getModel())
-                .type(car.getType())
+                .type(car.getType().toString())
                 .yearProduction(car.getYearProduction())
                 .color(car.getColor())
                 .engineCapacity(car.getEngineCapacity())
@@ -51,7 +52,7 @@ public class CarMapper implements Mapper<Car,CarResponse,CarRequest>{
         return new Car().builder()
                 .mark(carRequest.getMark())
                 .model(carRequest.getModel())
-                .type(carRequest.getType())
+                .type(TypeCar.valueOf(carRequest.getType()))
                 .yearProduction(carRequest.getYearProduction())
                 .color(carRequest.getColor())
                 .engineCapacity(carRequest.getEngine())
@@ -69,7 +70,7 @@ public class CarMapper implements Mapper<Car,CarResponse,CarRequest>{
     public Car update(Car car, final CarRequest carRequest) {
         car.setMark(carRequest.getMark());
         car.setModel(carRequest.getModel());
-        car.setType(carRequest.getType());
+        car.setType(TypeCar.valueOf(carRequest.getType()));
         car.setYearProduction(carRequest.getYearProduction());
         car.setColor(carRequest.getColor());
         car.setEngineCapacity(carRequest.getEngine());

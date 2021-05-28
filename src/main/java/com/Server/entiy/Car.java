@@ -1,5 +1,6 @@
 package com.Server.entiy;
 
+import com.Server.entiy.enums.TypeCar;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,8 +39,9 @@ public class Car {
     private String model;
     @NotNull
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     /**type*/
-    private String type;
+    private TypeCar type;
     @NotNull
     @Column(name = "year_production")
     /**yearProduction*/
@@ -56,7 +58,6 @@ public class Car {
     @Column(name = "money")
     /**money*/
     private float money;
-
     @NotNull
     @Column(name = "image")
     /**image*/
@@ -82,7 +83,7 @@ public class Car {
      * @param localization Car Location
      * @param image Url to photo of the Car
      */
-    public Car(String mark, String model, String type, int yearProduction, String color, int engineCapacity, float money, Localization localization, String image) {
+    public Car(String mark, String model, TypeCar type, int yearProduction, String color, int engineCapacity, float money, Localization localization, String image) {
         this.mark = mark;
         this.model = model;
         this.type = type;

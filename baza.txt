@@ -63,7 +63,7 @@ INSERT INTO `car` (`id_car`, `color`, `engine_capacity`, `image`, `mark`, `model
 (15, 'czarny', 3000, 'https://image.ceneostatic.pl/data/products/61374146/i-audi-q7-i-2014-diesel-244km-suv-czarny.jpg', 'Audi', 'Q 7', 300, 'suv', 2019, 1),
 (16, 'czarny', 2200, 'https://image.ceneostatic.pl/data/products/72680782/i-mercedes-benz-glc-2016-km-terenowy-czarny.jpg', 'Mercedes', 'GLC', 250, 'suv', 2017, 1),
 (17, 'niebieski', 2500, 'https://www.bmw-autopremium.pl/www/media/75/img/img_9376_1b.jpg', 'BMW', '7', 340, 'sedan', 2019, 1),
-(18, 'czarny', 2000, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg', 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 1),
+(18, 'czarny', 2000, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg', 'Skodq', 'Kodiaq', 240, 'suv', 2019, 1),
 (19, 'czarny', 1200, 'https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg', 'Toyota', 'Yaris', 79, 'hatchback', 2018, 2),
 (20, 'bialy', 1200, 'https://image.ceneostatic.pl/data/products/59600749/i-toyota-aygo-ii-2015-benzyna-69km-hatchback-bialy.jpg', 'Toyota', 'Aygo', 69, 'hatchback', 2017, 2),
 (21, 'czerwona', 1000, 'https://a.allegroimg.com/original/1138b5/222dd8d44fa98a697a01b0c7ff21/Skoda-Citigo-1-0-MPI-Salon-Polska-Kolor-Czerwony', 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 2),
@@ -81,7 +81,7 @@ INSERT INTO `car` (`id_car`, `color`, `engine_capacity`, `image`, `mark`, `model
 (33, 'czarny', 3000, 'https://image.ceneostatic.pl/data/products/61374146/i-audi-q7-i-2014-diesel-244km-suv-czarny.jpg', 'Audi', 'Q 7', 300, 'suv', 2019, 2),
 (34, 'czarny', 2200, 'https://image.ceneostatic.pl/data/products/72680782/i-mercedes-benz-glc-2016-km-terenowy-czarny.jpg', 'Mercedes', 'GLC', 250, 'suv', 2017, 2),
 (35, 'niebieski', 2500, 'https://www.bmw-autopremium.pl/www/media/75/img/img_9376_1b.jpg', 'BMW', '7', 340, 'sedan', 2019, 2),
-(36, 'czarny', 2000, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg', 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 2),
+(36, 'czarny', 2000, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg', 'Skodq', 'Kodiaq', 240, 'suv', 2019, 2),
 (37, 'czarny', 1200, 'https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg', 'Toyota', 'Yaris', 79, 'hatchback', 2018, 3),
 (38, 'bialy', 1200, 'https://image.ceneostatic.pl/data/products/59600749/i-toyota-aygo-ii-2015-benzyna-69km-hatchback-bialy.jpg', 'Toyota', 'Aygo', 69, 'hatchback', 2017, 3),
 (39, 'czerwona', 1000, 'https://a.allegroimg.com/original/1138b5/222dd8d44fa98a697a01b0c7ff21/Skoda-Citigo-1-0-MPI-Salon-Polska-Kolor-Czerwony', 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 3),
@@ -99,7 +99,7 @@ INSERT INTO `car` (`id_car`, `color`, `engine_capacity`, `image`, `mark`, `model
 (51, 'czarny', 3000, 'https://image.ceneostatic.pl/data/products/61374146/i-audi-q7-i-2014-diesel-244km-suv-czarny.jpg', 'Audi', 'Q 7', 300, 'suv', 2019, 3),
 (52, 'czarny', 2200, 'https://image.ceneostatic.pl/data/products/72680782/i-mercedes-benz-glc-2016-km-terenowy-czarny.jpg', 'Mercedes', 'GLC', 250, 'suv', 2017, 3),
 (53, 'niebieski', 2500, 'https://www.bmw-autopremium.pl/www/media/75/img/img_9376_1b.jpg', 'BMW', '7', 340, 'sedan', 2019, 3),
-(54, 'czarny', 2000, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg', 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 3),
+(54, 'czarny', 2000, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg', 'Skodq', 'Kodiaq', 240, 'suv', 2019, 3),
 (55, 'czarny', 1200, 'https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg', 'Toyota', 'Yaris', 79, 'hatchback', 2018, 4),
 (56, 'bialy', 1200, 'https://image.ceneostatic.pl/data/products/59600749/i-toyota-aygo-ii-2015-benzyna-69km-hatchback-bialy.jpg', 'Toyota', 'Aygo', 69, 'hatchback', 2017, 4),
 (57, 'czerwona', 1000, 'https://a.allegroimg.com/original/1138b5/222dd8d44fa98a697a01b0c7ff21/Skoda-Citigo-1-0-MPI-Salon-Polska-Kolor-Czerwony', 'Skoda', 'CitiGo', 69, 'hatchback', 2019, 4),
@@ -117,7 +117,7 @@ INSERT INTO `car` (`id_car`, `color`, `engine_capacity`, `image`, `mark`, `model
 (69, 'czarny', 3000, 'https://image.ceneostatic.pl/data/products/61374146/i-audi-q7-i-2014-diesel-244km-suv-czarny.jpg', 'Audi', 'Q 7', 300, 'suv', 2019, 4),
 (70, 'czarny', 2200, 'https://image.ceneostatic.pl/data/products/72680782/i-mercedes-benz-glc-2016-km-terenowy-czarny.jpg', 'Mercedes', 'GLC', 250, 'suv', 2017, 4),
 (71, 'niebieski', 2500, 'https://www.bmw-autopremium.pl/www/media/75/img/img_9376_1b.jpg', 'BMW', '7', 340, 'sedan', 2019, 4),
-(72, 'czarny', 2000, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg', 'Skodq', 'Kodiaq', 240, 'SUV', 2019, 4);
+(72, 'czarny', 2000, 'https://image.ceneostatic.pl/data/products/64886681/i-skoda-kodiaq-2018-150km-suv-czarny.jpg', 'Skodq', 'Kodiaq', 240, 'suv', 2019, 4);
 
 -- --------------------------------------------------------
 

@@ -39,7 +39,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
      */
     boolean existsByIdrent(Long id);
 
-    @Query("SELECT r FROM Reservation r WHERE r.user.id =:id and r.dataFrom <= CURRENT_TIMESTAMP and r.dataTo >= CURRENT_TIMESTAMP ")
+    @Query("SELECT r FROM Reservation r WHERE r.user.id =:id and r.dataTo >= CURRENT_TIMESTAMP ")
     List<Reservation> findCurrent(@Param("id") Long id);
     /**
      * Delete reservation on id.
