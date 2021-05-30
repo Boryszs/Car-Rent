@@ -7,7 +7,9 @@ import com.Server.entiy.Reservation;
 import com.Server.exception.WrongDataException;
 import com.Server.service.*;
 import com.Server.service.impl.SendMailImpl;
+import com.google.common.io.ByteStreams;
 import com.itextpdf.text.DocumentException;
+import jdk.incubator.jpackage.internal.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,7 +148,7 @@ public class ReservationController {
         response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".pdf");
         response.setHeader("filename", filename + ".pdf");
         InputStream inputStream = pdfResume.generatePdf(reservation.getIdrent());
-        ByteArrayResource resource = new ByteArrayResource(inputStream.readAllBytes());
+        ByteArrayResource resource = new ByteArrayResource(ByteStreams.toByteArray(inputStream));
         return new ResponseEntity<>(resource, HttpStatus.OK);
     }
 
