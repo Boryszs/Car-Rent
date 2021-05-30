@@ -2,7 +2,6 @@ package com.Server.controller;
 
 import com.Server.dto.Request.LocalizationRequest;
 import com.Server.dto.Response.LocalizationResponse;
-import com.Server.dto.Response.MessageResponse;
 import com.Server.exception.WrongDataException;
 import com.Server.service.LocalizationService;
 import org.slf4j.Logger;

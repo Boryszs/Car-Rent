@@ -1,7 +1,6 @@
 package com.Server.controller;
 
 import com.Server.dto.Request.UserRequest;
-import com.Server.dto.Response.MessageResponse;
 import com.Server.dto.Response.UserResponse;
 import com.Server.exception.WrongDataException;
 import com.Server.service.UserService;

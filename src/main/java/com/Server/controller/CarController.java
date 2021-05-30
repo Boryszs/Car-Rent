@@ -2,7 +2,6 @@ package com.Server.controller;
 
 import com.Server.dto.Request.CarRequest;
 import com.Server.dto.Response.CarResponse;
-import com.Server.dto.Response.MessageResponse;
 import com.Server.exception.WrongDataException;
 import com.Server.service.CarService;
 import com.Server.service.LocalizationService;
