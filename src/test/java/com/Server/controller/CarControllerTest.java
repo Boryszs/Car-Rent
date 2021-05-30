@@ -21,6 +21,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -69,7 +71,7 @@ class CarControllerTest {
     @Test
     @DisplayName("---- GET CAR ON ID ----")
     void getCar() throws Exception {
-        List<Integer> cars = List.of(2, 3, 4, 5, -1);
+        List<Integer> cars = new ArrayList<>(Arrays.asList(1,2,3,4));
         for (Integer carId : cars) {
             MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/car/get-car?id=" + carId)
                     .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
