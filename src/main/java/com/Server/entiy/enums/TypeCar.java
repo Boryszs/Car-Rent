@@ -9,5 +9,11 @@ public enum TypeCar {
     hatchback,
     liftback,
     sedan,
-    suv
+    suv,
+    kombi,
+    van,
+    minivan,
+    kabriolet,
+    coupe,
+    pickup
 }
