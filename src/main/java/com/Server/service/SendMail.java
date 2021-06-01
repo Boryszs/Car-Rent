@@ -9,5 +9,5 @@ import com.Server.dto.Request.UserRequest;
  * @since 2020-12-29.
  */
 public interface SendMail {
-    void sendMail(UserRequest userRequest, String mess);
+    void sendMail(Long id, String mess);
 }

@@ -218,7 +218,7 @@ public class UserServiceImpl implements UserService {
             log.error("---- USER EXIST ----");
             throw new WrongDataException("User Exist");
         } else {
-            //sendMail.sendMail(registerRequest, "Thank you for register account.");
+
             List<Role> roles = new LinkedList<>();
             if (userRequest.getRole().isEmpty()) {
                 roles.add(roleRepository.findByName(Roles.ROLE_USER).get());
@@ -233,6 +233,7 @@ public class UserServiceImpl implements UserService {
             User user = userMapper.toEntity(userRequest);
             user.setRoles(roles);
             userRepository.save(user);
+            sendMail.sendMail(user.getId(), "Thank you for register account.");
             log.info("---- SAVE USER ----");
         }
     }

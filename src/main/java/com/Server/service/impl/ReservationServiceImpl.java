@@ -12,6 +12,7 @@ import com.Server.repository.LocalizationRepository;
 import com.Server.repository.ReservationRepository;
 import com.Server.repository.UserRepository;
 import com.Server.service.ReservationService;
+import com.Server.service.SendMail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,16 +61,30 @@ public class ReservationServiceImpl implements ReservationService {
      * Reservation mapper
      */
     private final Mapper<Reservation, ReservationResponse, ReservationRequest> reservationMapper;
+    /**
+    * sendMail mail sender
+    */
+    private final SendMail sendMail;
 
+    /**
+     *  @param reservationRepository
+     * @param userRepository
+     * @param carRepository
+     * @param localizationRepository
+     * @param sendMailImpl
+     * @param reservationMapper
+     * @param sendMail
+     */
     @Autowired
     /**Constructor*/
-    public ReservationServiceImpl(ReservationRepository reservationRepository, UserRepository userRepository, CarRepository carRepository, LocalizationRepository localizationRepository, SendMailImpl sendMailImpl, Mapper<Reservation, ReservationResponse, ReservationRequest> reservationMapper) {
+    public ReservationServiceImpl(ReservationRepository reservationRepository, UserRepository userRepository, CarRepository carRepository, LocalizationRepository localizationRepository, SendMailImpl sendMailImpl, Mapper<Reservation, ReservationResponse, ReservationRequest> reservationMapper, SendMail sendMail) {
         this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
         this.carRepository = carRepository;
         this.localizationRepository = localizationRepository;
         this.sendMailImpl = sendMailImpl;
         this.reservationMapper = reservationMapper;
+        this.sendMail = sendMail;
     }
 
     /**
@@ -152,8 +167,9 @@ public class ReservationServiceImpl implements ReservationService {
             user.setReservations(reservations);
             userRepository.save(user);
             log.info("---- SAVE RENT ID ----");
+
+            sendMail.sendMail(user.getId(), "Thank you for order car:" + car.getMark() + " " + car.getModel() + " for " + noOfDaysBetween + " days in localization " + car.getLocalization().getCity() + " for prices: " + (noOfDaysBetween * car.getMoney()));
             return reservations;
-            //sendMail.sendMail(user.getUsername(), "Thank you for order car:" + car.getMark() + " " + car.getModel() + " for " + noOfDaysBetween + " days in localization " + car.getLocalization().getCity() + " for prices: " + (noOfDaysBetween * car.getMoney()));
         }
 
     }
