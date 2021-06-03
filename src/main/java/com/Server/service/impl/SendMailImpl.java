@@ -5,12 +5,14 @@ import com.Server.repository.UserRepository;
 import com.Server.service.SendMail;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.util.Properties;
 
 /**
@@ -65,27 +67,46 @@ public class SendMailImpl implements SendMail {
             InternetAddress toAddress = new InternetAddress(to);
 
             Message message = new MimeMessage(session);
-            message.setFrom(fromAddress);
-            message.setRecipient(Message.RecipientType.TO, toAddress);
-            message.setSubject("Car-Sharing");
 
-            String sb = "<head>" +
+            message.setFrom(new InternetAddress(from));
+
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(to));
+
+            message.setSubject("Testing Subject");
+
+            MimeMultipart multipart = new MimeMultipart("related");
+
+            BodyPart messageBodyPart = new MimeBodyPart();
+            String htmlText =
+                    "<head>" +
                     "<style type=\"text/css\">" +
                     "  .red { color: #f00; }" +
                     "</style>" +
                     "</head>" +
-                    "<h1 class=\"black\" style=\"background-color:#57ff14;\">" + "Car-Sharing" + "</h1>" +
                     "<body style=\"background-color:#57ff14;\">\n" +
                     "\n" +
-                    "<img src=\"https://i.wpimg.pl/730x0/m.autokult.pl/55937440-616487475464085-b315b3f.jpg\" width=\"270\" + height=\"180\"/>\n" +
+                    "<center><img src=\"cid:image\" width=\"470\" + height=\"340\"/></center>\n" +
                     "\n" +
                     "\n<p><b>" + "Car-Sharing" + "</b></p>\n" +
                     "<h4>Username:" + user.getUsername() + "</h4>\n" +
                     "<p>" + mess + "</p>" +
                     "\n" +
+                    "<p><strong>"+"Thanks,"+"</strong></p>"+
+                    "<p>"+"Support Car-Rental"+"</p>"+
                     "</body>";
-            message.setContent(sb, "text/html; charset=utf-8");
-            message.saveChanges();
+
+            messageBodyPart.setContent(htmlText, "text/html");
+            multipart.addBodyPart(messageBodyPart);
+
+            messageBodyPart = new MimeBodyPart();
+            DataSource fds = new FileDataSource("C:/Users/ideapad/Desktop/foto.png");
+
+            messageBodyPart.setDataHandler(new DataHandler(fds));
+            messageBodyPart.setHeader("Content-ID", "<image>");
+
+            multipart.addBodyPart(messageBodyPart);
+            message.setContent(multipart);
 
 
             Transport.send(message, "pizza.projekt06", "pizza12345678");
