@@ -1,7 +1,5 @@
 package com.Server.service;
 
-import com.Server.dto.Request.UserRequest;
-
 /**
  * Interface Service to send mail for client email.
  * @author Krystian Cwioro Kamil Bieniasz Damian Mierzynski.
