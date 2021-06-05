@@ -109,7 +109,7 @@ public class CarServiceImpl implements CarService {
         if (carRepository.existsByIdcar(id)) {
             Car car = carRepository.findByIdcar(id).get();
             car = carMapper.update(car,carRequest);
-            car.setLocalization((localizationRepository.findByCity(car.getLocalization().getCity()).get()));
+            car.setLocalization((localizationRepository.findByCity(carRequest.getCity()).get()));
             log.info("---- EDIT CAR ID "+id+" ----");
             return carRepository.save(car);
         } else {
