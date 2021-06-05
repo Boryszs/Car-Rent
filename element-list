@@ -4,6 +4,7 @@ com.Server.controller
 com.Server.dto.Request
 com.Server.dto.Response
 com.Server.entiy
+com.Server.entiy.enums
 com.Server.exception
 com.Server.mapper
 com.Server.mapper.impl
