@@ -100,7 +100,7 @@ public class SendMailImpl implements SendMail {
             multipart.addBodyPart(messageBodyPart);
 
             messageBodyPart = new MimeBodyPart();
-            DataSource fds = new FileDataSource("C:/Users/ideapad/Desktop/foto.png");
+            DataSource fds = new FileDataSource("foto.png");
 
             messageBodyPart.setDataHandler(new DataHandler(fds));
             messageBodyPart.setHeader("Content-ID", "<image>");
