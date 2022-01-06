@@ -16,3 +16,6 @@ INSERT INTO `localization` (`id_localization`, `city`) VALUES
 
 INSERT INTO `car` (`id_car`, `color`, `engine_capacity`, `image`, `mark`, `model`, `money`, `type`, `year_production`, `id_localization`) VALUES
 (1, 'czarny', 1200, 'https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg', 'Toyota', 'Yaris', 79, 'hatchback', 2018, 1);
+
+INSERT INTO `reservation` (`id_rent`, `data_from`,`data_to`,`price`,`id_car`,`localization_end`,`localization_start`,`user_id_user`)
+VALUES (1, '2022-01-05', '2022-02-26', 158, 1, 1, 1, 1);

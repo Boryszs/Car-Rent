@@ -22,6 +22,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Builder
 public class ReservationRequest implements Serializable{
     @NotNull
     @Min(1)
