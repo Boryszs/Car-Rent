@@ -4,7 +4,7 @@
 - git clone https://github.com/Boryszs/Car-Rent.git
 
 ###### Instrukcja Uruchomienia Testów:
-- mvn integration-test
+- mvn test
 
 ###### Język Programowania:
 - Java wersja 15.  
