@@ -5,7 +5,6 @@ import com.Server.dto.Response.CarResponse;
 import com.Server.dto.Response.LocalizationResponse;
 import com.Server.exception.WrongDataException;
 import com.Server.service.CarService;
-import javassist.NotFoundException;
 import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
