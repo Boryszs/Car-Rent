@@ -30,13 +30,6 @@ public interface RoleService {
     RoleResponse findById(int id);
 
     /**
-     * Method save new role.
-     * @param roleRequest data of new role.
-     * @return data new role.
-     */
-    void save(RoleRequest roleRequest);
-
-    /**
      * Method return List of all role.
      * @return List role.
      */

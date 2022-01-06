@@ -69,18 +69,6 @@ public class RoleServiceImpl implements RoleService {
     }
 
     /**
-     * Method save new role.
-     *
-     * @param roleRequest data of new role.
-     * @return data new role.
-     */
-    @Override
-    public void save(RoleRequest roleRequest) {
-        log.info("---- SAVE ROLE ----");
-         roleRepository.save(roleMapper.toEntity(roleRequest));
-    }
-
-    /**
      * Method return List of all role.
      *
      * @return List role.
