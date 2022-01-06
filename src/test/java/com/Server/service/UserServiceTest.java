@@ -4,15 +4,16 @@ import com.Server.dto.Request.UserRequest;
 import com.Server.dto.Response.CarResponse;
 import com.Server.dto.Response.RoleResponse;
 import com.Server.dto.Response.UserResponse;
+import com.Server.entiy.Role;
+import com.Server.entiy.Roles;
 import com.Server.entiy.User;
 import org.junit.Assert;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -24,35 +25,11 @@ class UserServiceTest {
 
     @Autowired
     private UserService userService;
+    private List<UserResponse> userResponses = new ArrayList<>();
 
-
-    @Test
-    void findByUsername() {
-    }
-
-    @Test
-    void getReservationUser() {
-    }
-
-    @Test
-    void deleteUser() {
-    }
-
-    @Test
-    void update() {
-    }
-
-    @Test
-    void testUpdate() {
-    }
-
-    @Test
-    void findByEmail() {
-    }
-
-    @Test
-    void findById() {
-        Assert.assertTrue(new ReflectionEquals(UserResponse
+    @BeforeEach
+    void setUp() {
+        UserResponse userResponse1 = UserResponse
                 .builder()
                 .id(1L)
                 .username("user1")
@@ -62,11 +39,28 @@ class UserServiceTest {
                         .id(1)
                         .name("ROLE_ADMIN")
                         .build()))
-                .build()
-        ).matches(userService.findById(1L)));
+                .build();
+
+        UserResponse userResponse2 = UserResponse
+                .builder()
+                .id(2L)
+                .username("user3")
+                .email("user3@example.com")
+                .roles(List.of(RoleResponse
+                        .builder()
+                        .id(1)
+                        .name("ROLE_ADMIN")
+                        .build()))
+                .build();
+
+        userResponses.add(userResponse1);
+        userResponses.add(userResponse2);
     }
 
     @Test
+    @DisplayName("save new user")
+    @Timeout(1)
+    @Order(value = 1)
     void save() {
         UserRequest userRequest = UserRequest.builder()
                 .username("user2")
@@ -83,8 +77,78 @@ class UserServiceTest {
     }
 
     @Test
-    void findAll() {
+    @DisplayName("update user")
+    @Timeout(1)
+    @Order(value = 2)
+    void update() {
+        UserRequest userRequest = UserRequest
+                .builder()
+                .username("user3")
+                .email("user3@example.com")
+                .role(Set.of("admin"))
+                .password("user123")
+                .build();
 
+        UserResponse userResponse = UserResponse
+                .builder()
+                .id(2L)
+                .username("user3")
+                .email("user3@example.com")
+                .roles(List.of(RoleResponse
+                        .builder()
+                        .id(1)
+                        .name("ROLE_ADMIN")
+                        .build()))
+                .build();
+
+        userService.update(userRequest, 2L);
+
+        Assert.assertTrue(new ReflectionEquals(userService.findById(2L)).matches(userResponse));
+    }
+
+    @Test
+    @DisplayName("find user by id")
+    @Timeout(1)
+    @Order(value = 3)
+    void findById() {
+        UserResponse userResponse = UserResponse
+                .builder()
+                .id(1L)
+                .username("user1")
+                .email("user1@example.com")
+                .roles(List.of(RoleResponse
+                        .builder()
+                        .id(1)
+                        .name("ROLE_ADMIN")
+                        .build()))
+                .build();
+
+        userResponses.add(userResponse);
+
+        System.out.println(userService.findById(1L));
+        Assert.assertTrue(new ReflectionEquals(userResponse).matches(userService.findById(1L)));
+    }
+
+    @Test
+    @DisplayName("Find all users")
+    @Timeout(1)
+    @Order(value = 4)
+    void findAll() {
+        System.out.println(userService.findAll());
+        Assert.assertArrayEquals(userService.findAll().toArray(), userResponses.toArray());
+    }
+
+    @Test
+    void getReservationUser() {
+    }
+
+    @Test
+    void deleteUser() {
+        userService.deleteUser(2L);
+
+        userResponses.remove(1);
+
+        Assert.assertArrayEquals(userService.findAll().toArray(), userResponses.toArray());
     }
 
     @Test

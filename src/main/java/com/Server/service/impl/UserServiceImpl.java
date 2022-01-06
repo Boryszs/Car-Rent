@@ -233,7 +233,7 @@ public class UserServiceImpl implements UserService {
             User user = userMapper.toEntity(userRequest);
             user.setRoles(roles);
             userRepository.save(user);
-            sendMail.sendMail(user.getId(), "Thank you for register account.");
+//            sendMail.sendMail(user.getId(), "Thank you for register account.");
             log.info("---- SAVE USER ----");
         }
     }
