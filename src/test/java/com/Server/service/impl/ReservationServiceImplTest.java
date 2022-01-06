@@ -160,18 +160,66 @@ class ReservationServiceImplTest {
     }
 
     @Test
-    void deleteByIdRent() {
-    }
-
-    @Test
-    void getCurrentReservation() {
-    }
-
-    @Test
+    @DisplayName("Find all Reservation on car Id : 1")
+    @Timeout(1)
+    @Order(value = 4)
     void findByCarIdCar() {
+        Assert.assertArrayEquals(reservationService.findByCarIdCar(1).toArray(),reservationResponses.toArray());
     }
 
     @Test
+    @DisplayName("Find all Reservation on user Id : 1")
+    @Timeout(1)
+    @Order(value = 5)
+    void getCurrentReservation() {
+        Assert.assertArrayEquals(reservationService.getCurrentReservation(1L).toArray(),reservationResponses.toArray());
+    }
+
+    @Test
+    @DisplayName("Find last Reservation on car Id : 1")
+    @Timeout(1)
+    @Order(value = 6)
     void findFirstByCarIdCarOrderByIdRentDesc() {
+        Assert.assertTrue(new ReflectionEquals(ReservationResponse
+                .builder()
+                .idRent(2L)
+                .carResponse(
+                        CarResponse.builder()
+                                .idcar(1)
+                                .color("czarny")
+                                .engineCapacity(1200)
+                                .image("https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg")
+                                .mark("Toyota")
+                                .model("Yaris")
+                                .money(79)
+                                .type("hatchback")
+                                .yearProduction(2018)
+                                .localization(LocalizationResponse.builder()
+                                        .id(1L)
+                                        .city("Tarnow")
+                                        .build())
+                                .build()
+                )
+                .dateTo("2022-06-20")
+                .dateFrom("2022-01-02")
+                .localizationEnd(LocalizationResponse.builder()
+                        .id(1L)
+                        .city("Tarnow")
+                        .build())
+                .localizationStart(LocalizationResponse.builder()
+                        .id(4L)
+                        .city("Nowy Targ")
+                        .build())
+                .price(13351f)
+                .build()
+        ).matches(reservationService.findFirstByCarIdCarOrderByIdRentDesc(1)));
+    }
+
+    @Test
+    @DisplayName("Delete Reservation By id: 2")
+    @Timeout(1)
+    @Order(value = 7)
+    void deleteByIdRent() {
+        reservationService.deleteByIdRent(2L);
     }
 }
