@@ -10,6 +10,7 @@
 - Javax Mail  
 - Hibernate  
 - JSON Web Token  
+- itext
 ##### Dokumentacja Servera:  
 [Dokumentacja Servera](https://boryszs.github.io/Car-Rent/)
 #### Dokumentacja API:    
@@ -29,13 +30,18 @@ POST
 ```  
 
 ```sh
-POST 
+GET 
+​/user​/get?id = id
+```  
+
+```sh
+DELETE 
 ​/user​/delete?id = id
 ```  
 
 ##### reservation-controller
 ```sh
-POST
+DELETE
 ​/reservation​/delete?id = id
 ```  
 
@@ -50,6 +56,21 @@ POST
   "localization_end": "string",
   "localization_start": "string"
 }
+```  
+
+```sh
+POST
+​/reservation​/add-pdf
+{
+  "id_user": 0,
+  "id_car": 0,
+  "dateto": "string",
+  "datefrom": "string",
+  "localization_end": "string",
+  "localization_start": "string"
+}
+Response : Resume order pdf.
+
 ```  
 
 ```sh
@@ -159,7 +180,7 @@ GET
   }
 ]
 ```  
-  
+
 ##### authentication-controller  
   
 ```sh
@@ -258,10 +279,9 @@ POST
 ``` 
 
 ```sh  
-POST
-​/car​/edit-car
+PUT
+​/car​/edit-car?id = id
 {
-  "idcar": 0,
   "mark": "string",
   "model": "string",
   "type": "string",
@@ -275,7 +295,7 @@ POST
 ```  
 
 ```sh  
-POST
+DELETE
 ​/car​/delete-car?id = id
 ```   
 

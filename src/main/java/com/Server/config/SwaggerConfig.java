@@ -34,8 +34,7 @@ public class SwaggerConfig {
     public Docket postsApi() {
         return new Docket(DocumentationType.SWAGGER_2).groupName("public-api")
                 .apiInfo(apiInfo()).select().paths(postPaths()).build()
-                .securityContexts(Arrays.asList(securityContext()))
-                .securitySchemes(Arrays.asList(basicAuthScheme()));
+                .securitySchemes(Arrays.asList(apiKey()));
     }
 
     /**
@@ -78,5 +77,9 @@ public class SwaggerConfig {
 
     private SecurityReference basicAuthReference() {
         return new SecurityReference("basicAuth", new AuthorizationScope[0]);
+    }
+
+    private ApiKey apiKey() {
+        return new ApiKey("Authorization", "Authorization", "header");
     }
 }

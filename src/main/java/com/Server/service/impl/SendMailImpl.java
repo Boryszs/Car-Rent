@@ -84,9 +84,9 @@ public class SendMailImpl implements SendMail {
                     "  .red { color: #f00; }" +
                     "</style>" +
                     "</head>" +
-                    "<body style=\"background-color:#57ff14;\">\n" +
+                    "<body>" +
                     "\n" +
-                    "<center><img src=\"cid:image\" width=\"470\" + height=\"340\"/></center>\n" +
+                    "<center><img src=\"cid:image\" width=\"420\" + height=\"540\"/></center>\n" +
                     "\n" +
                     "\n<p><b>" + "Car-Sharing" + "</b></p>\n" +
                     "<h4>Username:" + user.getUsername() + "</h4>\n" +

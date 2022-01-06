@@ -1,0 +1,16 @@
+                                                                                                                   ${AnsiColor.BLUE}    _____________________________   ${AnsiColor.WHITE}
+                                                                                                                   ${AnsiColor.BLUE}   /............................./| ${AnsiColor.WHITE}
+  ______    ______   _______                       _______   ________  __    __  ________   ______   __            ${AnsiColor.BLUE}   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$.| ${AnsiColor.WHITE}
+ /      \  /      \ |       \                     |       \ |        \|  \  |  \|        \ /      \ |  \           ${AnsiColor.BLUE}   $$$$$$$$${AnsiBackground.BLACK}  ${AnsiBackground.DEFAULT}$$$$$$$$$$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$$$$$.| ${AnsiColor.WHITE}
+|  $$$$$$\|  $$$$$$\| $$$$$$$\                    | $$$$$$$\| $$$$$$$$| $$\ | $$ \$$$$$$$$|  $$$$$$\| $$           ${AnsiColor.BLUE}   $$$$$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$$$$$$$$$$$$$$$$$$$$.| ${AnsiColor.WHITE}
+| $$   \$$| $$__| $$| $$__| $$       ______       | $$__| $$| $$__    | $$$\| $$   | $$   | $$__| $$| $$           ${AnsiColor.BLUE}   $$$$$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$$$${AnsiBackground.BLACK}     ${AnsiBackground.DEFAULT}$$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$$$$$.| ${AnsiColor.WHITE}
+| $$      | $$    $$| $$    $$      |      \      | $$    $$| $$  \   | $$$$\ $$   | $$   | $$    $$| $$           ${AnsiColor.BLUE}   $$$$$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$$$$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$$$$$.| ${AnsiColor.WHITE}
+| $$   __ | $$$$$$$$| $$$$$$$\       \$$$$$$      | $$$$$$$\| $$$$$   | $$\$$ $$   | $$   | $$$$$$$$| $$           ${AnsiColor.BLUE}   $$$$$$${AnsiBackground.BLACK}        ${AnsiBackground.DEFAULT}$$$$$$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$$$$$.| ${AnsiColor.WHITE}
+| $$__/  \| $$  | $$| $$  | $$                    | $$  | $$| $$_____ | $$ \$$$$   | $$   | $$  | $$| $$_____      ${AnsiColor.BLUE}   $$$$$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$${AnsiBackground.BLACK}     ${AnsiBackground.DEFAULT}$$$$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$$$$$.| ${AnsiColor.WHITE}
+ \$$    $$| $$  | $$| $$  | $$                    | $$  | $$| $$     \| $$  \$$$   | $$   | $$  | $$| $$     \     ${AnsiColor.BLUE}   $$$$$$${AnsiBackground.BLACK}    ${AnsiBackground.DEFAULT}$$$${AnsiBackground.BLACK}     ${AnsiBackground.DEFAULT}$$$${AnsiBackground.BLACK}  ${AnsiBackground.DEFAULT}$$$$$$$.| ${AnsiColor.WHITE}
+  \$$$$$$  \$$   \$$ \$$   \$$                     \$$   \$$ \$$$$$$$$ \$$   \$$    \$$    \$$   \$$ \$$$$$$$$     ${AnsiColor.BLUE}   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/ ${AnsiColor.WHITE}
+
+${AnsiColor.GREEN}Authors by:${author.name}
+${AnsiColor.GREEN}Version:${application.version}
+${AnsiColor.GREEN}Date Update:${date}
+${AnsiColor.WHITE}
