@@ -1,6 +1,12 @@
-# Car-Rental  
-##### Projekt wykonany w ramach zajęć Podstawy Programowania Systemów Mobilnych II  
-###### Język Programowania:  
+# Car-Rental
+
+###### Instrukcja Uruchomienia Projektu:
+- git clone https://github.com/Boryszs/Car-Rent.git
+
+###### Instrukcja Uruchomienia Testów:
+- mvn test
+
+###### Język Programowania:
 - Java wersja 15.  
 ###### Użyte technologie:
 - Spring Boot  
