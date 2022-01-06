@@ -4,7 +4,14 @@
 - git clone https://github.com/Boryszs/Car-Rent.git
 
 ###### Instrukcja Uruchomienia Testów:
+- mvn dependency:resolve
+- mvn install
 - mvn test
+
+###### Instrukcja Uruchomienia Projektu:
+- mvn dependency:resolve
+- mvn install
+- mvn spring-boot:run
 
 ###### Język Programowania:
 - Java wersja 15.  
