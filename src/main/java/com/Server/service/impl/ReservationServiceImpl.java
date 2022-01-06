@@ -168,7 +168,7 @@ public class ReservationServiceImpl implements ReservationService {
             userRepository.save(user);
             log.info("---- SAVE RENT ID ----");
 
-            sendMail.sendMail(user.getId(), "Thank you for order car:" + car.getMark() + " " + car.getModel() + " for " + noOfDaysBetween + " days in localization " + car.getLocalization().getCity() + " for prices: " + (noOfDaysBetween * car.getMoney()));
+            //sendMail.sendMail(user.getId(), "Thank you for order car:" + car.getMark() + " " + car.getModel() + " for " + noOfDaysBetween + " days in localization " + car.getLocalization().getCity() + " for prices: " + (noOfDaysBetween * car.getMoney()));
             return reservations;
         }
 
