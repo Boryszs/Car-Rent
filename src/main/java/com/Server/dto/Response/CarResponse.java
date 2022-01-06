@@ -16,6 +16,7 @@ import java.io.Serializable;
 @Data
 @Builder
 @EqualsAndHashCode
+@ToString
 public class CarResponse implements Serializable {
 
     /**idcar*/
