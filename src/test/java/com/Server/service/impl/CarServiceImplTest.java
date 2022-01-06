@@ -1,62 +1,134 @@
 package com.Server.service.impl;
 
+import com.Server.dto.Request.CarRequest;
 import com.Server.dto.Response.CarResponse;
-import com.Server.entiy.Localization;
-import com.Server.exception.WrongDataException;
-import com.Server.repository.LocalizationRepository;
+import com.Server.dto.Response.LocalizationResponse;
 import com.Server.service.CarService;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
+import org.junit.Assert;
+import org.junit.jupiter.api.*;
+import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Car service test
- */
 @SpringBootTest
+@TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
 class CarServiceImplTest {
 
     @Autowired
-    private LocalizationRepository localizationRepository;
-    @Autowired
     private CarService carService;
+    private List<CarResponse> carResponses = new ArrayList<>();
+
+    @BeforeEach
+    void setUp() {
+
+        LocalizationResponse localizationResponseCar1 = LocalizationResponse.builder()
+                .id(1L)
+                .city("Tarnow")
+                .build();
+
+        CarResponse carResponse1 = CarResponse.builder()
+                .idcar(1)
+                .color("czarny")
+                .engineCapacity(1200)
+                .image("https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg")
+                .mark("Toyota")
+                .model("Yaris")
+                .money(79)
+                .type("hatchback")
+                .yearProduction(2018)
+                .localization(localizationResponseCar1)
+                .build();
+
+        carResponses.add(carResponse1);
+    }
+
 
     @Test
-    @DisplayName("---- FIND ALL CAR ----")
-    @Timeout(value = 2,unit = SECONDS)
+    @DisplayName("Find all Car")
+    @Timeout(1)
+    @Order(value = 1)
     void findAll() {
-        assertNotEquals(carService.findAll().size(), 0);
+        Assert.assertArrayEquals(carService.findAll().toArray(),carResponses.toArray());
     }
 
     @Test
-    @DisplayName("---- FIND ALL ID ----")
-    void findByIdCar() throws WrongDataException {
-        for (CarResponse car : carService.findAll())
-            assertEquals(carService.findByIdCar(car.getIdcar()).hashCode(), car.hashCode());
-        assertThrows(WrongDataException.class, () -> carService.findByIdCar(10000));
+    @DisplayName("Save Car")
+    @Timeout(1)
+    @Order(value = 2)
+    void save() {
+      CarRequest carRequest = CarRequest.builder()
+                .mark("Skoda")
+                .model("Octavia")
+                .type("hatchback")
+                .yearProduction(2020)
+                .color("czarny")
+                .engine(1400)
+                .city("Tarnow")
+                .money(120)
+                .image("iamge")
+                .build();
+
+        carService.save(carRequest);
+    }
+
+
+    @Test
+    @DisplayName("Find Car By id : 1")
+    @Timeout(1)
+    @Order(value = 3)
+    void findByIdCar() {
+        Assert.assertTrue(new ReflectionEquals(CarResponse
+                .builder()
+                .idcar(1)
+                .color("czarny")
+                .engineCapacity(1200)
+                .image("https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg")
+                .mark("Toyota")
+                .model("Yaris")
+                .money(79)
+                .type("hatchback")
+                .yearProduction(2018)
+                .localization(LocalizationResponse.builder()
+                        .id(1L)
+                        .city("Tarnow")
+                        .build())
+                .build()
+        ).matches(carService.findByIdCar(1)));
     }
 
     @Test
-    @DisplayName("---- FIND ON LOCALIZATION ID ----")
+    @DisplayName("Find Car By Localization id : 1")
+    @Timeout(1)
+    @Order(value = 4)
     void findByLocalizationId() {
-        localizationRepository.findAll().forEach(localization -> assertNotEquals(carService.findByLocalizationId(localization.getId()).size(), 0));
+        Assert.assertTrue(new ReflectionEquals(List.of(CarResponse
+                .builder()
+                .idcar(1)
+                .color("czarny")
+                .engineCapacity(1200)
+                .image("https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg")
+                .mark("Toyota")
+                .model("Yaris")
+                .money(79)
+                .type("hatchback")
+                .yearProduction(2018)
+                .localization(LocalizationResponse.builder()
+                        .id(1L)
+                        .city("Tarnow")
+                        .build())
+                .build())
+        ).matches(carService.findByLocalizationId(1L)));
     }
 
     @Test
-    @DisplayName("---- FIND ON LOCALIZATION CITY NAME ----")
-    void findByLocalizationCity() {
-        for (Localization localization : localizationRepository.findAll()) {
-            try {
-                assertNotEquals(carService.findByLocalizationCity(localization.getCity()).size(), 0);
-            } catch (WrongDataException wrongDataException) {
-                wrongDataException.printStackTrace();
-            }
-        }
-
-        assertThrows(WrongDataException.class, () -> carService.findByLocalizationCity("Hamburg"));
+    void update() {
     }
+
+    @Test
+    void deleteByIdCar() {
+    }
+
 }
