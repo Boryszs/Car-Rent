@@ -22,6 +22,7 @@ import java.util.Set;
 @EqualsAndHashCode
 @AllArgsConstructor
 @ToString
+@Builder
 public class UserRequest implements Serializable {
 
     @Size(min = 3)
