@@ -1,12 +1,11 @@
-package com.Server.service;
+package com.Server.service.impl;
 
 import com.Server.dto.Request.UserRequest;
-import com.Server.dto.Response.CarResponse;
-import com.Server.dto.Response.RoleResponse;
-import com.Server.dto.Response.UserResponse;
+import com.Server.dto.Response.*;
 import com.Server.entiy.Role;
 import com.Server.entiy.Roles;
 import com.Server.entiy.User;
+import com.Server.service.UserService;
 import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
@@ -140,6 +139,43 @@ class UserServiceTest {
 
     @Test
     void getReservationUser() {
+        ReservationResponse reservationResponse = ReservationResponse
+                .builder()
+                .idRent(1L)
+                .carResponse(CarResponse
+                        .builder()
+                        .idcar(1)
+                        .mark("Toyota")
+                        .model("Yaris")
+                        .type("hatchback")
+                        .yearProduction(2018)
+                        .color("czarny")
+                        .engineCapacity(1200)
+                        .money(79)
+                        .image("https://image.ceneostatic.pl/data/products/66661051/i-toyota-yaris-ii-2008-87km-hatchback-czarny.jpg")
+                        .localization(LocalizationResponse
+                                .builder()
+                                .id(1L)
+                                .city("Tarnow")
+                                .build())
+                        .build())
+                .dateTo("2022-02-26")
+                .dateFrom("2022-01-05")
+                .localizationEnd(LocalizationResponse
+                        .builder()
+                        .id(1L)
+                        .city("Tarnow")
+                        .build())
+                .localizationStart(LocalizationResponse
+                        .builder()
+                        .id(1L)
+                        .city("Tarnow")
+                        .build())
+                .price(158f)
+                .build();
+
+        System.out.println(userService.getReservationUser(1L));
+        Assert.assertArrayEquals(userService.getReservationUser(1L).toArray(), List.of(reservationResponse).toArray());
     }
 
     @Test
@@ -153,5 +189,18 @@ class UserServiceTest {
 
     @Test
     void findByReservationsIdRent() {
+        UserResponse userResponse = UserResponse
+                .builder()
+                .id(1L)
+                .username("user1")
+                .email("user1@example.com")
+                .roles(List.of(RoleResponse
+                        .builder()
+                        .id(1)
+                        .name("ROLE_ADMIN")
+                        .build()))
+                .build();
+
+       Assert.assertTrue(new ReflectionEquals(userService.findByReservationsIdRent(1L)).matches(userResponse));
     }
 }
